@@ -6,199 +6,323 @@
 <title>Ayaa School Admin</title>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#f4f6f9;--sb:#1a1d24;--accent:#4f46e5;--accent2:#4338ca;--green:#059669;--red:#dc2626;--gold:#d97706;--text:#111827;--muted:#6b7280;--border:#e5e7eb;--white:#fff}
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:14px;color:var(--text);background:var(--bg);height:100vh;overflow:hidden}
+:root{
+  --sb:#13161b;--sb2:#1c1f26;--top:#fff;--bg:#eef0f4;
+  --accent:#4f46e5;--accent2:#4338ca;--green:#059669;--red:#dc2626;--gold:#d97706;
+  --text:#111827;--muted:#6b7280;--border:#e5e7eb;
+  --sh:0 1px 3px rgba(0,0,0,.1);--shlg:0 8px 24px rgba(0,0,0,.15);
+  --r:7px;--th:52px;--sw:252px;
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13.5px;color:var(--text);background:var(--bg);overflow:hidden;height:100vh}
 button{cursor:pointer;font:inherit;border:none;background:none}
 input,textarea,select{font:inherit}
+svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 
 /* Login */
-#login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d0f14,#1e2130);z-index:100}
-.lbox{background:#fff;border-radius:14px;padding:2.5rem;width:360px;box-shadow:0 24px 64px rgba(0,0,0,.5);text-align:center}
-.lbox h1{font-size:1.6rem;font-weight:800;color:var(--accent);margin-bottom:.25rem}
-.lbox p{color:var(--muted);font-size:.9rem;margin-bottom:1.5rem}
-.lbox input{width:100%;padding:.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;margin-bottom:.75rem;outline:none;transition:border-color .2s}
-.lbox input:focus{border-color:var(--accent)}
-.lbox button{width:100%;padding:.8rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.95rem;font-weight:600}
-.lbox button:hover{background:var(--accent2)}
-.lerr{color:var(--red);font-size:.82rem;margin-top:.5rem;min-height:1em}
+#login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d0f14,#1e2130);z-index:900}
+.lc{background:#fff;border-radius:14px;padding:2.5rem;width:360px;box-shadow:0 24px 64px rgba(0,0,0,.5);text-align:center}
+.lc-logo{font-size:1.9rem;font-weight:800;color:var(--accent);letter-spacing:-1px}
+.lc-logo small{display:block;font-size:.85rem;font-weight:400;color:var(--muted);margin-top:-2px}
+.lc h2{font-size:1rem;font-weight:500;color:var(--muted);margin:1.25rem 0}
+.lc input{width:100%;padding:.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;margin-bottom:.9rem;outline:none;transition:border-color .2s}
+.lc input:focus{border-color:var(--accent)}
+.lc-btn{width:100%;padding:.8rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.95rem;font-weight:600;transition:background .2s}
+.lc-btn:hover{background:var(--accent2)}
+.lc-err{color:var(--red);font-size:.82rem;margin-top:.6rem;min-height:1em}
 
 /* App */
-#app{display:none;height:100vh;flex-direction:column}
+#app{display:none;flex-direction:column;height:100vh}
 #app.on{display:flex}
 
 /* Topbar */
-.topbar{height:52px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1rem;gap:.75rem;flex-shrink:0;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.tb-logo{font-weight:800;font-size:1rem;color:var(--accent)}
-.tb-sep{width:1px;height:18px;background:var(--border)}
-.tb-section{font-size:.82rem;color:var(--muted)}
-.tb-right{margin-left:auto;display:flex;align-items:center;gap:.5rem}
-.btn{display:inline-flex;align-items:center;gap:.35rem;padding:.42rem .85rem;border-radius:6px;font-size:.82rem;font-weight:600;transition:all .15s;border:1.5px solid transparent;cursor:pointer}
-.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}.btn-primary:hover{background:var(--accent2)}
-.btn-success{background:var(--green);color:#fff}.btn-success:hover{background:#047857}
-.btn-ghost{background:transparent;color:var(--muted);border-color:var(--border)}.btn-ghost:hover{background:var(--bg);color:var(--text)}
-.btn-danger{background:var(--red);color:#fff}.btn-danger:hover{background:#b91c1c}
-.btn-sm{padding:.3rem .65rem;font-size:.78rem}
-.unsaved{width:7px;height:7px;border-radius:50%;background:var(--gold);display:none}
+.topbar{height:var(--th);background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 .9rem;gap:.75rem;flex-shrink:0;box-shadow:var(--sh);z-index:10}
+.tb-logo{font-weight:800;font-size:1.05rem;color:var(--accent);letter-spacing:-.5px;white-space:nowrap}
+.tb-sep{width:1px;height:18px;background:var(--border);flex-shrink:0}
+.tb-page{color:var(--muted);font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.unsaved{width:7px;height:7px;border-radius:50%;background:var(--gold);display:none;flex-shrink:0}
 .unsaved.on{display:block}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:.4rem}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;gap:.35rem;padding:.42rem .85rem;border-radius:6px;font-size:.82rem;font-weight:600;transition:all .15s;white-space:nowrap;border:1.5px solid transparent}
+.btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}.btn-primary:hover{background:var(--accent2)}
+.btn-success{background:var(--green);color:#fff;border-color:var(--green)}.btn-success:hover{background:#047857}
+.btn-ghost{background:transparent;color:var(--muted);border-color:var(--border)}.btn-ghost:hover{background:var(--bg);color:var(--text)}
+.btn-danger{background:var(--red);color:#fff;border-color:var(--red)}.btn-danger:hover{background:#b91c1c}
+.btn-sm{display:inline-flex;align-items:center;gap:.3rem;padding:.28rem .6rem;border-radius:5px;border:1px solid #2e323b;background:#252830;color:#c9d1d9;font-size:.76rem;font-weight:600}
+.btn-sm:hover{background:#2e323b}
+.btn-full{width:100%;justify-content:center}
 
 /* Layout */
 .layout{display:flex;flex:1;overflow:hidden}
 
 /* Sidebar */
-.sidebar{width:200px;background:var(--sb);display:flex;flex-direction:column;flex-shrink:0;overflow-y:auto}
-.sidebar::-webkit-scrollbar{width:3px}.sidebar::-webkit-scrollbar-thumb{background:#2e323b}
-.sb-section{padding:.5rem .65rem;color:#4b5563;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin-top:.75rem}
-.sb-item{display:flex;align-items:center;gap:.5rem;padding:.5rem .75rem;color:#9ca3af;font-size:.84rem;cursor:pointer;border-radius:6px;margin:.5px .4rem;transition:all .15s}
-.sb-item:hover{background:rgba(255,255,255,.06);color:#e5e7eb}
+.sidebar{width:var(--sw);background:var(--sb);display:flex;flex-direction:column;flex-shrink:0}
+.stabs{display:grid;grid-template-columns:repeat(5,1fr);background:#0a0c10;flex-shrink:0}
+.stab{background:none;border:none;color:#6b7280;padding:.55rem .1rem;display:flex;flex-direction:column;align-items:center;gap:.18rem;font-size:.56rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;transition:all .15s;border-bottom:2px solid transparent}
+.stab:hover{color:#e5e7eb;background:rgba(255,255,255,.04)}
+.stab.on{color:#fff;border-bottom-color:var(--accent)}
+.stab svg{width:15px;height:15px}
+.sidebar-pane{display:none;flex-direction:column;flex:1;overflow:hidden}.sidebar-pane.on{display:flex}
+.ph{display:flex;align-items:center;justify-content:space-between;padding:.65rem .85rem;border-bottom:1px solid #22252d;flex-shrink:0}
+.ph h3{color:#f9fafb;font-size:.85rem;font-weight:600}
+.pscroll{flex:1;overflow-y:auto;padding:.65rem}.pscroll::-webkit-scrollbar{width:3px}.pscroll::-webkit-scrollbar-thumb{background:#2e323b;border-radius:2px}
+.hint{color:#5b6370;font-size:.76rem;line-height:1.55;margin-bottom:.6rem}
+
+/* Sidebar nav items */
+.sb-item{display:flex;align-items:center;gap:.5rem;padding:.45rem .6rem;border-radius:6px;cursor:pointer;color:#b0b8c4;font-size:.82rem;transition:background .15s;margin-bottom:1px}
+.sb-item:hover{background:rgba(255,255,255,.05);color:#e5e7eb}
 .sb-item.on{background:rgba(79,70,229,.2);color:#a5b4fc;font-weight:600}
-.sb-item svg{width:15px;height:15px;flex-shrink:0}
+.sb-item svg{width:14px;height:14px;flex-shrink:0}
+.sb-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#4b5563;padding:.5rem .6rem .25rem;margin-top:.25rem}
 
-/* Main content */
-.main{flex:1;overflow-y:auto;padding:1.5rem}
-.main::-webkit-scrollbar{width:5px}.main::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
-
-/* Cards / sections */
-.section-card{background:#fff;border-radius:10px;border:1px solid var(--border);margin-bottom:1.25rem;overflow:hidden}
-.section-card-head{padding:.85rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.section-card-head h3{font-size:.9rem;font-weight:700;color:var(--text)}
-.section-card-body{padding:1.1rem}
-
-/* Form fields */
-.field{margin-bottom:1rem}
-.field:last-child{margin-bottom:0}
-.field label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
-.field input,.field textarea,.field select{width:100%;padding:.55rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-size:.88rem;outline:none;transition:border-color .2s;color:var(--text);background:#fff}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
-.field textarea{min-height:80px;resize:vertical;line-height:1.6}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.field-hint{font-size:.75rem;color:var(--muted);margin-top:.25rem}
-
-/* Image picker field */
-.img-pick{display:flex;align-items:center;gap:.65rem}
-.img-pick-thumb{width:56px;height:56px;border-radius:7px;object-fit:cover;border:1.5px solid var(--border);background:#f3f4f6;flex-shrink:0}
-.img-pick-thumb.empty{display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:1.2rem}
-
-/* Gallery grid */
-.gallery-admin{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.gallery-item-admin{background:#f8f9fa;border:1.5px solid var(--border);border-radius:8px;padding:.75rem}
-.gallery-item-admin label{font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:.5rem}
-
-/* Impact / project cards */
-.card-list{display:flex;flex-direction:column;gap:.75rem}
-.card-admin{background:#f8f9fa;border:1.5px solid var(--border);border-radius:8px;padding:.85rem}
-.card-admin-head{font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.6rem}
-
-/* Image grid */
-.img-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.5rem;margin-top:.75rem}
-.img-cell{border-radius:7px;overflow:hidden;aspect-ratio:1;background:#f3f4f6;position:relative;cursor:pointer;border:2px solid transparent}
-.img-cell:hover{border-color:var(--accent)}
-.img-cell img{width:100%;height:100%;object-fit:cover;display:block}
-.img-cell-del{position:absolute;top:3px;right:3px;background:rgba(220,38,38,.85);color:#fff;border-radius:4px;padding:.15rem .35rem;font-size:.7rem;font-weight:700;display:none}
-.img-cell:hover .img-cell-del{display:block}
-.img-cell-name{font-size:.6rem;color:var(--muted);text-align:center;padding:.15rem .3rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;background:#fff}
-.upload-zone{border:2px dashed var(--border);border-radius:8px;text-align:center;padding:1.5rem;color:var(--muted);cursor:pointer;transition:all .2s;margin-bottom:.75rem}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);color:var(--accent);background:rgba(79,70,229,.04)}
+/* Images in sidebar */
+.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.img-card{border-radius:6px;overflow:hidden;background:#1c1f26;position:relative;aspect-ratio:1}
+.img-card img{width:100%;height:100%;object-fit:cover;display:block}
+.img-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;opacity:0;transition:opacity .15s;padding:.3rem}
+.img-card:hover .img-overlay{opacity:1}
+.img-name{font-size:.62rem;color:#9ca3af;text-align:center;padding:.15rem .3rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upload-zone{border:1.5px dashed #2e323b;border-radius:8px;text-align:center;padding:1rem .75rem;color:#5b6370;cursor:pointer;transition:all .2s;margin-bottom:.65rem;display:block}
+.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);color:#a5b4fc;background:rgba(79,70,229,.06)}
 .upload-zone input{display:none}
 
+/* Main area */
+.main{flex:1;overflow-y:auto;padding:1.5rem;background:var(--bg)}
+.main::-webkit-scrollbar{width:5px}.main::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
+
+/* Page header */
+.page-header{margin-bottom:1.25rem}
+.page-header h2{font-size:1.25rem;font-weight:800;color:var(--text);letter-spacing:-.3px}
+.page-header p{font-size:.82rem;color:var(--muted);margin-top:.2rem}
+
+/* Cards */
+.card{background:#fff;border-radius:10px;border:1px solid var(--border);margin-bottom:1rem;overflow:hidden;box-shadow:var(--sh)}
+.card-head{padding:.8rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-head h3{font-size:.85rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.45rem}
+.card-head h3 svg{color:var(--accent)}
+.card-body{padding:1.1rem}
+
+/* Form fields */
+.field{margin-bottom:.85rem}
+.field:last-child{margin-bottom:0}
+.field label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
+.field input,.field textarea,.field select{width:100%;padding:.52rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-size:.85rem;outline:none;transition:border-color .2s;color:var(--text);background:#fff}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
+.field textarea{min-height:80px;resize:vertical;line-height:1.6}
+.field-hint{font-size:.74rem;color:var(--muted);margin-top:.25rem}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+
+/* Image picker field */
+.img-pick{display:flex;align-items:center;gap:.75rem}
+.img-pick-thumb{width:60px;height:60px;border-radius:8px;object-fit:cover;border:1.5px solid var(--border);background:#f3f4f6;flex-shrink:0;display:none}
+.img-pick-thumb.has-img{display:block}
+.img-pick-empty{width:60px;height:60px;border-radius:8px;border:1.5px dashed var(--border);background:#f9fafb;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--muted)}
+
+/* Subcard (gallery / impact / project items) */
+.subcard{background:#f8f9fc;border:1.5px solid var(--border);border-radius:8px;padding:.85rem;margin-bottom:.65rem}
+.subcard:last-child{margin-bottom:0}
+.subcard-label{font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.65rem;display:flex;align-items:center;gap:.4rem}
+.subcard-label svg{width:12px;height:12px}
+
+/* Tab panes (main content) */
+.mpane{display:none}.mpane.on{display:block}
+
 /* Image picker modal */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:200;display:none}
-.overlay.on{display:block}
-.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:12px;box-shadow:0 24px 64px rgba(0,0,0,.2);z-index:201;width:560px;max-width:95vw;max-height:85vh;display:none;flex-direction:column}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:100;display:none}.overlay.on{display:block}
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:12px;box-shadow:var(--shlg);z-index:101;display:none;width:540px;max-width:95vw;max-height:85vh;flex-direction:column}
 .modal.on{display:flex}
-.mhead{padding:1rem 1.1rem .75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.mhead{padding:1.1rem 1.1rem .75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .mhead h3{font-size:.95rem;font-weight:700}
 .mbody{padding:1rem;overflow-y:auto;flex:1}
 .picker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem}
-.picker-cell{border-radius:7px;overflow:hidden;aspect-ratio:1;cursor:pointer;border:2px solid transparent;transition:border-color .15s;position:relative}
-.picker-cell:hover{border-color:var(--accent)}
-.picker-cell img{width:100%;height:100%;object-fit:cover}
-.picker-name{font-size:.6rem;color:var(--muted);text-align:center;padding:.1rem .2rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.picker-item{border-radius:6px;overflow:hidden;aspect-ratio:1;cursor:pointer;border:2px solid transparent;transition:border-color .15s;position:relative}
+.picker-item:hover{border-color:var(--accent)}
+.picker-item img{width:100%;height:100%;object-fit:cover}
+.picker-name{font-size:.6rem;color:var(--muted);text-align:center;padding:.12rem .25rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
 /* Toast */
-#toast{position:fixed;bottom:1.25rem;right:1.25rem;background:#1f2937;color:#f9fafb;padding:.55rem 1rem;border-radius:7px;font-size:.82rem;box-shadow:0 8px 24px rgba(0,0,0,.2);z-index:300;opacity:0;transform:translateY(6px);transition:all .22s;pointer-events:none}
+#toast{position:fixed;bottom:1.25rem;right:1.25rem;background:#1f2937;color:#f9fafb;padding:.55rem 1rem;border-radius:7px;font-size:.82rem;box-shadow:var(--shlg);z-index:200;opacity:0;transform:translateY(6px);transition:all .22s;pointer-events:none}
 #toast.on{opacity:1;transform:translateY(0)}
-#toast.ok{background:#064e3b}
-#toast.err{background:#7f1d1d}
-
-/* Tab panes */
-.tab-pane{display:none}.tab-pane.on{display:block}
-
-/* Page title */
-.page-title{font-size:1.3rem;font-weight:800;color:var(--text);margin-bottom:1.25rem}
-.page-title span{font-size:.85rem;font-weight:400;color:var(--muted);margin-left:.5rem}
+#toast.ok{background:#064e3b}#toast.err{background:#7f1d1d}
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
-<div id="login">
-  <div class="lbox">
-    <h1>Ayaa Admin</h1>
-    <p>School website content manager</p>
+<div id="login-screen">
+  <div class="lc">
+    <div class="lc-logo">Ayaa <small>School Admin</small></div>
+    <h2>Sign in to continue</h2>
     <form id="login-form">
-      <input type="password" id="pw" placeholder="Password" autofocus/>
-      <button type="submit">Sign In</button>
+      <input id="pw" type="password" placeholder="Password" autofocus autocomplete="current-password"/>
+      <button type="submit" class="lc-btn">Sign In</button>
     </form>
-    <p class="lerr" id="lerr"></p>
+    <p class="lc-err" id="lc-err"></p>
   </div>
 </div>
 
 <!-- APP -->
 <div id="app">
   <header class="topbar">
-    <span class="tb-logo">Ayaa School Admin</span>
+    <span class="tb-logo">Ayaa School</span>
     <span class="tb-sep"></span>
-    <span class="tb-section" id="tb-section">General</span>
-    <span class="unsaved" id="unsaved-dot" title="Unsaved changes"></span>
+    <span class="tb-page" id="tb-page">Content Manager</span>
+    <span class="unsaved" id="unsaved-dot"></span>
     <div class="tb-right">
-      <button class="btn btn-ghost btn-sm" id="btn-restore" style="color:var(--gold);border-color:var(--gold);display:none">↩ Restore</button>
-      <button class="btn btn-primary btn-sm" id="btn-save">💾 Save Changes</button>
-      <button class="btn btn-success btn-sm" id="btn-deploy">🚀 Go Live</button>
-      <button class="btn btn-ghost btn-sm" id="btn-logout">Logout</button>
+      <button class="btn btn-ghost" id="btn-restore" title="Undo last save" style="color:#d97706;border-color:#d97706;display:none">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.8"/></svg>
+        Restore
+      </button>
+      <button class="btn btn-primary" id="btn-save">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        Save
+      </button>
+      <button class="btn btn-success" id="btn-deploy">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+        Go Live
+      </button>
+      <button class="btn btn-ghost" id="btn-logout">Logout</button>
     </div>
   </header>
 
   <div class="layout">
     <!-- SIDEBAR -->
     <aside class="sidebar">
-      <div class="sb-section">Content</div>
-      <div class="sb-item on" data-tab="general">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
-        General
+      <!-- Icon tab strip -->
+      <div class="stabs">
+        <button class="stab on" data-stab="content">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          Content
+        </button>
+        <button class="stab" data-stab="media">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Media
+        </button>
+        <button class="stab" data-stab="deploy">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+          Deploy
+        </button>
+        <button class="stab" data-stab="settings">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          Settings
+        </button>
+        <button class="stab" data-stab="help">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          Help
+        </button>
       </div>
-      <div class="sb-item" data-tab="hero">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        Hero Section
+
+      <!-- Content nav -->
+      <div class="sidebar-pane on" id="sp-content">
+        <div class="ph"><h3>Sections</h3></div>
+        <div class="pscroll">
+          <div class="sb-label">Info</div>
+          <div class="sb-item on" data-tab="general">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            General
+          </div>
+          <div class="sb-label">Homepage</div>
+          <div class="sb-item" data-tab="hero">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            Hero
+          </div>
+          <div class="sb-item" data-tab="story">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+            Story
+          </div>
+          <div class="sb-item" data-tab="founder">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            Founder
+          </div>
+          <div class="sb-item" data-tab="gallery">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+            Gallery
+          </div>
+          <div class="sb-item" data-tab="impact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            Impact
+          </div>
+          <div class="sb-item" data-tab="projects">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Projects
+          </div>
+        </div>
       </div>
-      <div class="sb-item" data-tab="story">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-        Story
+
+      <!-- Media -->
+      <div class="sidebar-pane" id="sp-media">
+        <div class="ph"><h3>Media</h3></div>
+        <div class="pscroll">
+          <label class="upload-zone" id="upload-zone">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+            <div style="font-size:.8rem;margin-top:.25rem">Click or drag to upload</div>
+            <div style="font-size:.7rem;color:#4b5563;margin-top:.15rem">JPG · PNG · WEBP · SVG</div>
+            <input type="file" id="upload-input" accept="image/*" multiple/>
+          </label>
+          <div class="img-grid" id="img-grid"></div>
+        </div>
       </div>
-      <div class="sb-item" data-tab="founder">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        Founder
+
+      <!-- Deploy -->
+      <div class="sidebar-pane" id="sp-deploy">
+        <div class="ph"><h3>Deploy</h3></div>
+        <div class="pscroll">
+          <p class="hint">Push your saved changes to the live website. Save first, then deploy.</p>
+          <button class="btn btn-success btn-full" id="btn-deploy-side" style="margin-bottom:.75rem">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+            Deploy to Live Site
+          </button>
+          <div id="deploy-status" style="font-size:.8rem;padding:.5rem .65rem;border-radius:6px;display:none"></div>
+          <div style="margin-top:1rem;padding-top:.75rem;border-top:1px solid #22252d">
+            <p class="hint">After saving, the site auto-deploys in the background. Use this button if you want to manually push again.</p>
+          </div>
+        </div>
       </div>
-      <div class="sb-item" data-tab="gallery">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        Gallery
+
+      <!-- Settings -->
+      <div class="sidebar-pane" id="sp-settings">
+        <div class="ph"><h3>Settings</h3></div>
+        <div class="pscroll">
+          <p class="hint" style="margin-bottom:.75rem">Change the admin password.</p>
+          <div style="display:flex;flex-direction:column;gap:.45rem">
+            <div>
+              <label style="display:block;color:#6b7280;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem">New Password</label>
+              <input id="new-pw" type="password" placeholder="Enter new password" style="width:100%;background:#1c1f26;border:1px solid #2e323b;border-radius:6px;color:#f3f4f6;padding:.5rem .65rem;font-size:.81rem;outline:none"/>
+            </div>
+            <div>
+              <label style="display:block;color:#6b7280;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem">Confirm Password</label>
+              <input id="confirm-pw" type="password" placeholder="Repeat new password" style="width:100%;background:#1c1f26;border:1px solid #2e323b;border-radius:6px;color:#f3f4f6;padding:.5rem .65rem;font-size:.81rem;outline:none"/>
+            </div>
+            <button class="btn btn-primary btn-full" id="btn-save-pw" style="margin-top:.25rem">Save Password</button>
+          </div>
+        </div>
       </div>
-      <div class="sb-item" data-tab="impact">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-        Impact
-      </div>
-      <div class="sb-item" data-tab="projects">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-        Projects
-      </div>
-      <div class="sb-section">Media</div>
-      <div class="sb-item" data-tab="images">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-        Images
-      </div>
-      <div class="sb-section">Settings</div>
-      <div class="sb-item" data-tab="settings">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-        Password
+
+      <!-- Help -->
+      <div class="sidebar-pane" id="sp-help">
+        <div class="ph"><h3>How to Use</h3></div>
+        <div class="pscroll">
+          <div style="display:flex;flex-direction:column;gap:.65rem">
+            <div style="background:#1c1f26;border-radius:8px;padding:.75rem">
+              <div style="color:#a5b4fc;font-size:.75rem;font-weight:700;margin-bottom:.45rem">Editing Content</div>
+              <div style="color:#9ca3af;font-size:.76rem;line-height:1.6">Click any section in the sidebar, edit the fields, then hit <strong style="color:#e5e7eb">Save</strong> in the top bar.</div>
+            </div>
+            <div style="background:#1c1f26;border-radius:8px;padding:.75rem">
+              <div style="color:#a5b4fc;font-size:.75rem;font-weight:700;margin-bottom:.45rem">Publishing</div>
+              <div style="color:#9ca3af;font-size:.76rem;line-height:1.6">Save first → then click <strong style="color:#e5e7eb">Go Live</strong>. The site updates within a minute.</div>
+            </div>
+            <div style="background:#1c1f26;border-radius:8px;padding:.75rem">
+              <div style="color:#a5b4fc;font-size:.75rem;font-weight:700;margin-bottom:.45rem">Images</div>
+              <div style="color:#9ca3af;font-size:.76rem;line-height:1.6">Upload photos in the <strong style="color:#e5e7eb">Media</strong> tab. Then use "Choose image" buttons on any section to pick them.</div>
+            </div>
+            <div style="background:#1c1f26;border-radius:8px;padding:.75rem">
+              <div style="color:#d97706;font-size:.75rem;font-weight:700;margin-bottom:.45rem">Undo / Restore</div>
+              <div style="color:#9ca3af;font-size:.76rem;line-height:1.6">After saving, a <strong style="color:#e5e7eb">Restore</strong> button appears in the top bar. Click it to undo your last save.</div>
+            </div>
+          </div>
+        </div>
       </div>
     </aside>
 
@@ -206,44 +330,61 @@ input,textarea,select{font:inherit}
     <main class="main" id="main">
 
       <!-- GENERAL -->
-      <div class="tab-pane on" id="pane-general">
-        <div class="page-title">General <span>Contact info & links</span></div>
-        <div class="section-card">
-          <div class="section-card-head"><h3>Contact Information</h3></div>
-          <div class="section-card-body">
-            <div class="field-row">
+      <div class="mpane on" id="pane-general">
+        <div class="page-header">
+          <h2>General</h2>
+          <p>Contact information and links shown across the site</p>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact Info</h3>
+          </div>
+          <div class="card-body">
+            <div class="grid-2">
               <div class="field"><label>Email Address</label><input type="email" id="g-email"/></div>
               <div class="field"><label>Phone Number</label><input type="tel" id="g-phone"/></div>
             </div>
-            <div class="field"><label>School Facebook URL</label><input type="url" id="g-fbSchool"/></div>
-            <div class="field"><label>Simon's Facebook URL</label><input type="url" id="g-fbSimon"/></div>
-            <div class="field"><label>GoFundMe URL</label><input type="url" id="g-gofundme"/></div>
+            <div class="grid-2">
+              <div class="field"><label>School Facebook URL</label><input type="url" id="g-fbSchool" placeholder="https://facebook.com/..."/></div>
+              <div class="field"><label>Simon's Facebook URL</label><input type="url" id="g-fbSimon" placeholder="https://facebook.com/..."/></div>
+            </div>
+            <div class="field"><label>GoFundMe URL</label><input type="url" id="g-gofundme" placeholder="https://gofundme.com/..."/></div>
           </div>
         </div>
       </div>
 
       <!-- HERO -->
-      <div class="tab-pane" id="pane-hero">
-        <div class="page-title">Hero Section <span>Top of the homepage</span></div>
-        <div class="section-card">
-          <div class="section-card-head"><h3>Hero Content</h3></div>
-          <div class="section-card-body">
-            <div class="field"><label>Eyebrow Text</label><input type="text" id="h-eyebrow"/><p class="field-hint">Small text above the headline e.g. "Louisville, Kentucky · South Sudan"</p></div>
+      <div class="mpane" id="pane-hero">
+        <div class="page-header">
+          <h2>Hero Section</h2>
+          <p>The banner at the very top of the homepage</p>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Hero Text</h3>
+          </div>
+          <div class="card-body">
+            <div class="field"><label>Eyebrow Text</label><input type="text" id="h-eyebrow"/><p class="field-hint">Small text above the headline — e.g. "Louisville, Kentucky · South Sudan"</p></div>
             <div class="field"><label>Main Headline</label><input type="text" id="h-headline"/></div>
             <div class="field"><label>Description</label><textarea id="h-description"></textarea></div>
-            <div class="field-row">
+            <div class="grid-2">
               <div class="field"><label>Card Tag Line</label><input type="text" id="h-cardSpan"/><p class="field-hint">e.g. "Established 2022 · 200+ Students"</p></div>
               <div class="field"><label>Card Heading</label><input type="text" id="h-cardHeading"/></div>
             </div>
-            <div class="field">
-              <label>Hero Image</label>
-              <div class="img-pick">
-                <img id="h-heroImage-thumb" class="img-pick-thumb" src="" alt=""/>
-                <div>
-                  <input type="hidden" id="h-heroImage"/>
-                  <button class="btn btn-ghost btn-sm" onclick="openPicker('h-heroImage','h-heroImage-thumb')">Choose image</button>
-                  <p class="field-hint" id="h-heroImage-name"></p>
-                </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Hero Image</h3>
+          </div>
+          <div class="card-body">
+            <div class="img-pick">
+              <img id="h-heroImage-thumb" class="img-pick-thumb" src="" alt=""/>
+              <div id="h-heroImage-empty" class="img-pick-empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+              <div>
+                <input type="hidden" id="h-heroImage"/>
+                <button class="btn btn-ghost" onclick="openPicker('h-heroImage','h-heroImage-thumb','h-heroImage-empty')">Choose image</button>
+                <p class="field-hint" id="h-heroImage-name" style="margin-top:.35rem"></p>
               </div>
             </div>
           </div>
@@ -251,12 +392,17 @@ input,textarea,select{font:inherit}
       </div>
 
       <!-- STORY -->
-      <div class="tab-pane" id="pane-story">
-        <div class="page-title">Story <span>Simon's story section</span></div>
-        <div class="section-card">
-          <div class="section-card-head"><h3>Story Content</h3></div>
-          <div class="section-card-body">
-            <div class="field"><label>Pull Quote</label><textarea id="s-quote" style="min-height:60px"></textarea><p class="field-hint">The large quote shown prominently in the story section</p></div>
+      <div class="mpane" id="pane-story">
+        <div class="page-header">
+          <h2>Story</h2>
+          <p>Simon's story section on the homepage</p>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Story Content</h3>
+          </div>
+          <div class="card-body">
+            <div class="field"><label>Pull Quote</label><textarea id="s-quote" style="min-height:64px"></textarea><p class="field-hint">The large quote shown prominently in the story section</p></div>
             <div class="field"><label>Paragraph 1</label><textarea id="s-p1"></textarea></div>
             <div class="field"><label>Paragraph 2</label><textarea id="s-p2"></textarea></div>
             <div class="field"><label>Paragraph 3</label><textarea id="s-p3"></textarea></div>
@@ -265,25 +411,38 @@ input,textarea,select{font:inherit}
       </div>
 
       <!-- FOUNDER -->
-      <div class="tab-pane" id="pane-founder">
-        <div class="page-title">Founder <span>Simon's profile card</span></div>
-        <div class="section-card">
-          <div class="section-card-head"><h3>Founder Details</h3></div>
-          <div class="section-card-body">
-            <div class="field-row">
+      <div class="mpane" id="pane-founder">
+        <div class="page-header">
+          <h2>Founder</h2>
+          <p>Simon Ottaviano's profile card</p>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Founder Details</h3>
+          </div>
+          <div class="card-body">
+            <div class="grid-2">
               <div class="field"><label>Full Name</label><input type="text" id="f-name"/></div>
               <div class="field"><label>Title / Role</label><input type="text" id="f-role"/></div>
             </div>
             <div class="field"><label>Bio</label><textarea id="f-bio" style="min-height:100px"></textarea></div>
-            <div class="field-row">
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-head">
+            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</h3>
+          </div>
+          <div class="card-body">
+            <div class="grid-2">
               <div class="field">
                 <label>Profile Photo</label>
                 <div class="img-pick">
                   <img id="f-photo-thumb" class="img-pick-thumb" src="" alt=""/>
+                  <div id="f-photo-empty" class="img-pick-empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
                   <div>
                     <input type="hidden" id="f-photo"/>
-                    <button class="btn btn-ghost btn-sm" onclick="openPicker('f-photo','f-photo-thumb')">Choose image</button>
-                    <p class="field-hint" id="f-photo-name"></p>
+                    <button class="btn btn-ghost" onclick="openPicker('f-photo','f-photo-thumb','f-photo-empty')">Choose image</button>
+                    <p class="field-hint" id="f-photo-name" style="margin-top:.35rem"></p>
                   </div>
                 </div>
               </div>
@@ -291,10 +450,11 @@ input,textarea,select{font:inherit}
                 <label>Army / Secondary Photo</label>
                 <div class="img-pick">
                   <img id="f-armyPhoto-thumb" class="img-pick-thumb" src="" alt=""/>
+                  <div id="f-armyPhoto-empty" class="img-pick-empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
                   <div>
                     <input type="hidden" id="f-armyPhoto"/>
-                    <button class="btn btn-ghost btn-sm" onclick="openPicker('f-armyPhoto','f-armyPhoto-thumb')">Choose image</button>
-                    <p class="field-hint" id="f-armyPhoto-name"></p>
+                    <button class="btn btn-ghost" onclick="openPicker('f-armyPhoto','f-armyPhoto-thumb','f-armyPhoto-empty')">Choose image</button>
+                    <p class="field-hint" id="f-armyPhoto-name" style="margin-top:.35rem"></p>
                   </div>
                 </div>
               </div>
@@ -304,64 +464,42 @@ input,textarea,select{font:inherit}
       </div>
 
       <!-- GALLERY -->
-      <div class="tab-pane" id="pane-gallery">
-        <div class="page-title">Gallery <span>School photo gallery</span></div>
-        <div class="gallery-admin" id="gallery-admin"></div>
+      <div class="mpane" id="pane-gallery">
+        <div class="page-header">
+          <h2>Gallery</h2>
+          <p>School photo gallery shown on the homepage</p>
+        </div>
+        <div id="gallery-admin"></div>
       </div>
 
       <!-- IMPACT -->
-      <div class="tab-pane" id="pane-impact">
-        <div class="page-title">Impact <span>Timeline milestone cards</span></div>
-        <div class="card-list" id="impact-admin"></div>
+      <div class="mpane" id="pane-impact">
+        <div class="page-header">
+          <h2>Impact</h2>
+          <p>Timeline milestone cards</p>
+        </div>
+        <div id="impact-admin"></div>
       </div>
 
       <!-- PROJECTS -->
-      <div class="tab-pane" id="pane-projects">
-        <div class="page-title">Projects <span>Fundraising & future goals</span></div>
-        <div class="card-list" id="projects-admin"></div>
-      </div>
-
-      <!-- IMAGES -->
-      <div class="tab-pane" id="pane-images">
-        <div class="page-title">Images <span>Upload & manage photos</span></div>
-        <div class="section-card">
-          <div class="section-card-head"><h3>Upload Images</h3></div>
-          <div class="section-card-body">
-            <label class="upload-zone" id="upload-zone">
-              <input type="file" id="upload-input" accept="image/*" multiple/>
-              <div>📁 Drag photos here or click to browse</div>
-              <div style="font-size:.8rem;color:var(--muted);margin-top:.35rem">JPG, PNG, WEBP, SVG up to 50MB</div>
-            </label>
-            <div class="img-grid" id="img-grid"></div>
-          </div>
+      <div class="mpane" id="pane-projects">
+        <div class="page-header">
+          <h2>Projects</h2>
+          <p>Fundraising goals and future projects</p>
         </div>
-      </div>
-
-      <!-- SETTINGS -->
-      <div class="tab-pane" id="pane-settings">
-        <div class="page-title">Password <span>Change admin password</span></div>
-        <div class="section-card">
-          <div class="section-card-head"><h3>Change Password</h3></div>
-          <div class="section-card-body">
-            <div class="field-row">
-              <div class="field"><label>New Password</label><input type="password" id="new-pw" placeholder="Enter new password"/></div>
-              <div class="field"><label>Confirm Password</label><input type="password" id="confirm-pw" placeholder="Repeat new password"/></div>
-            </div>
-            <button class="btn btn-primary" id="btn-save-pw">Save Password</button>
-          </div>
-        </div>
+        <div id="projects-admin"></div>
       </div>
 
     </main>
   </div>
 </div>
 
-<!-- Image Picker Modal -->
+<!-- Image picker modal -->
 <div class="overlay" id="picker-overlay" onclick="closePicker()"></div>
 <div class="modal" id="picker-modal">
   <div class="mhead">
     <h3>Choose an Image</h3>
-    <button class="btn btn-ghost btn-sm" onclick="closePicker()">✕ Close</button>
+    <button class="btn btn-ghost" style="padding:.3rem .6rem;font-size:.78rem" onclick="closePicker()">✕ Close</button>
   </div>
   <div class="mbody">
     <div class="picker-grid" id="picker-grid"></div>
@@ -373,28 +511,27 @@ input,textarea,select{font:inherit}
 <script>
 'use strict';
 let content = null;
-let pickerTarget = null, pickerThumb = null;
+let pickerTarget = null, pickerThumb = null, pickerEmpty = null;
 let toastTimer;
 
 function toast(msg, type=''){
   const el = document.getElementById('toast');
   el.textContent = msg; el.className = 'on ' + type;
-  clearTimeout(toastTimer); toastTimer = setTimeout(()=>el.className='', 3000);
+  clearTimeout(toastTimer); toastTimer = setTimeout(()=>el.className='', 3200);
 }
-
 function markUnsaved(){ document.getElementById('unsaved-dot').classList.add('on'); }
 function markSaved(){ document.getElementById('unsaved-dot').classList.remove('on'); }
 
-// ── Login ─────────────────────────────────────────────────────
+// ── Login ──────────────────────────────────────────────────────
 document.getElementById('login-form').onsubmit = async e => {
   e.preventDefault();
   const r = await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:document.getElementById('pw').value})});
   if(r.ok){
-    document.getElementById('login').style.display = 'none';
+    document.getElementById('login-screen').style.display='none';
     document.getElementById('app').classList.add('on');
     initAdmin();
   } else {
-    document.getElementById('lerr').textContent = 'Wrong password. Try again.';
+    document.getElementById('lc-err').textContent = 'Wrong password. Try again.';
   }
 };
 
@@ -403,252 +540,278 @@ document.getElementById('btn-logout').onclick = async () => {
   location.reload();
 };
 
-// ── Sidebar tabs ──────────────────────────────────────────────
-document.querySelectorAll('.sb-item').forEach(item => {
-  item.onclick = () => {
-    document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('on'));
-    document.querySelectorAll('.tab-pane').forEach(p=>p.classList.remove('on'));
-    item.classList.add('on');
-    document.getElementById('pane-'+item.dataset.tab).classList.add('on');
-    document.getElementById('tb-section').textContent = item.textContent.trim();
-    if(item.dataset.tab === 'images') loadImages();
+// ── Sidebar icon tabs ──────────────────────────────────────────
+document.querySelectorAll('.stab').forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));
+    document.querySelectorAll('.sidebar-pane').forEach(p=>p.classList.remove('on'));
+    tab.classList.add('on');
+    document.getElementById('sp-'+tab.dataset.stab).classList.add('on');
+    if(tab.dataset.stab === 'media') loadImages();
   };
 });
 
-// ── Init ──────────────────────────────────────────────────────
+// ── Sidebar content nav ────────────────────────────────────────
+document.querySelectorAll('.sb-item').forEach(item => {
+  item.onclick = () => {
+    document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('on'));
+    document.querySelectorAll('.mpane').forEach(p=>p.classList.remove('on'));
+    item.classList.add('on');
+    document.getElementById('pane-'+item.dataset.tab).classList.add('on');
+    document.getElementById('tb-page').textContent = item.textContent.trim();
+  };
+});
+
+// ── Init ───────────────────────────────────────────────────────
 async function initAdmin(){
   const r = await fetch('/api/content');
   if(!r.ok){ toast('Failed to load content','err'); return; }
   content = await r.json();
   populateForms();
   loadImages();
-  // Show restore button if backup exists
   fetch('/api/content/has-backup').then(r=>r.json()).then(d=>{
     document.getElementById('btn-restore').style.display = d.hasBak ? 'inline-flex' : 'none';
   }).catch(()=>{});
 }
 
-// ── Populate forms ────────────────────────────────────────────
+// ── Populate ───────────────────────────────────────────────────
 function populateForms(){
   const c = content;
-
-  // General
   document.getElementById('g-email').value    = c.contact.email || '';
   document.getElementById('g-phone').value    = c.contact.phone || '';
   document.getElementById('g-fbSchool').value = c.contact.facebookSchool || '';
   document.getElementById('g-fbSimon').value  = c.contact.facebookSimon || '';
   document.getElementById('g-gofundme').value = c.gofundmeUrl || '';
 
-  // Hero
   document.getElementById('h-eyebrow').value     = c.hero.eyebrow || '';
   document.getElementById('h-headline').value    = c.hero.headline || '';
   document.getElementById('h-description').value = c.hero.description || '';
   document.getElementById('h-cardSpan').value    = c.hero.cardSpan || '';
   document.getElementById('h-cardHeading').value = c.hero.cardHeading || '';
-  setImageField('h-heroImage', 'h-heroImage-thumb', 'h-heroImage-name', c.hero.heroImage);
+  setImageField('h-heroImage','h-heroImage-thumb','h-heroImage-empty','h-heroImage-name', c.hero.heroImage);
 
-  // Story
   document.getElementById('s-quote').value = c.story.quote || '';
   document.getElementById('s-p1').value    = c.story.paragraph1 || '';
   document.getElementById('s-p2').value    = c.story.paragraph2 || '';
   document.getElementById('s-p3').value    = c.story.paragraph3 || '';
 
-  // Founder
   document.getElementById('f-name').value = c.founder.name || '';
   document.getElementById('f-role').value = c.founder.role || '';
   document.getElementById('f-bio').value  = c.founder.bio || '';
-  setImageField('f-photo', 'f-photo-thumb', 'f-photo-name', c.founder.photo);
-  setImageField('f-armyPhoto', 'f-armyPhoto-thumb', 'f-armyPhoto-name', c.founder.armyPhoto);
+  setImageField('f-photo','f-photo-thumb','f-photo-empty','f-photo-name', c.founder.photo);
+  setImageField('f-armyPhoto','f-armyPhoto-thumb','f-armyPhoto-empty','f-armyPhoto-name', c.founder.armyPhoto);
 
-  // Gallery
   buildGallery(c.gallery);
-
-  // Impact
   buildImpact(c.impact);
-
-  // Projects
   buildProjects(c.projects);
 
-  // Listen for changes
-  document.querySelectorAll('input,textarea,select').forEach(el => {
-    el.addEventListener('input', markUnsaved);
-  });
+  document.querySelectorAll('input,textarea,select').forEach(el => el.addEventListener('input', markUnsaved));
 }
 
-function setImageField(inputId, thumbId, nameId, filename){
+function setImageField(inputId, thumbId, emptyId, nameId, filename){
   document.getElementById(inputId).value = filename || '';
   const thumb = document.getElementById(thumbId);
-  if(filename){ thumb.src = '/' + filename; thumb.style.display = 'block'; }
-  else { thumb.src = ''; thumb.style.display = 'none'; }
+  const empty = document.getElementById(emptyId);
+  if(filename){
+    thumb.src = '/'+filename;
+    thumb.classList.add('has-img');
+    if(empty) empty.style.display='none';
+  } else {
+    thumb.src='';
+    thumb.classList.remove('has-img');
+    if(empty) empty.style.display='flex';
+  }
   if(nameId) document.getElementById(nameId).textContent = filename || '';
 }
 
-// ── Gallery builder ───────────────────────────────────────────
+// ── Gallery ────────────────────────────────────────────────────
 function buildGallery(gallery){
-  const container = document.getElementById('gallery-admin');
-  container.innerHTML = '';
+  const c = document.getElementById('gallery-admin');
+  c.innerHTML = '';
   gallery.forEach((img, i) => {
-    const div = document.createElement('div');
-    div.className = 'gallery-item-admin';
-    div.innerHTML = `
-      <label>Photo ${i+1}</label>
-      <div class="img-pick" style="margin-bottom:.6rem">
-        <img id="gal-src-thumb-${i}" class="img-pick-thumb" src="${img.src ? '/'+img.src : ''}" alt="" style="${img.src?'':'display:none'}"/>
-        <div>
-          <input type="hidden" id="gal-src-${i}" value="${img.src||''}"/>
-          <button class="btn btn-ghost btn-sm" onclick="openPicker('gal-src-${i}','gal-src-thumb-${i}')">Choose image</button>
+    const d = document.createElement('div');
+    d.className = 'card';
+    d.innerHTML = `
+      <div class="card-head">
+        <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photo ${i+1}</h3>
+      </div>
+      <div class="card-body">
+        <div class="field" style="margin-bottom:.85rem">
+          <label>Image</label>
+          <div class="img-pick">
+            <img id="gal-thumb-${i}" class="img-pick-thumb${img.src?' has-img':''}" src="${img.src?'/'+img.src:''}" alt=""/>
+            <div id="gal-empty-${i}" class="img-pick-empty" style="${img.src?'display:none':''}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+            <div>
+              <input type="hidden" id="gal-src-${i}" value="${img.src||''}"/>
+              <button class="btn btn-ghost" onclick="openPicker('gal-src-${i}','gal-thumb-${i}','gal-empty-${i}')">Choose image</button>
+              <p class="field-hint" id="gal-name-${i}" style="margin-top:.35rem">${img.src||''}</p>
+            </div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="field"><label>Caption</label><input type="text" id="gal-cap-${i}" value="${escHtml(img.caption||'')}"/></div>
+          <div class="field"><label>Alt Text</label><input type="text" id="gal-alt-${i}" value="${escHtml(img.alt||'')}"/></div>
         </div>
       </div>
-      <div class="field"><label>Caption</label><input type="text" id="gal-cap-${i}" value="${img.caption||''}"/></div>
-      <div class="field"><label>Alt Text</label><input type="text" id="gal-alt-${i}" value="${img.alt||''}"/></div>
     `;
-    container.appendChild(div);
+    c.appendChild(d);
   });
 }
 
-// ── Impact builder ────────────────────────────────────────────
+// ── Impact ─────────────────────────────────────────────────────
 function buildImpact(impact){
-  const container = document.getElementById('impact-admin');
-  container.innerHTML = '';
+  const c = document.getElementById('impact-admin');
+  c.innerHTML = '';
   impact.forEach((item, i) => {
-    const div = document.createElement('div');
-    div.className = 'card-admin';
-    div.innerHTML = `
-      <div class="card-admin-head">Impact Card ${i+1}</div>
-      <div class="field-row">
-        <div class="field"><label>Year / Number</label><input type="text" id="imp-num-${i}" value="${item.number||''}"/></div>
-        <div class="field"><label>Format</label>
-          <select id="imp-fmt-${i}">
-            <option value="year" ${item.format==='year'?'selected':''}>Year (e.g. 2022)</option>
-            <option value="plus" ${item.format==='plus'?'selected':''}>Number+ (e.g. 200+)</option>
-            <option value="plain" ${item.format==='plain'?'selected':''}>Plain number</option>
-          </select>
+    const d = document.createElement('div');
+    d.className = 'card';
+    d.innerHTML = `
+      <div class="card-head">
+        <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Impact Card ${i+1}</h3>
+      </div>
+      <div class="card-body">
+        <div class="grid-3">
+          <div class="field"><label>Year / Number</label><input type="text" id="imp-num-${i}" value="${escHtml(item.number||'')}"/></div>
+          <div class="field"><label>Format</label>
+            <select id="imp-fmt-${i}">
+              <option value="year" ${item.format==='year'?'selected':''}>Year (2022)</option>
+              <option value="plus" ${item.format==='plus'?'selected':''}>Number+ (200+)</option>
+              <option value="plain" ${item.format==='plain'?'selected':''}>Plain</option>
+            </select>
+          </div>
+          <div class="field"><label>Title</label><input type="text" id="imp-title-${i}" value="${escHtml(item.title||'')}"/></div>
+        </div>
+        <div class="field"><label>Description</label><textarea id="imp-desc-${i}">${escHtml(item.desc||'')}</textarea></div>
+      </div>
+    `;
+    c.appendChild(d);
+  });
+}
+
+// ── Projects ───────────────────────────────────────────────────
+function buildProjects(projects){
+  const c = document.getElementById('projects-admin');
+  c.innerHTML = '';
+  projects.forEach((proj, i) => {
+    const d = document.createElement('div');
+    d.className = 'card';
+    d.innerHTML = `
+      <div class="card-head">
+        <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Project ${i+1}${proj.highlight?' <span style="color:#d97706;font-size:.72rem;font-weight:700;margin-left:.4rem">★ Active Fundraiser</span>':''}</h3>
+      </div>
+      <div class="card-body">
+        <div class="field"><label>Title</label><input type="text" id="proj-title-${i}" value="${escHtml(proj.title||'')}"/></div>
+        <div class="field"><label>Description</label><textarea id="proj-desc-${i}">${escHtml(proj.desc||'')}</textarea></div>
+        <div class="grid-2">
+          <div class="field"><label>Donate Link (optional)</label><input type="url" id="proj-link-${i}" value="${escHtml(proj.link||'')}" placeholder="https://..."/></div>
+          <div class="field"><label>Button Text</label><input type="text" id="proj-linktext-${i}" value="${escHtml(proj.linkText||'')}"/></div>
         </div>
       </div>
-      <div class="field"><label>Title</label><input type="text" id="imp-title-${i}" value="${item.title||''}"/></div>
-      <div class="field"><label>Description</label><textarea id="imp-desc-${i}">${item.desc||''}</textarea></div>
     `;
-    container.appendChild(div);
+    c.appendChild(d);
   });
 }
 
-// ── Projects builder ──────────────────────────────────────────
-function buildProjects(projects){
-  const container = document.getElementById('projects-admin');
-  container.innerHTML = '';
-  projects.forEach((proj, i) => {
-    const div = document.createElement('div');
-    div.className = 'card-admin';
-    div.innerHTML = `
-      <div class="card-admin-head">Project ${i+1}${proj.highlight?' ⭐ Active Fundraiser':''}</div>
-      <div class="field"><label>Title</label><input type="text" id="proj-title-${i}" value="${proj.title||''}"/></div>
-      <div class="field"><label>Description</label><textarea id="proj-desc-${i}">${proj.desc||''}</textarea></div>
-      <div class="field-row">
-        <div class="field"><label>Donate Link (optional)</label><input type="url" id="proj-link-${i}" value="${proj.link||''}"/></div>
-        <div class="field"><label>Link Button Text</label><input type="text" id="proj-linktext-${i}" value="${proj.linkText||''}"/></div>
-      </div>
-    `;
-    container.appendChild(div);
-  });
-}
+function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-// ── Collect form data ─────────────────────────────────────────
+// ── Collect ────────────────────────────────────────────────────
 function collectContent(){
-  const gallery = content.gallery.map((img, i) => ({
+  const gallery = content.gallery.map((img,i) => ({
     src: document.getElementById(`gal-src-${i}`).value,
     caption: document.getElementById(`gal-cap-${i}`).value,
     alt: document.getElementById(`gal-alt-${i}`).value,
-    tall: img.tall || false,
-    wide: img.wide || false
+    tall: img.tall||false, wide: img.wide||false
   }));
-  const impact = content.impact.map((item, i) => ({
+  const impact = content.impact.map((item,i) => ({
     number: document.getElementById(`imp-num-${i}`).value,
     format: document.getElementById(`imp-fmt-${i}`).value,
-    title: document.getElementById(`imp-title-${i}`).value,
-    desc: document.getElementById(`imp-desc-${i}`).value
+    title:  document.getElementById(`imp-title-${i}`).value,
+    desc:   document.getElementById(`imp-desc-${i}`).value
   }));
-  const projects = content.projects.map((proj, i) => ({
-    title: document.getElementById(`proj-title-${i}`).value,
-    desc: document.getElementById(`proj-desc-${i}`).value,
-    link: document.getElementById(`proj-link-${i}`).value,
+  const projects = content.projects.map((proj,i) => ({
+    title:    document.getElementById(`proj-title-${i}`).value,
+    desc:     document.getElementById(`proj-desc-${i}`).value,
+    link:     document.getElementById(`proj-link-${i}`).value,
     linkText: document.getElementById(`proj-linktext-${i}`).value,
-    highlight: proj.highlight || false
+    highlight: proj.highlight||false
   }));
   return {
-    contact: {
-      email: document.getElementById('g-email').value,
-      phone: document.getElementById('g-phone').value,
-      facebookSchool: document.getElementById('g-fbSchool').value,
+    contact:{
+      email:         document.getElementById('g-email').value,
+      phone:         document.getElementById('g-phone').value,
+      facebookSchool:document.getElementById('g-fbSchool').value,
       facebookSimon: document.getElementById('g-fbSimon').value
     },
     gofundmeUrl: document.getElementById('g-gofundme').value,
-    hero: {
-      eyebrow: document.getElementById('h-eyebrow').value,
-      headline: document.getElementById('h-headline').value,
-      description: document.getElementById('h-description').value,
-      cardSpan: document.getElementById('h-cardSpan').value,
-      cardHeading: document.getElementById('h-cardHeading').value,
-      heroImage: document.getElementById('h-heroImage').value
+    hero:{
+      eyebrow:    document.getElementById('h-eyebrow').value,
+      headline:   document.getElementById('h-headline').value,
+      description:document.getElementById('h-description').value,
+      cardSpan:   document.getElementById('h-cardSpan').value,
+      cardHeading:document.getElementById('h-cardHeading').value,
+      heroImage:  document.getElementById('h-heroImage').value
     },
-    story: {
-      quote: document.getElementById('s-quote').value,
-      paragraph1: document.getElementById('s-p1').value,
-      paragraph2: document.getElementById('s-p2').value,
-      paragraph3: document.getElementById('s-p3').value
+    story:{
+      quote:     document.getElementById('s-quote').value,
+      paragraph1:document.getElementById('s-p1').value,
+      paragraph2:document.getElementById('s-p2').value,
+      paragraph3:document.getElementById('s-p3').value
     },
-    founder: {
-      name: document.getElementById('f-name').value,
-      role: document.getElementById('f-role').value,
-      bio: document.getElementById('f-bio').value,
-      photo: document.getElementById('f-photo').value,
+    founder:{
+      name:      document.getElementById('f-name').value,
+      role:      document.getElementById('f-role').value,
+      bio:       document.getElementById('f-bio').value,
+      photo:     document.getElementById('f-photo').value,
       armyPhoto: document.getElementById('f-armyPhoto').value
     },
-    gallery,
-    impact,
-    projects
+    gallery, impact, projects
   };
 }
 
-// ── Save ──────────────────────────────────────────────────────
+// ── Save ───────────────────────────────────────────────────────
 document.getElementById('btn-save').onclick = async () => {
   const data = collectContent();
   const r = await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
   if(r.ok){
-    content = data;
-    markSaved();
-    toast('Saved! Site is updating...','ok');
-    document.getElementById('btn-restore').style.display = 'inline-flex';
-  } else {
-    toast('Save failed','err');
-  }
+    content = data; markSaved();
+    toast('Saved — site is updating…','ok');
+    document.getElementById('btn-restore').style.display='inline-flex';
+  } else { toast('Save failed','err'); }
 };
 
-// ── Deploy ────────────────────────────────────────────────────
-document.getElementById('btn-deploy').onclick = async () => {
-  toast('Deploying to live site...');
+// ── Deploy ─────────────────────────────────────────────────────
+async function doDeploy(){
+  const status = document.getElementById('deploy-status');
+  toast('Deploying to live site…');
+  if(status){ status.style.display='block'; status.textContent='Deploying…'; status.style.background='rgba(79,70,229,.12)'; status.style.color='#a5b4fc'; }
   const r = await fetch('/api/deploy',{method:'POST'});
-  if(r.ok) toast('Site is live!','ok');
-  else toast('Deploy failed — check server logs','err');
-};
+  if(r.ok){
+    toast('Site is live!','ok');
+    if(status){ status.textContent='✓ Deployed successfully'; status.style.background='rgba(5,150,105,.12)'; status.style.color='#6ee7b7'; }
+  } else {
+    toast('Deploy failed — check server logs','err');
+    if(status){ status.textContent='✗ Deploy failed'; status.style.background='rgba(220,38,38,.12)'; status.style.color='#fca5a5'; }
+  }
+}
+document.getElementById('btn-deploy').onclick = doDeploy;
+document.getElementById('btn-deploy-side').onclick = doDeploy;
 
-// ── Restore ───────────────────────────────────────────────────
+// ── Restore ────────────────────────────────────────────────────
 document.getElementById('btn-restore').onclick = async () => {
   if(!confirm('Restore previous version? This will undo your last save.')) return;
   const r = await fetch('/api/content/restore',{method:'POST'});
   if(r.ok){
     const data = await r.json();
-    content = data.content;
-    populateForms();
-    markSaved();
+    content = data.content; populateForms(); markSaved();
     toast('Restored to previous version','ok');
-    document.getElementById('btn-restore').style.display = 'none';
+    document.getElementById('btn-restore').style.display='none';
   } else {
-    const err = await r.json();
-    toast(err.error || 'No backup found','err');
+    const err = await r.json().catch(()=>({}));
+    toast(err.error||'No backup found','err');
   }
 };
 
-// ── Images ────────────────────────────────────────────────────
+// ── Images ─────────────────────────────────────────────────────
 async function loadImages(){
   const r = await fetch('/api/images');
   if(!r.ok) return;
@@ -657,61 +820,67 @@ async function loadImages(){
   grid.innerHTML = '';
   images.forEach(name => {
     const cell = document.createElement('div');
-    cell.className = 'img-cell';
-    cell.innerHTML = `<img src="/${name}" alt="${name}"/><span class="img-cell-del" title="Delete">✕</span><div class="img-cell-name">${name}</div>`;
-    cell.querySelector('.img-cell-del').onclick = async (e) => {
-      e.stopPropagation();
-      if(!confirm('Delete "'+name+'"?')) return;
-      await fetch('/api/images/'+name,{method:'DELETE'});
-      toast('Deleted','ok');
-      loadImages();
-    };
+    cell.className = 'img-card';
+    cell.innerHTML = `
+      <img src="/${name}" alt="${name}"/>
+      <div class="img-overlay">
+        <div class="img-name">${name}</div>
+        <button class="btn-sm" style="background:#dc2626;border-color:#dc2626;color:#fff" onclick="deleteImage('${name}',this)">Delete</button>
+      </div>
+    `;
     grid.appendChild(cell);
   });
 }
 
-// Upload
-const uploadZone = document.getElementById('upload-zone');
+window.deleteImage = async (name, btn) => {
+  if(!confirm('Delete "'+name+'"?')) return;
+  await fetch('/api/images/'+encodeURIComponent(name),{method:'DELETE'});
+  toast('Deleted','ok');
+  loadImages();
+};
+
+const uploadZone  = document.getElementById('upload-zone');
 const uploadInput = document.getElementById('upload-input');
-uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'));
-uploadZone.addEventListener('drop', async e => {
+uploadZone.addEventListener('dragover', e=>{ e.preventDefault(); uploadZone.classList.add('drag'); });
+uploadZone.addEventListener('dragleave', ()=>uploadZone.classList.remove('drag'));
+uploadZone.addEventListener('drop', async e=>{
   e.preventDefault(); uploadZone.classList.remove('drag');
-  for(const file of e.dataTransfer.files) await uploadFile(file);
+  for(const f of e.dataTransfer.files) await uploadFile(f);
   loadImages();
 });
 uploadInput.onchange = async () => {
-  for(const file of uploadInput.files) await uploadFile(file);
-  uploadInput.value = '';
-  loadImages();
+  for(const f of uploadInput.files) await uploadFile(f);
+  uploadInput.value=''; loadImages();
 };
 async function uploadFile(file){
-  const fd = new FormData();
-  fd.append('image', file);
+  const fd = new FormData(); fd.append('image',file);
   const r = await fetch('/api/images',{method:'POST',body:fd});
   if(r.ok) toast('Uploaded: '+file.name,'ok');
   else toast('Upload failed: '+file.name,'err');
 }
 
-// ── Image picker modal ────────────────────────────────────────
-async function openPicker(inputId, thumbId){
-  pickerTarget = inputId;
-  pickerThumb  = thumbId;
+// ── Image picker ───────────────────────────────────────────────
+window.openPicker = async (inputId, thumbId, emptyId) => {
+  pickerTarget = inputId; pickerThumb = thumbId; pickerEmpty = emptyId;
   const r = await fetch('/api/images');
   const images = await r.json();
   const grid = document.getElementById('picker-grid');
   grid.innerHTML = '';
   images.forEach(name => {
     const cell = document.createElement('div');
-    cell.className = 'picker-cell';
+    cell.className = 'picker-item';
     cell.innerHTML = `<img src="/${name}" alt="${name}"/><div class="picker-name">${name}</div>`;
     cell.onclick = () => {
       document.getElementById(pickerTarget).value = name;
       const thumb = document.getElementById(pickerThumb);
-      thumb.src = '/' + name;
-      thumb.style.display = 'block';
-      const nameEl = document.getElementById(pickerTarget + '-name');
+      thumb.src = '/'+name; thumb.classList.add('has-img');
+      const empty = document.getElementById(pickerEmpty);
+      if(empty) empty.style.display='none';
+      const nameEl = document.getElementById(pickerTarget+'-name');
       if(nameEl) nameEl.textContent = name;
+      // gallery special case
+      const galNameEl = document.getElementById(pickerTarget.replace('gal-src-','gal-name-'));
+      if(galNameEl) galNameEl.textContent = name;
       markUnsaved();
       closePicker();
     };
@@ -719,13 +888,13 @@ async function openPicker(inputId, thumbId){
   });
   document.getElementById('picker-overlay').classList.add('on');
   document.getElementById('picker-modal').classList.add('on');
-}
-function closePicker(){
+};
+window.closePicker = () => {
   document.getElementById('picker-overlay').classList.remove('on');
   document.getElementById('picker-modal').classList.remove('on');
-}
+};
 
-// ── Password ──────────────────────────────────────────────────
+// ── Password ───────────────────────────────────────────────────
 document.getElementById('btn-save-pw').onclick = async () => {
   const np = document.getElementById('new-pw').value;
   const cp = document.getElementById('confirm-pw').value;
@@ -736,10 +905,10 @@ document.getElementById('btn-save-pw').onclick = async () => {
   else toast('Failed to update password','err');
 };
 
-// ── Check auth on load ────────────────────────────────────────
+// ── Auth check on load ─────────────────────────────────────────
 fetch('/api/auth').then(r=>r.json()).then(d=>{
   if(d.ok){
-    document.getElementById('login').style.display='none';
+    document.getElementById('login-screen').style.display='none';
     document.getElementById('app').classList.add('on');
     initAdmin();
   }
