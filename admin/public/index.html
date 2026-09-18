@@ -7,18 +7,18 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --sb:#13161b;--sb2:#1c1f26;--top:#fff;--bg:#eef0f4;
+  --sb:#13161b;--sb2:#1c1f26;--bg:#eef0f4;
   --accent:#4f46e5;--accent2:#4338ca;--green:#059669;--red:#dc2626;--gold:#d97706;
   --text:#111827;--muted:#6b7280;--border:#e5e7eb;
   --sh:0 1px 3px rgba(0,0,0,.1);--shlg:0 8px 24px rgba(0,0,0,.15);
-  --r:7px;--th:52px;--sw:252px;
+  --sw:248px;--th:52px;
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13.5px;color:var(--text);background:var(--bg);overflow:hidden;height:100vh}
 button{cursor:pointer;font:inherit;border:none;background:none}
 input,textarea,select{font:inherit}
 svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 
-/* Login */
+/* ── Login ── */
 #login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d0f14,#1e2130);z-index:900}
 .lc{background:#fff;border-radius:14px;padding:2.5rem;width:360px;box-shadow:0 24px 64px rgba(0,0,0,.5);text-align:center}
 .lc-logo{font-size:1.9rem;font-weight:800;color:var(--accent);letter-spacing:-1px}
@@ -26,40 +26,46 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 .lc h2{font-size:1rem;font-weight:500;color:var(--muted);margin:1.25rem 0}
 .lc input{width:100%;padding:.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;margin-bottom:.9rem;outline:none;transition:border-color .2s}
 .lc input:focus{border-color:var(--accent)}
-.lc-btn{width:100%;padding:.8rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.95rem;font-weight:600;transition:background .2s}
+.lc-btn{width:100%;padding:.8rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.95rem;font-weight:600}
 .lc-btn:hover{background:var(--accent2)}
 .lc-err{color:var(--red);font-size:.82rem;margin-top:.6rem;min-height:1em}
 
-/* App */
+/* ── App ── */
 #app{display:none;flex-direction:column;height:100vh}
 #app.on{display:flex}
 
-/* Topbar */
-.topbar{height:var(--th);background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 .9rem;gap:.75rem;flex-shrink:0;box-shadow:var(--sh);z-index:10}
-.tb-logo{font-weight:800;font-size:1.05rem;color:var(--accent);letter-spacing:-.5px;white-space:nowrap}
+/* ── Topbar ── */
+.topbar{height:var(--th);background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 .75rem;gap:.5rem;flex-shrink:0;box-shadow:var(--sh);z-index:10}
+.tb-logo{font-weight:800;font-size:1rem;color:var(--accent);letter-spacing:-.5px;white-space:nowrap;margin-right:.25rem}
 .tb-sep{width:1px;height:18px;background:var(--border);flex-shrink:0}
-.tb-page{color:var(--muted);font-size:.82rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:200px}
+.tb-section{color:var(--muted);font-size:.82rem;white-space:nowrap}
 .unsaved{width:7px;height:7px;border-radius:50%;background:var(--gold);display:none;flex-shrink:0}
 .unsaved.on{display:block}
-.tb-right{margin-left:auto;display:flex;align-items:center;gap:.4rem}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:.35rem}
 
-/* Buttons */
-.btn{display:inline-flex;align-items:center;gap:.35rem;padding:.42rem .85rem;border-radius:6px;font-size:.82rem;font-weight:600;transition:all .15s;white-space:nowrap;border:1.5px solid transparent}
+/* ── Buttons ── */
+.btn{display:inline-flex;align-items:center;gap:.32rem;padding:.4rem .8rem;border-radius:6px;font-size:.82rem;font-weight:600;transition:all .15s;white-space:nowrap;border:1.5px solid transparent}
 .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}.btn-primary:hover{background:var(--accent2)}
 .btn-success{background:var(--green);color:#fff;border-color:var(--green)}.btn-success:hover{background:#047857}
 .btn-ghost{background:transparent;color:var(--muted);border-color:var(--border)}.btn-ghost:hover{background:var(--bg);color:var(--text)}
 .btn-danger{background:var(--red);color:#fff;border-color:var(--red)}.btn-danger:hover{background:#b91c1c}
 .btn-sm{display:inline-flex;align-items:center;gap:.3rem;padding:.28rem .6rem;border-radius:5px;border:1px solid #2e323b;background:#252830;color:#c9d1d9;font-size:.76rem;font-weight:600}
 .btn-sm:hover{background:#2e323b}
+.btn-icon{display:inline-flex;align-items:center;justify-content:center;padding:.32rem;border-radius:5px;border:1.5px solid var(--border);color:var(--muted);transition:all .15s}
+.btn-icon:hover{background:var(--bg);color:var(--text)}
+.btn-icon.active{border-color:var(--accent);color:var(--accent);background:rgba(79,70,229,.07)}
+.btn:disabled{opacity:.38;cursor:not-allowed;pointer-events:none}
 .btn-full{width:100%;justify-content:center}
+.btn-add{display:flex;align-items:center;gap:.45rem;width:100%;padding:.55rem .85rem;border:1.5px dashed var(--border);border-radius:8px;color:var(--muted);font-size:.82rem;font-weight:600;background:transparent;transition:all .15s;justify-content:center;margin-top:.5rem}
+.btn-add:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,70,229,.04)}
 
-/* Layout */
+/* ── Layout ── */
 .layout{display:flex;flex:1;overflow:hidden}
 
-/* Sidebar */
+/* ── Sidebar ── */
 .sidebar{width:var(--sw);background:var(--sb);display:flex;flex-direction:column;flex-shrink:0}
 .stabs{display:grid;grid-template-columns:repeat(5,1fr);background:#0a0c10;flex-shrink:0}
-.stab{background:none;border:none;color:#6b7280;padding:.55rem .1rem;display:flex;flex-direction:column;align-items:center;gap:.18rem;font-size:.56rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;transition:all .15s;border-bottom:2px solid transparent}
+.stab{background:none;border:none;color:#6b7280;padding:.52rem .1rem;display:flex;flex-direction:column;align-items:center;gap:.17rem;font-size:.55rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;transition:all .15s;border-bottom:2px solid transparent}
 .stab:hover{color:#e5e7eb;background:rgba(255,255,255,.04)}
 .stab.on{color:#fff;border-bottom-color:var(--accent)}
 .stab svg{width:15px;height:15px}
@@ -68,72 +74,81 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 .ph h3{color:#f9fafb;font-size:.85rem;font-weight:600}
 .pscroll{flex:1;overflow-y:auto;padding:.65rem}.pscroll::-webkit-scrollbar{width:3px}.pscroll::-webkit-scrollbar-thumb{background:#2e323b;border-radius:2px}
 .hint{color:#5b6370;font-size:.76rem;line-height:1.55;margin-bottom:.6rem}
-
-/* Sidebar nav items */
-.sb-item{display:flex;align-items:center;gap:.5rem;padding:.45rem .6rem;border-radius:6px;cursor:pointer;color:#b0b8c4;font-size:.82rem;transition:background .15s;margin-bottom:1px}
+.sb-label{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#4b5563;padding:.45rem .6rem .2rem;margin-top:.2rem}
+.sb-item{display:flex;align-items:center;gap:.5rem;padding:.44rem .6rem;border-radius:6px;cursor:pointer;color:#b0b8c4;font-size:.82rem;transition:background .15s;margin-bottom:1px}
 .sb-item:hover{background:rgba(255,255,255,.05);color:#e5e7eb}
 .sb-item.on{background:rgba(79,70,229,.2);color:#a5b4fc;font-weight:600}
 .sb-item svg{width:14px;height:14px;flex-shrink:0}
-.sb-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#4b5563;padding:.5rem .6rem .25rem;margin-top:.25rem}
 
-/* Images in sidebar */
-.img-grid{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
-.img-card{border-radius:6px;overflow:hidden;background:#1c1f26;position:relative;aspect-ratio:1}
-.img-card img{width:100%;height:100%;object-fit:cover;display:block}
-.img-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;opacity:0;transition:opacity .15s;padding:.3rem}
-.img-card:hover .img-overlay{opacity:1}
-.img-name{font-size:.62rem;color:#9ca3af;text-align:center;padding:.15rem .3rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.upload-zone{border:1.5px dashed #2e323b;border-radius:8px;text-align:center;padding:1rem .75rem;color:#5b6370;cursor:pointer;transition:all .2s;margin-bottom:.65rem;display:block}
+/* Media tab */
+.img-grid-sb{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
+.img-card-sb{border-radius:6px;overflow:hidden;background:#1c1f26;position:relative;aspect-ratio:1}
+.img-card-sb img{width:100%;height:100%;object-fit:cover;display:block}
+.img-overlay-sb{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;opacity:0;transition:opacity .15s;padding:.3rem}
+.img-card-sb:hover .img-overlay-sb{opacity:1}
+.img-name-sb{font-size:.6rem;color:#9ca3af;text-align:center;padding:.15rem .3rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.upload-zone{border:1.5px dashed #2e323b;border-radius:8px;text-align:center;padding:.9rem .75rem;color:#5b6370;cursor:pointer;transition:all .2s;margin-bottom:.65rem;display:block}
 .upload-zone:hover,.upload-zone.drag{border-color:var(--accent);color:#a5b4fc;background:rgba(79,70,229,.06)}
 .upload-zone input{display:none}
 
-/* Main area */
-.main{flex:1;overflow-y:auto;padding:1.5rem;background:var(--bg)}
-.main::-webkit-scrollbar{width:5px}.main::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
+/* ── Forms panel ── */
+.forms-panel{overflow-y:auto;background:var(--bg);transition:width .2s;flex:1}
+.forms-panel.with-preview{flex:none;width:420px;border-right:1px solid var(--border)}
+.forms-panel::-webkit-scrollbar{width:5px}.forms-panel::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
+.forms-inner{padding:1.25rem}
 
-/* Page header */
-.page-header{margin-bottom:1.25rem}
-.page-header h2{font-size:1.25rem;font-weight:800;color:var(--text);letter-spacing:-.3px}
-.page-header p{font-size:.82rem;color:var(--muted);margin-top:.2rem}
+/* ── Preview panel ── */
+.preview-panel{flex:1;display:none;flex-direction:column;background:#1a1d24;min-width:0}
+.preview-panel.on{display:flex}
+.preview-toolbar{height:40px;background:#0d0f14;border-bottom:1px solid #22252d;display:flex;align-items:center;padding:0 .75rem;gap:.4rem;flex-shrink:0}
+.preview-toolbar span{color:#9ca3af;font-size:.78rem;font-weight:600;margin-right:.35rem}
+.dev-btn{display:inline-flex;align-items:center;justify-content:center;padding:.28rem .55rem;border-radius:5px;border:1px solid #2e323b;color:#9ca3af;font-size:.72rem;font-weight:600;transition:all .15s}
+.dev-btn:hover{background:#1c1f26;color:#e5e7eb}
+.dev-btn.on{background:rgba(79,70,229,.2);border-color:rgba(79,70,229,.5);color:#a5b4fc}
+.preview-toolbar .ml{margin-left:auto}
+.frame-wrap{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:.75rem;transition:padding .25s}
+.frame-wrap.tablet{padding:.75rem 10%}
+.frame-wrap.mobile{padding:.75rem 25%}
+#pframe{width:100%;height:100%;border:none;border-radius:8px;box-shadow:0 0 0 1px rgba(255,255,255,.05),0 16px 48px rgba(0,0,0,.4);background:#fff}
 
-/* Cards */
-.card{background:#fff;border-radius:10px;border:1px solid var(--border);margin-bottom:1rem;overflow:hidden;box-shadow:var(--sh)}
-.card-head{padding:.8rem 1.1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.card-head h3{font-size:.85rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.45rem}
+/* ── Cards (main forms) ── */
+.page-header{margin-bottom:1.1rem}
+.page-header h2{font-size:1.2rem;font-weight:800;color:var(--text);letter-spacing:-.3px}
+.page-header p{font-size:.8rem;color:var(--muted);margin-top:.18rem}
+.card{background:#fff;border-radius:10px;border:1px solid var(--border);margin-bottom:.85rem;overflow:hidden;box-shadow:var(--sh)}
+.card-head{padding:.75rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-head h3{font-size:.84rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.4rem}
 .card-head h3 svg{color:var(--accent)}
-.card-body{padding:1.1rem}
+.card-body{padding:1rem}
+.card-item{background:#fff;border:1.5px solid var(--border);border-radius:8px;margin-bottom:.65rem;overflow:hidden}
+.card-item:last-child{margin-bottom:0}
+.card-item-head{padding:.6rem .85rem;background:#f8f9fc;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.card-item-head span{font-size:.74rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
+.card-item-body{padding:.85rem}
 
-/* Form fields */
-.field{margin-bottom:.85rem}
+/* ── Fields ── */
+.field{margin-bottom:.8rem}
 .field:last-child{margin-bottom:0}
-.field label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem}
-.field input,.field textarea,.field select{width:100%;padding:.52rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-size:.85rem;outline:none;transition:border-color .2s;color:var(--text);background:#fff}
+.field label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.28rem}
+.field input,.field textarea,.field select{width:100%;padding:.5rem .72rem;border:1.5px solid var(--border);border-radius:7px;font-size:.85rem;outline:none;transition:border-color .2s;color:var(--text);background:#fff}
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
-.field textarea{min-height:80px;resize:vertical;line-height:1.6}
-.field-hint{font-size:.74rem;color:var(--muted);margin-top:.25rem}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}
-.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.75rem}
+.field textarea{min-height:78px;resize:vertical;line-height:1.6}
+.field-hint{font-size:.73rem;color:var(--muted);margin-top:.22rem}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem}
 
 /* Image picker field */
-.img-pick{display:flex;align-items:center;gap:.75rem}
-.img-pick-thumb{width:60px;height:60px;border-radius:8px;object-fit:cover;border:1.5px solid var(--border);background:#f3f4f6;flex-shrink:0;display:none}
-.img-pick-thumb.has-img{display:block}
-.img-pick-empty{width:60px;height:60px;border-radius:8px;border:1.5px dashed var(--border);background:#f9fafb;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--muted)}
+.img-pick-row{display:flex;align-items:center;gap:.7rem}
+.img-pick-thumb{width:58px;height:58px;border-radius:8px;object-fit:cover;border:1.5px solid var(--border);display:none}
+.img-pick-thumb.has{display:block}
+.img-pick-empty{width:58px;height:58px;border-radius:8px;border:1.5px dashed var(--border);background:#f9fafb;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#d1d5db}
+.img-pick-info{font-size:.74rem;color:var(--muted);margin-top:.28rem}
 
-/* Subcard (gallery / impact / project items) */
-.subcard{background:#f8f9fc;border:1.5px solid var(--border);border-radius:8px;padding:.85rem;margin-bottom:.65rem}
-.subcard:last-child{margin-bottom:0}
-.subcard-label{font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.65rem;display:flex;align-items:center;gap:.4rem}
-.subcard-label svg{width:12px;height:12px}
-
-/* Tab panes (main content) */
-.mpane{display:none}.mpane.on{display:block}
-
-/* Image picker modal */
+/* ── Modal ── */
 .overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:100;display:none}.overlay.on{display:block}
 .modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:12px;box-shadow:var(--shlg);z-index:101;display:none;width:540px;max-width:95vw;max-height:85vh;flex-direction:column}
 .modal.on{display:flex}
-.mhead{padding:1.1rem 1.1rem .75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.mhead{padding:1rem 1.1rem .75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .mhead h3{font-size:.95rem;font-weight:700}
 .mbody{padding:1rem;overflow-y:auto;flex:1}
 .picker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem}
@@ -142,10 +157,13 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 .picker-item img{width:100%;height:100%;object-fit:cover}
 .picker-name{font-size:.6rem;color:var(--muted);text-align:center;padding:.12rem .25rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
-/* Toast */
-#toast{position:fixed;bottom:1.25rem;right:1.25rem;background:#1f2937;color:#f9fafb;padding:.55rem 1rem;border-radius:7px;font-size:.82rem;box-shadow:var(--shlg);z-index:200;opacity:0;transform:translateY(6px);transition:all .22s;pointer-events:none}
+/* ── Toast ── */
+#toast{position:fixed;bottom:1.25rem;right:1.25rem;background:#1f2937;color:#f9fafb;padding:.55rem 1rem;border-radius:7px;font-size:.82rem;box-shadow:var(--shlg);z-index:300;opacity:0;transform:translateY(6px);transition:all .22s;pointer-events:none}
 #toast.on{opacity:1;transform:translateY(0)}
 #toast.ok{background:#064e3b}#toast.err{background:#7f1d1d}
+
+/* ── Tab panes ── */
+.mpane{display:none}.mpane.on{display:block}
 </style>
 </head>
 <body>
@@ -168,10 +186,24 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
   <header class="topbar">
     <span class="tb-logo">Ayaa School</span>
     <span class="tb-sep"></span>
-    <span class="tb-page" id="tb-page">Content Manager</span>
-    <span class="unsaved" id="unsaved-dot"></span>
+    <span class="tb-section" id="tb-section">General</span>
+    <span class="unsaved" id="unsaved-dot" title="Unsaved changes"></span>
     <div class="tb-right">
-      <button class="btn btn-ghost" id="btn-restore" title="Undo last save" style="color:#d97706;border-color:#d97706;display:none">
+      <!-- Undo / Redo -->
+      <button class="btn-icon" id="btn-undo" title="Undo (Ctrl+Z)" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.8"/></svg>
+      </button>
+      <button class="btn-icon" id="btn-redo" title="Redo (Ctrl+Y)" disabled>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-3.8"/></svg>
+      </button>
+      <span class="tb-sep"></span>
+      <!-- Preview toggle -->
+      <button class="btn-icon" id="btn-preview" title="Toggle live preview">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        Preview
+      </button>
+      <span class="tb-sep"></span>
+      <button class="btn btn-ghost" id="btn-restore" style="color:#d97706;border-color:#d97706;display:none">
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.8"/></svg>
         Restore
       </button>
@@ -188,9 +220,8 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
   </header>
 
   <div class="layout">
-    <!-- SIDEBAR -->
+    <!-- ── SIDEBAR ── -->
     <aside class="sidebar">
-      <!-- Icon tab strip -->
       <div class="stabs">
         <button class="stab on" data-stab="content">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
@@ -225,7 +256,7 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
           </div>
           <div class="sb-label">Homepage</div>
           <div class="sb-item" data-tab="hero">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
             Hero
           </div>
           <div class="sb-item" data-tab="story">
@@ -261,7 +292,7 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
             <div style="font-size:.7rem;color:#4b5563;margin-top:.15rem">JPG · PNG · WEBP · SVG</div>
             <input type="file" id="upload-input" accept="image/*" multiple/>
           </label>
-          <div class="img-grid" id="img-grid"></div>
+          <div class="img-grid-sb" id="img-grid"></div>
         </div>
       </div>
 
@@ -269,15 +300,12 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
       <div class="sidebar-pane" id="sp-deploy">
         <div class="ph"><h3>Deploy</h3></div>
         <div class="pscroll">
-          <p class="hint">Push your saved changes to the live website. Save first, then deploy.</p>
-          <button class="btn btn-success btn-full" id="btn-deploy-side" style="margin-bottom:.75rem">
+          <p class="hint">Save your changes first, then click Deploy to push to the live website.</p>
+          <button class="btn btn-success btn-full" id="btn-deploy-side" style="margin-bottom:.65rem">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
-            Deploy to Live Site
+            Deploy Now
           </button>
-          <div id="deploy-status" style="font-size:.8rem;padding:.5rem .65rem;border-radius:6px;display:none"></div>
-          <div style="margin-top:1rem;padding-top:.75rem;border-top:1px solid #22252d">
-            <p class="hint">After saving, the site auto-deploys in the background. Use this button if you want to manually push again.</p>
-          </div>
+          <div id="deploy-status" style="font-size:.8rem;padding:.5rem .65rem;border-radius:6px;display:none;line-height:1.5"></div>
         </div>
       </div>
 
@@ -285,17 +313,17 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
       <div class="sidebar-pane" id="sp-settings">
         <div class="ph"><h3>Settings</h3></div>
         <div class="pscroll">
-          <p class="hint" style="margin-bottom:.75rem">Change the admin password.</p>
-          <div style="display:flex;flex-direction:column;gap:.45rem">
+          <p class="hint" style="margin-bottom:.75rem">Change the admin password below.</p>
+          <div style="display:flex;flex-direction:column;gap:.5rem">
             <div>
-              <label style="display:block;color:#6b7280;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem">New Password</label>
-              <input id="new-pw" type="password" placeholder="Enter new password" style="width:100%;background:#1c1f26;border:1px solid #2e323b;border-radius:6px;color:#f3f4f6;padding:.5rem .65rem;font-size:.81rem;outline:none"/>
+              <label style="display:block;color:#6b7280;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.28rem">New Password</label>
+              <input id="new-pw" type="password" placeholder="New password" style="width:100%;background:#1c1f26;border:1px solid #2e323b;border-radius:6px;color:#f3f4f6;padding:.48rem .65rem;font-size:.81rem;outline:none"/>
             </div>
             <div>
-              <label style="display:block;color:#6b7280;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.3rem">Confirm Password</label>
-              <input id="confirm-pw" type="password" placeholder="Repeat new password" style="width:100%;background:#1c1f26;border:1px solid #2e323b;border-radius:6px;color:#f3f4f6;padding:.5rem .65rem;font-size:.81rem;outline:none"/>
+              <label style="display:block;color:#6b7280;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.28rem">Confirm</label>
+              <input id="confirm-pw" type="password" placeholder="Repeat password" style="width:100%;background:#1c1f26;border:1px solid #2e323b;border-radius:6px;color:#f3f4f6;padding:.48rem .65rem;font-size:.81rem;outline:none"/>
             </div>
-            <button class="btn btn-primary btn-full" id="btn-save-pw" style="margin-top:.25rem">Save Password</button>
+            <button class="btn btn-primary btn-full" id="btn-save-pw" style="margin-top:.15rem">Save Password</button>
           </div>
         </div>
       </div>
@@ -304,202 +332,226 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
       <div class="sidebar-pane" id="sp-help">
         <div class="ph"><h3>How to Use</h3></div>
         <div class="pscroll">
-          <div style="display:flex;flex-direction:column;gap:.65rem">
+          <div style="display:flex;flex-direction:column;gap:.6rem">
             <div style="background:#1c1f26;border-radius:8px;padding:.75rem">
-              <div style="color:#a5b4fc;font-size:.75rem;font-weight:700;margin-bottom:.45rem">Editing Content</div>
-              <div style="color:#9ca3af;font-size:.76rem;line-height:1.6">Click any section in the sidebar, edit the fields, then hit <strong style="color:#e5e7eb">Save</strong> in the top bar.</div>
+              <div style="color:#a5b4fc;font-size:.74rem;font-weight:700;margin-bottom:.4rem">👁 Live Preview</div>
+              <div style="color:#9ca3af;font-size:.75rem;line-height:1.65">Click <strong style="color:#e5e7eb">Preview</strong> in the topbar to open a split-view of the site. It updates automatically as you type.</div>
             </div>
             <div style="background:#1c1f26;border-radius:8px;padding:.75rem">
-              <div style="color:#a5b4fc;font-size:.75rem;font-weight:700;margin-bottom:.45rem">Publishing</div>
-              <div style="color:#9ca3af;font-size:.76rem;line-height:1.6">Save first → then click <strong style="color:#e5e7eb">Go Live</strong>. The site updates within a minute.</div>
+              <div style="color:#a5b4fc;font-size:.74rem;font-weight:700;margin-bottom:.4rem">↩ Undo / Redo</div>
+              <div style="color:#9ca3af;font-size:.75rem;line-height:1.65">Use the ↩ ↪ buttons in the topbar, or <strong style="color:#e5e7eb">Ctrl+Z</strong> / <strong style="color:#e5e7eb">Ctrl+Y</strong> to step through your changes.</div>
             </div>
             <div style="background:#1c1f26;border-radius:8px;padding:.75rem">
-              <div style="color:#a5b4fc;font-size:.75rem;font-weight:700;margin-bottom:.45rem">Images</div>
-              <div style="color:#9ca3af;font-size:.76rem;line-height:1.6">Upload photos in the <strong style="color:#e5e7eb">Media</strong> tab. Then use "Choose image" buttons on any section to pick them.</div>
+              <div style="color:#a5b4fc;font-size:.74rem;font-weight:700;margin-bottom:.4rem">+ Adding Items</div>
+              <div style="color:#9ca3af;font-size:.75rem;line-height:1.65">In Gallery, Impact, and Projects — use <strong style="color:#e5e7eb">+ Add</strong> buttons to add new items. Click Remove to delete one.</div>
             </div>
             <div style="background:#1c1f26;border-radius:8px;padding:.75rem">
-              <div style="color:#d97706;font-size:.75rem;font-weight:700;margin-bottom:.45rem">Undo / Restore</div>
-              <div style="color:#9ca3af;font-size:.76rem;line-height:1.6">After saving, a <strong style="color:#e5e7eb">Restore</strong> button appears in the top bar. Click it to undo your last save.</div>
+              <div style="color:#a5b4fc;font-size:.74rem;font-weight:700;margin-bottom:.4rem">🖼 Images</div>
+              <div style="color:#9ca3af;font-size:.75rem;line-height:1.65">Upload photos in <strong style="color:#e5e7eb">Media</strong> tab. Then use <strong style="color:#e5e7eb">Choose image</strong> on any section to pick them.</div>
+            </div>
+            <div style="background:#1c1f26;border-radius:8px;padding:.75rem">
+              <div style="color:#d97706;font-size:.74rem;font-weight:700;margin-bottom:.4rem">💾 Save + Go Live</div>
+              <div style="color:#9ca3af;font-size:.75rem;line-height:1.65"><strong style="color:#e5e7eb">Save</strong> stores your changes. <strong style="color:#e5e7eb">Go Live</strong> publishes them to the website for everyone to see.</div>
             </div>
           </div>
         </div>
       </div>
     </aside>
 
-    <!-- MAIN CONTENT -->
-    <main class="main" id="main">
+    <!-- ── FORMS PANEL ── -->
+    <div class="forms-panel" id="forms-panel">
+      <div class="forms-inner">
 
-      <!-- GENERAL -->
-      <div class="mpane on" id="pane-general">
-        <div class="page-header">
-          <h2>General</h2>
-          <p>Contact information and links shown across the site</p>
-        </div>
-        <div class="card">
-          <div class="card-head">
-            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact Info</h3>
-          </div>
-          <div class="card-body">
-            <div class="grid-2">
-              <div class="field"><label>Email Address</label><input type="email" id="g-email"/></div>
-              <div class="field"><label>Phone Number</label><input type="tel" id="g-phone"/></div>
+        <!-- GENERAL -->
+        <div class="mpane on" id="pane-general">
+          <div class="page-header"><h2>General</h2><p>Contact info & links shown across the site</p></div>
+          <div class="card">
+            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact</h3></div>
+            <div class="card-body">
+              <div class="g2">
+                <div class="field"><label>Email</label><input type="email" id="g-email"/></div>
+                <div class="field"><label>Phone</label><input type="tel" id="g-phone"/></div>
+              </div>
+              <div class="g2">
+                <div class="field"><label>School Facebook</label><input type="url" id="g-fbSchool"/></div>
+                <div class="field"><label>Simon's Facebook</label><input type="url" id="g-fbSimon"/></div>
+              </div>
+              <div class="field"><label>GoFundMe URL</label><input type="url" id="g-gofundme"/></div>
             </div>
-            <div class="grid-2">
-              <div class="field"><label>School Facebook URL</label><input type="url" id="g-fbSchool" placeholder="https://facebook.com/..."/></div>
-              <div class="field"><label>Simon's Facebook URL</label><input type="url" id="g-fbSimon" placeholder="https://facebook.com/..."/></div>
-            </div>
-            <div class="field"><label>GoFundMe URL</label><input type="url" id="g-gofundme" placeholder="https://gofundme.com/..."/></div>
           </div>
         </div>
-      </div>
 
-      <!-- HERO -->
-      <div class="mpane" id="pane-hero">
-        <div class="page-header">
-          <h2>Hero Section</h2>
-          <p>The banner at the very top of the homepage</p>
-        </div>
-        <div class="card">
-          <div class="card-head">
-            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Hero Text</h3>
-          </div>
-          <div class="card-body">
-            <div class="field"><label>Eyebrow Text</label><input type="text" id="h-eyebrow"/><p class="field-hint">Small text above the headline — e.g. "Louisville, Kentucky · South Sudan"</p></div>
-            <div class="field"><label>Main Headline</label><input type="text" id="h-headline"/></div>
-            <div class="field"><label>Description</label><textarea id="h-description"></textarea></div>
-            <div class="grid-2">
-              <div class="field"><label>Card Tag Line</label><input type="text" id="h-cardSpan"/><p class="field-hint">e.g. "Established 2022 · 200+ Students"</p></div>
-              <div class="field"><label>Card Heading</label><input type="text" id="h-cardHeading"/></div>
-            </div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-head">
-            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Hero Image</h3>
-          </div>
-          <div class="card-body">
-            <div class="img-pick">
-              <img id="h-heroImage-thumb" class="img-pick-thumb" src="" alt=""/>
-              <div id="h-heroImage-empty" class="img-pick-empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-              <div>
-                <input type="hidden" id="h-heroImage"/>
-                <button class="btn btn-ghost" onclick="openPicker('h-heroImage','h-heroImage-thumb','h-heroImage-empty')">Choose image</button>
-                <p class="field-hint" id="h-heroImage-name" style="margin-top:.35rem"></p>
+        <!-- HERO -->
+        <div class="mpane" id="pane-hero">
+          <div class="page-header"><h2>Hero</h2><p>The banner at the top of the homepage</p></div>
+          <div class="card">
+            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Hero Text</h3></div>
+            <div class="card-body">
+              <div class="field"><label>Eyebrow</label><input type="text" id="h-eyebrow"/><p class="field-hint">e.g. "Louisville, Kentucky · South Sudan"</p></div>
+              <div class="field"><label>Headline</label><input type="text" id="h-headline"/></div>
+              <div class="field"><label>Description</label><textarea id="h-description"></textarea></div>
+              <div class="g2">
+                <div class="field"><label>Card Tag</label><input type="text" id="h-cardSpan"/><p class="field-hint">e.g. "Established 2022 · 200+ Students"</p></div>
+                <div class="field"><label>Card Heading</label><input type="text" id="h-cardHeading"/></div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-
-      <!-- STORY -->
-      <div class="mpane" id="pane-story">
-        <div class="page-header">
-          <h2>Story</h2>
-          <p>Simon's story section on the homepage</p>
-        </div>
-        <div class="card">
-          <div class="card-head">
-            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Story Content</h3>
-          </div>
-          <div class="card-body">
-            <div class="field"><label>Pull Quote</label><textarea id="s-quote" style="min-height:64px"></textarea><p class="field-hint">The large quote shown prominently in the story section</p></div>
-            <div class="field"><label>Paragraph 1</label><textarea id="s-p1"></textarea></div>
-            <div class="field"><label>Paragraph 2</label><textarea id="s-p2"></textarea></div>
-            <div class="field"><label>Paragraph 3</label><textarea id="s-p3"></textarea></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- FOUNDER -->
-      <div class="mpane" id="pane-founder">
-        <div class="page-header">
-          <h2>Founder</h2>
-          <p>Simon Ottaviano's profile card</p>
-        </div>
-        <div class="card">
-          <div class="card-head">
-            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Founder Details</h3>
-          </div>
-          <div class="card-body">
-            <div class="grid-2">
-              <div class="field"><label>Full Name</label><input type="text" id="f-name"/></div>
-              <div class="field"><label>Title / Role</label><input type="text" id="f-role"/></div>
-            </div>
-            <div class="field"><label>Bio</label><textarea id="f-bio" style="min-height:100px"></textarea></div>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-head">
-            <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</h3>
-          </div>
-          <div class="card-body">
-            <div class="grid-2">
-              <div class="field">
-                <label>Profile Photo</label>
-                <div class="img-pick">
-                  <img id="f-photo-thumb" class="img-pick-thumb" src="" alt=""/>
-                  <div id="f-photo-empty" class="img-pick-empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                  <div>
-                    <input type="hidden" id="f-photo"/>
-                    <button class="btn btn-ghost" onclick="openPicker('f-photo','f-photo-thumb','f-photo-empty')">Choose image</button>
-                    <p class="field-hint" id="f-photo-name" style="margin-top:.35rem"></p>
-                  </div>
+          <div class="card">
+            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Hero Image</h3></div>
+            <div class="card-body">
+              <div class="img-pick-row">
+                <img id="h-heroImage-thumb" class="img-pick-thumb" src="" alt=""/>
+                <div id="h-heroImage-empty" class="img-pick-empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                <div>
+                  <input type="hidden" id="h-heroImage"/>
+                  <button class="btn btn-ghost" onclick="openPicker('h-heroImage','h-heroImage-thumb','h-heroImage-empty')">Choose image</button>
+                  <p class="img-pick-info" id="h-heroImage-name"></p>
                 </div>
               </div>
-              <div class="field">
-                <label>Army / Secondary Photo</label>
-                <div class="img-pick">
-                  <img id="f-armyPhoto-thumb" class="img-pick-thumb" src="" alt=""/>
-                  <div id="f-armyPhoto-empty" class="img-pick-empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-                  <div>
-                    <input type="hidden" id="f-armyPhoto"/>
-                    <button class="btn btn-ghost" onclick="openPicker('f-armyPhoto','f-armyPhoto-thumb','f-armyPhoto-empty')">Choose image</button>
-                    <p class="field-hint" id="f-armyPhoto-name" style="margin-top:.35rem"></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- STORY -->
+        <div class="mpane" id="pane-story">
+          <div class="page-header"><h2>Story</h2><p>Simon's story section</p></div>
+          <div class="card">
+            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Story Content</h3></div>
+            <div class="card-body">
+              <div class="field"><label>Pull Quote</label><textarea id="s-quote" style="min-height:60px"></textarea><p class="field-hint">The large quote shown in the story section</p></div>
+              <div class="field"><label>Paragraph 1</label><textarea id="s-p1"></textarea></div>
+              <div class="field"><label>Paragraph 2</label><textarea id="s-p2"></textarea></div>
+              <div class="field"><label>Paragraph 3</label><textarea id="s-p3"></textarea></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FOUNDER -->
+        <div class="mpane" id="pane-founder">
+          <div class="page-header"><h2>Founder</h2><p>Simon's profile card</p></div>
+          <div class="card">
+            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Details</h3></div>
+            <div class="card-body">
+              <div class="g2">
+                <div class="field"><label>Full Name</label><input type="text" id="f-name"/></div>
+                <div class="field"><label>Title / Role</label><input type="text" id="f-role"/></div>
+              </div>
+              <div class="field"><label>Bio</label><textarea id="f-bio" style="min-height:95px"></textarea></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</h3></div>
+            <div class="card-body">
+              <div class="g2">
+                <div class="field">
+                  <label>Profile Photo</label>
+                  <div class="img-pick-row">
+                    <img id="f-photo-thumb" class="img-pick-thumb" src="" alt=""/>
+                    <div id="f-photo-empty" class="img-pick-empty"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                    <div>
+                      <input type="hidden" id="f-photo"/>
+                      <button class="btn btn-ghost" onclick="openPicker('f-photo','f-photo-thumb','f-photo-empty')">Choose</button>
+                      <p class="img-pick-info" id="f-photo-name"></p>
+                    </div>
+                  </div>
+                </div>
+                <div class="field">
+                  <label>Army Photo</label>
+                  <div class="img-pick-row">
+                    <img id="f-armyPhoto-thumb" class="img-pick-thumb" src="" alt=""/>
+                    <div id="f-armyPhoto-empty" class="img-pick-empty"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+                    <div>
+                      <input type="hidden" id="f-armyPhoto"/>
+                      <button class="btn btn-ghost" onclick="openPicker('f-armyPhoto','f-armyPhoto-thumb','f-armyPhoto-empty')">Choose</button>
+                      <p class="img-pick-info" id="f-armyPhoto-name"></p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- GALLERY -->
-      <div class="mpane" id="pane-gallery">
-        <div class="page-header">
-          <h2>Gallery</h2>
-          <p>School photo gallery shown on the homepage</p>
+        <!-- GALLERY -->
+        <div class="mpane" id="pane-gallery">
+          <div class="page-header"><h2>Gallery</h2><p>School photo gallery on the homepage</p></div>
+          <div class="card">
+            <div class="card-head">
+              <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</h3>
+            </div>
+            <div class="card-body" style="padding-bottom:.5rem">
+              <div id="gallery-admin"></div>
+              <button class="btn-add" onclick="addGalleryItem()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Photo
+              </button>
+            </div>
+          </div>
         </div>
-        <div id="gallery-admin"></div>
-      </div>
 
-      <!-- IMPACT -->
-      <div class="mpane" id="pane-impact">
-        <div class="page-header">
-          <h2>Impact</h2>
-          <p>Timeline milestone cards</p>
+        <!-- IMPACT -->
+        <div class="mpane" id="pane-impact">
+          <div class="page-header"><h2>Impact</h2><p>Timeline milestone cards</p></div>
+          <div class="card">
+            <div class="card-head">
+              <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Milestones</h3>
+            </div>
+            <div class="card-body" style="padding-bottom:.5rem">
+              <div id="impact-admin"></div>
+              <button class="btn-add" onclick="addImpactItem()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Milestone
+              </button>
+            </div>
+          </div>
         </div>
-        <div id="impact-admin"></div>
-      </div>
 
-      <!-- PROJECTS -->
-      <div class="mpane" id="pane-projects">
-        <div class="page-header">
-          <h2>Projects</h2>
-          <p>Fundraising goals and future projects</p>
+        <!-- PROJECTS -->
+        <div class="mpane" id="pane-projects">
+          <div class="page-header"><h2>Projects</h2><p>Fundraising goals and future projects</p></div>
+          <div class="card">
+            <div class="card-head">
+              <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Projects</h3>
+            </div>
+            <div class="card-body" style="padding-bottom:.5rem">
+              <div id="projects-admin"></div>
+              <button class="btn-add" onclick="addProjectItem()">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                Add Project
+              </button>
+            </div>
+          </div>
         </div>
-        <div id="projects-admin"></div>
-      </div>
 
-    </main>
-  </div>
-</div>
+      </div><!-- /forms-inner -->
+    </div><!-- /forms-panel -->
+
+    <!-- ── PREVIEW PANEL ── -->
+    <div class="preview-panel" id="preview-panel">
+      <div class="preview-toolbar">
+        <span>Preview</span>
+        <button class="dev-btn on" id="dev-desktop" onclick="setDevice('desktop')">Desktop</button>
+        <button class="dev-btn" id="dev-tablet" onclick="setDevice('tablet')">Tablet</button>
+        <button class="dev-btn" id="dev-mobile" onclick="setDevice('mobile')">Mobile</button>
+        <div class="ml" style="display:flex;align-items:center;gap:.4rem">
+          <button class="dev-btn" onclick="refreshPreview()">↺ Refresh</button>
+          <a href="/?preview" target="_blank" class="dev-btn" style="text-decoration:none">Open ↗</a>
+        </div>
+      </div>
+      <div class="frame-wrap" id="frame-wrap">
+        <iframe id="pframe" src="/?preview" title="Site preview"></iframe>
+      </div>
+    </div>
+
+  </div><!-- /layout -->
+</div><!-- /app -->
 
 <!-- Image picker modal -->
 <div class="overlay" id="picker-overlay" onclick="closePicker()"></div>
 <div class="modal" id="picker-modal">
   <div class="mhead">
     <h3>Choose an Image</h3>
-    <button class="btn btn-ghost" style="padding:.3rem .6rem;font-size:.78rem" onclick="closePicker()">✕ Close</button>
+    <button class="btn btn-ghost" style="padding:.28rem .6rem;font-size:.78rem" onclick="closePicker()">✕ Close</button>
   </div>
   <div class="mbody">
     <div class="picker-grid" id="picker-grid"></div>
@@ -510,10 +562,68 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 
 <script>
 'use strict';
+
 let content = null;
 let pickerTarget = null, pickerThumb = null, pickerEmpty = null;
-let toastTimer;
+let toastTimer, previewTimer;
+let previewVisible = false;
 
+// ── Undo / Redo ──────────────────────────────────────────────
+const undoStack = [];
+let undoIndex = -1;
+
+function pushUndo(){
+  if(!content) return;
+  const snap = JSON.stringify(collectContent());
+  // Don't push if same as current
+  if(undoIndex >= 0 && undoStack[undoIndex] === snap) return;
+  undoStack.splice(undoIndex + 1);
+  undoStack.push(snap);
+  if(undoStack.length > 25){ undoStack.shift(); } else { undoIndex++; }
+  updateUndoBtns();
+}
+
+function updateUndoBtns(){
+  document.getElementById('btn-undo').disabled = undoIndex <= 0;
+  document.getElementById('btn-redo').disabled = undoIndex >= undoStack.length - 1;
+}
+
+function applyUndo(idx){
+  const snap = undoStack[idx];
+  if(!snap) return;
+  content = JSON.parse(snap);
+  populateForms();
+  markUnsaved();
+  schedulPreview();
+  updateUndoBtns();
+}
+
+document.getElementById('btn-undo').onclick = () => {
+  if(undoIndex <= 0) return;
+  undoIndex--;
+  applyUndo(undoIndex);
+};
+document.getElementById('btn-redo').onclick = () => {
+  if(undoIndex >= undoStack.length - 1) return;
+  undoIndex++;
+  applyUndo(undoIndex);
+};
+document.addEventListener('keydown', e => {
+  if((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey){
+    e.preventDefault();
+    document.getElementById('btn-undo').click();
+  }
+  if((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey))){
+    e.preventDefault();
+    document.getElementById('btn-redo').click();
+  }
+  if((e.ctrlKey || e.metaKey) && e.key === 's'){
+    e.preventDefault();
+    document.getElementById('btn-save').click();
+  }
+});
+
+// ── Toast ────────────────────────────────────────────────────
 function toast(msg, type=''){
   const el = document.getElementById('toast');
   el.textContent = msg; el.className = 'on ' + type;
@@ -522,7 +632,7 @@ function toast(msg, type=''){
 function markUnsaved(){ document.getElementById('unsaved-dot').classList.add('on'); }
 function markSaved(){ document.getElementById('unsaved-dot').classList.remove('on'); }
 
-// ── Login ──────────────────────────────────────────────────────
+// ── Login ────────────────────────────────────────────────────
 document.getElementById('login-form').onsubmit = async e => {
   e.preventDefault();
   const r = await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:document.getElementById('pw').value})});
@@ -531,16 +641,15 @@ document.getElementById('login-form').onsubmit = async e => {
     document.getElementById('app').classList.add('on');
     initAdmin();
   } else {
-    document.getElementById('lc-err').textContent = 'Wrong password. Try again.';
+    document.getElementById('lc-err').textContent='Wrong password. Try again.';
   }
 };
-
 document.getElementById('btn-logout').onclick = async () => {
   await fetch('/api/logout',{method:'POST'});
   location.reload();
 };
 
-// ── Sidebar icon tabs ──────────────────────────────────────────
+// ── Sidebar tabs ─────────────────────────────────────────────
 document.querySelectorAll('.stab').forEach(tab => {
   tab.onclick = () => {
     document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));
@@ -551,127 +660,206 @@ document.querySelectorAll('.stab').forEach(tab => {
   };
 });
 
-// ── Sidebar content nav ────────────────────────────────────────
+// ── Content section nav ──────────────────────────────────────
 document.querySelectorAll('.sb-item').forEach(item => {
   item.onclick = () => {
     document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('on'));
     document.querySelectorAll('.mpane').forEach(p=>p.classList.remove('on'));
     item.classList.add('on');
     document.getElementById('pane-'+item.dataset.tab).classList.add('on');
-    document.getElementById('tb-page').textContent = item.textContent.trim();
+    document.getElementById('tb-section').textContent = item.textContent.trim();
   };
 });
 
-// ── Init ───────────────────────────────────────────────────────
+// ── Preview ──────────────────────────────────────────────────
+const previewBtn = document.getElementById('btn-preview');
+previewBtn.onclick = () => {
+  previewVisible = !previewVisible;
+  document.getElementById('preview-panel').classList.toggle('on', previewVisible);
+  document.getElementById('forms-panel').classList.toggle('with-preview', previewVisible);
+  previewBtn.classList.toggle('active', previewVisible);
+  if(previewVisible) schedulPreview();
+};
+
+function schedulPreview(){
+  if(!previewVisible) return;
+  clearTimeout(previewTimer);
+  previewTimer = setTimeout(doPreview, 700);
+}
+
+async function doPreview(){
+  if(!previewVisible || !content) return;
+  const data = collectContent();
+  await fetch('/api/content/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).catch(()=>{});
+  refreshPreview();
+}
+
+function refreshPreview(){
+  const frame = document.getElementById('pframe');
+  frame.src = '/?preview&t=' + Date.now();
+}
+
+function setDevice(d){
+  document.getElementById('frame-wrap').className = 'frame-wrap' + (d==='tablet'?' tablet':d==='mobile'?' mobile':'');
+  ['desktop','tablet','mobile'].forEach(id => document.getElementById('dev-'+id).classList.toggle('on', id===d));
+}
+
+// ── Init ─────────────────────────────────────────────────────
 async function initAdmin(){
   const r = await fetch('/api/content');
   if(!r.ok){ toast('Failed to load content','err'); return; }
   content = await r.json();
   populateForms();
   loadImages();
+  // Push initial state
+  undoStack.push(JSON.stringify(content));
+  undoIndex = 0;
+  updateUndoBtns();
+  // Check backup
   fetch('/api/content/has-backup').then(r=>r.json()).then(d=>{
     document.getElementById('btn-restore').style.display = d.hasBak ? 'inline-flex' : 'none';
   }).catch(()=>{});
 }
 
-// ── Populate ───────────────────────────────────────────────────
+// ── Populate ─────────────────────────────────────────────────
 function populateForms(){
   const c = content;
-  document.getElementById('g-email').value    = c.contact.email || '';
-  document.getElementById('g-phone').value    = c.contact.phone || '';
-  document.getElementById('g-fbSchool').value = c.contact.facebookSchool || '';
-  document.getElementById('g-fbSimon').value  = c.contact.facebookSimon || '';
-  document.getElementById('g-gofundme').value = c.gofundmeUrl || '';
+  document.getElementById('g-email').value    = c.contact.email||'';
+  document.getElementById('g-phone').value    = c.contact.phone||'';
+  document.getElementById('g-fbSchool').value = c.contact.facebookSchool||'';
+  document.getElementById('g-fbSimon').value  = c.contact.facebookSimon||'';
+  document.getElementById('g-gofundme').value = c.gofundmeUrl||'';
 
-  document.getElementById('h-eyebrow').value     = c.hero.eyebrow || '';
-  document.getElementById('h-headline').value    = c.hero.headline || '';
-  document.getElementById('h-description').value = c.hero.description || '';
-  document.getElementById('h-cardSpan').value    = c.hero.cardSpan || '';
-  document.getElementById('h-cardHeading').value = c.hero.cardHeading || '';
-  setImageField('h-heroImage','h-heroImage-thumb','h-heroImage-empty','h-heroImage-name', c.hero.heroImage);
+  document.getElementById('h-eyebrow').value     = c.hero.eyebrow||'';
+  document.getElementById('h-headline').value    = c.hero.headline||'';
+  document.getElementById('h-description').value = c.hero.description||'';
+  document.getElementById('h-cardSpan').value    = c.hero.cardSpan||'';
+  document.getElementById('h-cardHeading').value = c.hero.cardHeading||'';
+  setImg('h-heroImage','h-heroImage-thumb','h-heroImage-empty','h-heroImage-name', c.hero.heroImage);
 
-  document.getElementById('s-quote').value = c.story.quote || '';
-  document.getElementById('s-p1').value    = c.story.paragraph1 || '';
-  document.getElementById('s-p2').value    = c.story.paragraph2 || '';
-  document.getElementById('s-p3').value    = c.story.paragraph3 || '';
+  document.getElementById('s-quote').value = c.story.quote||'';
+  document.getElementById('s-p1').value    = c.story.paragraph1||'';
+  document.getElementById('s-p2').value    = c.story.paragraph2||'';
+  document.getElementById('s-p3').value    = c.story.paragraph3||'';
 
-  document.getElementById('f-name').value = c.founder.name || '';
-  document.getElementById('f-role').value = c.founder.role || '';
-  document.getElementById('f-bio').value  = c.founder.bio || '';
-  setImageField('f-photo','f-photo-thumb','f-photo-empty','f-photo-name', c.founder.photo);
-  setImageField('f-armyPhoto','f-armyPhoto-thumb','f-armyPhoto-empty','f-armyPhoto-name', c.founder.armyPhoto);
+  document.getElementById('f-name').value = c.founder.name||'';
+  document.getElementById('f-role').value = c.founder.role||'';
+  document.getElementById('f-bio').value  = c.founder.bio||'';
+  setImg('f-photo','f-photo-thumb','f-photo-empty','f-photo-name', c.founder.photo);
+  setImg('f-armyPhoto','f-armyPhoto-thumb','f-armyPhoto-empty','f-armyPhoto-name', c.founder.armyPhoto);
 
   buildGallery(c.gallery);
   buildImpact(c.impact);
   buildProjects(c.projects);
 
-  document.querySelectorAll('input,textarea,select').forEach(el => el.addEventListener('input', markUnsaved));
+  bindInputs();
 }
 
-function setImageField(inputId, thumbId, emptyId, nameId, filename){
-  document.getElementById(inputId).value = filename || '';
+function setImg(inputId, thumbId, emptyId, nameId, filename){
+  const el = document.getElementById(inputId);
+  if(el) el.value = filename||'';
   const thumb = document.getElementById(thumbId);
   const empty = document.getElementById(emptyId);
-  if(filename){
-    thumb.src = '/'+filename;
-    thumb.classList.add('has-img');
-    if(empty) empty.style.display='none';
-  } else {
-    thumb.src='';
-    thumb.classList.remove('has-img');
-    if(empty) empty.style.display='flex';
+  if(thumb){
+    if(filename){ thumb.src='/'+filename; thumb.classList.add('has'); }
+    else{ thumb.src=''; thumb.classList.remove('has'); }
   }
-  if(nameId) document.getElementById(nameId).textContent = filename || '';
+  if(empty) empty.style.display = filename ? 'none' : 'flex';
+  if(nameId){ const n=document.getElementById(nameId); if(n) n.textContent=filename||''; }
 }
 
-// ── Gallery ────────────────────────────────────────────────────
+function bindInputs(){
+  document.querySelectorAll('input,textarea,select').forEach(el => {
+    el.removeEventListener('input', onInput);
+    el.addEventListener('input', onInput);
+  });
+}
+let inputDebounce;
+function onInput(){
+  markUnsaved();
+  clearTimeout(inputDebounce);
+  inputDebounce = setTimeout(()=>{ pushUndo(); schedulPreview(); }, 800);
+}
+
+// ── Gallery ──────────────────────────────────────────────────
+function collectGallery(){
+  return (content.gallery||[]).map((_,i)=>({
+    src:     val(`gal-src-${i}`),
+    caption: val(`gal-cap-${i}`),
+    alt:     val(`gal-alt-${i}`),
+    tall:    content.gallery[i]?.tall||false,
+    wide:    content.gallery[i]?.wide||false
+  }));
+}
 function buildGallery(gallery){
   const c = document.getElementById('gallery-admin');
-  c.innerHTML = '';
-  gallery.forEach((img, i) => {
-    const d = document.createElement('div');
-    d.className = 'card';
-    d.innerHTML = `
-      <div class="card-head">
-        <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photo ${i+1}</h3>
+  c.innerHTML='';
+  gallery.forEach((img,i)=>{
+    const d=document.createElement('div');
+    d.className='card-item';
+    d.innerHTML=`
+      <div class="card-item-head">
+        <span>Photo ${i+1}</span>
+        <button class="btn btn-ghost" style="padding:.2rem .5rem;font-size:.76rem;color:var(--red);border-color:var(--red)" onclick="removeGalleryItem(${i})">Remove</button>
       </div>
-      <div class="card-body">
-        <div class="field" style="margin-bottom:.85rem">
+      <div class="card-item-body">
+        <div class="field" style="margin-bottom:.65rem">
           <label>Image</label>
-          <div class="img-pick">
-            <img id="gal-thumb-${i}" class="img-pick-thumb${img.src?' has-img':''}" src="${img.src?'/'+img.src:''}" alt=""/>
-            <div id="gal-empty-${i}" class="img-pick-empty" style="${img.src?'display:none':''}"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
+          <div class="img-pick-row">
+            <img id="gal-thumb-${i}" class="img-pick-thumb${img.src?' has':''}" src="${img.src?'/'+img.src:''}" alt=""/>
+            <div id="gal-empty-${i}" class="img-pick-empty" style="${img.src?'display:none':''}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
             <div>
-              <input type="hidden" id="gal-src-${i}" value="${img.src||''}"/>
+              <input type="hidden" id="gal-src-${i}" value="${e(img.src)}"/>
               <button class="btn btn-ghost" onclick="openPicker('gal-src-${i}','gal-thumb-${i}','gal-empty-${i}')">Choose image</button>
-              <p class="field-hint" id="gal-name-${i}" style="margin-top:.35rem">${img.src||''}</p>
+              <p class="img-pick-info" id="gal-name-${i}">${e(img.src)}</p>
             </div>
           </div>
         </div>
-        <div class="grid-2">
-          <div class="field"><label>Caption</label><input type="text" id="gal-cap-${i}" value="${escHtml(img.caption||'')}"/></div>
-          <div class="field"><label>Alt Text</label><input type="text" id="gal-alt-${i}" value="${escHtml(img.alt||'')}"/></div>
+        <div class="g2">
+          <div class="field"><label>Caption</label><input type="text" id="gal-cap-${i}" value="${e(img.caption)}"/></div>
+          <div class="field"><label>Alt Text</label><input type="text" id="gal-alt-${i}" value="${e(img.alt)}"/></div>
         </div>
-      </div>
-    `;
+      </div>`;
     c.appendChild(d);
   });
+  bindInputs();
 }
+window.addGalleryItem = ()=>{
+  content.gallery = collectGallery();
+  content.gallery.push({src:'',alt:'',caption:'',tall:false,wide:false});
+  buildGallery(content.gallery);
+  markUnsaved(); pushUndo();
+};
+window.removeGalleryItem = i=>{
+  content.gallery = collectGallery();
+  content.gallery.splice(i,1);
+  buildGallery(content.gallery);
+  markUnsaved(); pushUndo(); schedulPreview();
+};
 
-// ── Impact ─────────────────────────────────────────────────────
+// ── Impact ───────────────────────────────────────────────────
+function collectImpact(){
+  return (content.impact||[]).map((_,i)=>({
+    number: val(`imp-num-${i}`),
+    format: val(`imp-fmt-${i}`),
+    title:  val(`imp-title-${i}`),
+    desc:   val(`imp-desc-${i}`)
+  }));
+}
 function buildImpact(impact){
-  const c = document.getElementById('impact-admin');
-  c.innerHTML = '';
-  impact.forEach((item, i) => {
-    const d = document.createElement('div');
-    d.className = 'card';
-    d.innerHTML = `
-      <div class="card-head">
-        <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Impact Card ${i+1}</h3>
+  const c=document.getElementById('impact-admin');
+  c.innerHTML='';
+  impact.forEach((item,i)=>{
+    const d=document.createElement('div');
+    d.className='card-item';
+    d.innerHTML=`
+      <div class="card-item-head">
+        <span>Milestone ${i+1}</span>
+        <button class="btn btn-ghost" style="padding:.2rem .5rem;font-size:.76rem;color:var(--red);border-color:var(--red)" onclick="removeImpactItem(${i})">Remove</button>
       </div>
-      <div class="card-body">
-        <div class="grid-3">
-          <div class="field"><label>Year / Number</label><input type="text" id="imp-num-${i}" value="${escHtml(item.number||'')}"/></div>
+      <div class="card-item-body">
+        <div class="g3">
+          <div class="field"><label>Number</label><input type="text" id="imp-num-${i}" value="${e(item.number)}"/></div>
           <div class="field"><label>Format</label>
             <select id="imp-fmt-${i}">
               <option value="year" ${item.format==='year'?'selected':''}>Year (2022)</option>
@@ -679,124 +867,144 @@ function buildImpact(impact){
               <option value="plain" ${item.format==='plain'?'selected':''}>Plain</option>
             </select>
           </div>
-          <div class="field"><label>Title</label><input type="text" id="imp-title-${i}" value="${escHtml(item.title||'')}"/></div>
+          <div class="field"><label>Title</label><input type="text" id="imp-title-${i}" value="${e(item.title)}"/></div>
         </div>
-        <div class="field"><label>Description</label><textarea id="imp-desc-${i}">${escHtml(item.desc||'')}</textarea></div>
-      </div>
-    `;
+        <div class="field"><label>Description</label><textarea id="imp-desc-${i}">${e(item.desc)}</textarea></div>
+      </div>`;
     c.appendChild(d);
   });
+  bindInputs();
 }
+window.addImpactItem = ()=>{
+  content.impact = collectImpact();
+  content.impact.push({number:'',format:'plain',title:'',desc:''});
+  buildImpact(content.impact);
+  markUnsaved(); pushUndo();
+};
+window.removeImpactItem = i=>{
+  content.impact = collectImpact();
+  content.impact.splice(i,1);
+  buildImpact(content.impact);
+  markUnsaved(); pushUndo(); schedulPreview();
+};
 
-// ── Projects ───────────────────────────────────────────────────
-function buildProjects(projects){
-  const c = document.getElementById('projects-admin');
-  c.innerHTML = '';
-  projects.forEach((proj, i) => {
-    const d = document.createElement('div');
-    d.className = 'card';
-    d.innerHTML = `
-      <div class="card-head">
-        <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Project ${i+1}${proj.highlight?' <span style="color:#d97706;font-size:.72rem;font-weight:700;margin-left:.4rem">★ Active Fundraiser</span>':''}</h3>
-      </div>
-      <div class="card-body">
-        <div class="field"><label>Title</label><input type="text" id="proj-title-${i}" value="${escHtml(proj.title||'')}"/></div>
-        <div class="field"><label>Description</label><textarea id="proj-desc-${i}">${escHtml(proj.desc||'')}</textarea></div>
-        <div class="grid-2">
-          <div class="field"><label>Donate Link (optional)</label><input type="url" id="proj-link-${i}" value="${escHtml(proj.link||'')}" placeholder="https://..."/></div>
-          <div class="field"><label>Button Text</label><input type="text" id="proj-linktext-${i}" value="${escHtml(proj.linkText||'')}"/></div>
-        </div>
-      </div>
-    `;
-    c.appendChild(d);
-  });
-}
-
-function escHtml(s){ return String(s).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-// ── Collect ────────────────────────────────────────────────────
-function collectContent(){
-  const gallery = content.gallery.map((img,i) => ({
-    src: document.getElementById(`gal-src-${i}`).value,
-    caption: document.getElementById(`gal-cap-${i}`).value,
-    alt: document.getElementById(`gal-alt-${i}`).value,
-    tall: img.tall||false, wide: img.wide||false
-  }));
-  const impact = content.impact.map((item,i) => ({
-    number: document.getElementById(`imp-num-${i}`).value,
-    format: document.getElementById(`imp-fmt-${i}`).value,
-    title:  document.getElementById(`imp-title-${i}`).value,
-    desc:   document.getElementById(`imp-desc-${i}`).value
-  }));
-  const projects = content.projects.map((proj,i) => ({
-    title:    document.getElementById(`proj-title-${i}`).value,
-    desc:     document.getElementById(`proj-desc-${i}`).value,
-    link:     document.getElementById(`proj-link-${i}`).value,
-    linkText: document.getElementById(`proj-linktext-${i}`).value,
+// ── Projects ─────────────────────────────────────────────────
+function collectProjects(){
+  return (content.projects||[]).map((proj,i)=>({
+    title:    val(`proj-title-${i}`),
+    desc:     val(`proj-desc-${i}`),
+    link:     val(`proj-link-${i}`),
+    linkText: val(`proj-linktext-${i}`),
     highlight: proj.highlight||false
   }));
+}
+function buildProjects(projects){
+  const c=document.getElementById('projects-admin');
+  c.innerHTML='';
+  projects.forEach((proj,i)=>{
+    const d=document.createElement('div');
+    d.className='card-item';
+    d.innerHTML=`
+      <div class="card-item-head">
+        <span>Project ${i+1}${proj.highlight?' <span style="color:#d97706">★ Active</span>':''}</span>
+        <button class="btn btn-ghost" style="padding:.2rem .5rem;font-size:.76rem;color:var(--red);border-color:var(--red)" onclick="removeProjectItem(${i})">Remove</button>
+      </div>
+      <div class="card-item-body">
+        <div class="field"><label>Title</label><input type="text" id="proj-title-${i}" value="${e(proj.title)}"/></div>
+        <div class="field"><label>Description</label><textarea id="proj-desc-${i}">${e(proj.desc)}</textarea></div>
+        <div class="g2">
+          <div class="field"><label>Donate Link</label><input type="url" id="proj-link-${i}" value="${e(proj.link)}" placeholder="https://..."/></div>
+          <div class="field"><label>Button Text</label><input type="text" id="proj-linktext-${i}" value="${e(proj.linkText)}"/></div>
+        </div>
+      </div>`;
+    c.appendChild(d);
+  });
+  bindInputs();
+}
+window.addProjectItem = ()=>{
+  content.projects = collectProjects();
+  content.projects.push({title:'',desc:'',link:'',linkText:'',highlight:false});
+  buildProjects(content.projects);
+  markUnsaved(); pushUndo();
+};
+window.removeProjectItem = i=>{
+  content.projects = collectProjects();
+  content.projects.splice(i,1);
+  buildProjects(content.projects);
+  markUnsaved(); pushUndo(); schedulPreview();
+};
+
+// ── Helpers ──────────────────────────────────────────────────
+function val(id){ const el=document.getElementById(id); return el?el.value:''; }
+function e(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+// ── Collect all ──────────────────────────────────────────────
+function collectContent(){
   return {
     contact:{
-      email:         document.getElementById('g-email').value,
-      phone:         document.getElementById('g-phone').value,
-      facebookSchool:document.getElementById('g-fbSchool').value,
-      facebookSimon: document.getElementById('g-fbSimon').value
+      email:          val('g-email'),
+      phone:          val('g-phone'),
+      facebookSchool: val('g-fbSchool'),
+      facebookSimon:  val('g-fbSimon')
     },
-    gofundmeUrl: document.getElementById('g-gofundme').value,
+    gofundmeUrl: val('g-gofundme'),
     hero:{
-      eyebrow:    document.getElementById('h-eyebrow').value,
-      headline:   document.getElementById('h-headline').value,
-      description:document.getElementById('h-description').value,
-      cardSpan:   document.getElementById('h-cardSpan').value,
-      cardHeading:document.getElementById('h-cardHeading').value,
-      heroImage:  document.getElementById('h-heroImage').value
+      eyebrow:     val('h-eyebrow'),
+      headline:    val('h-headline'),
+      description: val('h-description'),
+      cardSpan:    val('h-cardSpan'),
+      cardHeading: val('h-cardHeading'),
+      heroImage:   val('h-heroImage')
     },
     story:{
-      quote:     document.getElementById('s-quote').value,
-      paragraph1:document.getElementById('s-p1').value,
-      paragraph2:document.getElementById('s-p2').value,
-      paragraph3:document.getElementById('s-p3').value
+      quote:      val('s-quote'),
+      paragraph1: val('s-p1'),
+      paragraph2: val('s-p2'),
+      paragraph3: val('s-p3')
     },
     founder:{
-      name:      document.getElementById('f-name').value,
-      role:      document.getElementById('f-role').value,
-      bio:       document.getElementById('f-bio').value,
-      photo:     document.getElementById('f-photo').value,
-      armyPhoto: document.getElementById('f-armyPhoto').value
+      name:      val('f-name'),
+      role:      val('f-role'),
+      bio:       val('f-bio'),
+      photo:     val('f-photo'),
+      armyPhoto: val('f-armyPhoto')
     },
-    gallery, impact, projects
+    gallery:  collectGallery(),
+    impact:   collectImpact(),
+    projects: collectProjects()
   };
 }
 
-// ── Save ───────────────────────────────────────────────────────
+// ── Save ─────────────────────────────────────────────────────
 document.getElementById('btn-save').onclick = async () => {
   const data = collectContent();
   const r = await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
   if(r.ok){
     content = data; markSaved();
-    toast('Saved — site is updating…','ok');
+    toast('Saved — site updating in the background…','ok');
     document.getElementById('btn-restore').style.display='inline-flex';
+    if(previewVisible) refreshPreview();
   } else { toast('Save failed','err'); }
 };
 
-// ── Deploy ─────────────────────────────────────────────────────
+// ── Deploy ────────────────────────────────────────────────────
 async function doDeploy(){
-  const status = document.getElementById('deploy-status');
-  toast('Deploying to live site…');
-  if(status){ status.style.display='block'; status.textContent='Deploying…'; status.style.background='rgba(79,70,229,.12)'; status.style.color='#a5b4fc'; }
+  toast('Deploying…');
+  const ds = document.getElementById('deploy-status');
+  if(ds){ ds.style.display='block'; ds.textContent='Deploying…'; ds.style.background='rgba(79,70,229,.1)'; ds.style.color='#a5b4fc'; }
   const r = await fetch('/api/deploy',{method:'POST'});
   if(r.ok){
     toast('Site is live!','ok');
-    if(status){ status.textContent='✓ Deployed successfully'; status.style.background='rgba(5,150,105,.12)'; status.style.color='#6ee7b7'; }
+    if(ds){ ds.textContent='✓ Deployed successfully'; ds.style.background='rgba(5,150,105,.1)'; ds.style.color='#059669'; }
   } else {
-    toast('Deploy failed — check server logs','err');
-    if(status){ status.textContent='✗ Deploy failed'; status.style.background='rgba(220,38,38,.12)'; status.style.color='#fca5a5'; }
+    toast('Deploy failed','err');
+    if(ds){ ds.textContent='✗ Deploy failed — check logs'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; }
   }
 }
 document.getElementById('btn-deploy').onclick = doDeploy;
 document.getElementById('btn-deploy-side').onclick = doDeploy;
 
-// ── Restore ────────────────────────────────────────────────────
+// ── Restore ───────────────────────────────────────────────────
 document.getElementById('btn-restore').onclick = async () => {
   if(!confirm('Restore previous version? This will undo your last save.')) return;
   const r = await fetch('/api/content/restore',{method:'POST'});
@@ -805,107 +1013,98 @@ document.getElementById('btn-restore').onclick = async () => {
     content = data.content; populateForms(); markSaved();
     toast('Restored to previous version','ok');
     document.getElementById('btn-restore').style.display='none';
+    if(previewVisible) refreshPreview();
   } else {
     const err = await r.json().catch(()=>({}));
     toast(err.error||'No backup found','err');
   }
 };
 
-// ── Images ─────────────────────────────────────────────────────
+// ── Images ────────────────────────────────────────────────────
 async function loadImages(){
   const r = await fetch('/api/images');
   if(!r.ok) return;
   const images = await r.json();
   const grid = document.getElementById('img-grid');
-  grid.innerHTML = '';
-  images.forEach(name => {
-    const cell = document.createElement('div');
-    cell.className = 'img-card';
-    cell.innerHTML = `
-      <img src="/${name}" alt="${name}"/>
-      <div class="img-overlay">
-        <div class="img-name">${name}</div>
-        <button class="btn-sm" style="background:#dc2626;border-color:#dc2626;color:#fff" onclick="deleteImage('${name}',this)">Delete</button>
-      </div>
-    `;
+  grid.innerHTML='';
+  images.forEach(name=>{
+    const cell=document.createElement('div');
+    cell.className='img-card-sb';
+    cell.innerHTML=`<img src="/${name}" alt="${name}"/><div class="img-overlay-sb"><div class="img-name-sb">${name}</div><button class="btn-sm" style="background:#dc2626;border-color:#dc2626;color:#fff" onclick="delImg('${name}')">Delete</button></div>`;
     grid.appendChild(cell);
   });
 }
-
-window.deleteImage = async (name, btn) => {
+window.delImg = async name=>{
   if(!confirm('Delete "'+name+'"?')) return;
   await fetch('/api/images/'+encodeURIComponent(name),{method:'DELETE'});
-  toast('Deleted','ok');
-  loadImages();
+  toast('Deleted','ok'); loadImages();
 };
-
 const uploadZone  = document.getElementById('upload-zone');
 const uploadInput = document.getElementById('upload-input');
-uploadZone.addEventListener('dragover', e=>{ e.preventDefault(); uploadZone.classList.add('drag'); });
+uploadZone.addEventListener('dragover', e=>{e.preventDefault();uploadZone.classList.add('drag');});
 uploadZone.addEventListener('dragleave', ()=>uploadZone.classList.remove('drag'));
 uploadZone.addEventListener('drop', async e=>{
-  e.preventDefault(); uploadZone.classList.remove('drag');
+  e.preventDefault();uploadZone.classList.remove('drag');
   for(const f of e.dataTransfer.files) await uploadFile(f);
   loadImages();
 });
-uploadInput.onchange = async () => {
+uploadInput.onchange = async ()=>{
   for(const f of uploadInput.files) await uploadFile(f);
   uploadInput.value=''; loadImages();
 };
 async function uploadFile(file){
-  const fd = new FormData(); fd.append('image',file);
-  const r = await fetch('/api/images',{method:'POST',body:fd});
+  const fd=new FormData(); fd.append('image',file);
+  const r=await fetch('/api/images',{method:'POST',body:fd});
   if(r.ok) toast('Uploaded: '+file.name,'ok');
-  else toast('Upload failed: '+file.name,'err');
+  else toast('Upload failed','err');
 }
 
-// ── Image picker ───────────────────────────────────────────────
-window.openPicker = async (inputId, thumbId, emptyId) => {
-  pickerTarget = inputId; pickerThumb = thumbId; pickerEmpty = emptyId;
-  const r = await fetch('/api/images');
-  const images = await r.json();
-  const grid = document.getElementById('picker-grid');
-  grid.innerHTML = '';
-  images.forEach(name => {
-    const cell = document.createElement('div');
-    cell.className = 'picker-item';
-    cell.innerHTML = `<img src="/${name}" alt="${name}"/><div class="picker-name">${name}</div>`;
-    cell.onclick = () => {
-      document.getElementById(pickerTarget).value = name;
-      const thumb = document.getElementById(pickerThumb);
-      thumb.src = '/'+name; thumb.classList.add('has-img');
-      const empty = document.getElementById(pickerEmpty);
+// ── Image picker ──────────────────────────────────────────────
+window.openPicker = async (inputId,thumbId,emptyId)=>{
+  pickerTarget=inputId; pickerThumb=thumbId; pickerEmpty=emptyId;
+  const images=await fetch('/api/images').then(r=>r.json());
+  const grid=document.getElementById('picker-grid');
+  grid.innerHTML='';
+  images.forEach(name=>{
+    const cell=document.createElement('div');
+    cell.className='picker-item';
+    cell.innerHTML=`<img src="/${name}" alt="${name}"/><div class="picker-name">${name}</div>`;
+    cell.onclick=()=>{
+      document.getElementById(pickerTarget).value=name;
+      const thumb=document.getElementById(pickerThumb);
+      if(thumb){thumb.src='/'+name; thumb.classList.add('has');}
+      const empty=document.getElementById(pickerEmpty);
       if(empty) empty.style.display='none';
-      const nameEl = document.getElementById(pickerTarget+'-name');
-      if(nameEl) nameEl.textContent = name;
-      // gallery special case
-      const galNameEl = document.getElementById(pickerTarget.replace('gal-src-','gal-name-'));
-      if(galNameEl) galNameEl.textContent = name;
-      markUnsaved();
-      closePicker();
+      // Update name label
+      const nameEl=document.getElementById(pickerTarget+'-name');
+      if(nameEl) nameEl.textContent=name;
+      // Gallery name label
+      const galName=document.getElementById(pickerTarget.replace('gal-src-','gal-name-'));
+      if(galName) galName.textContent=name;
+      markUnsaved(); schedulPreview(); closePicker();
     };
     grid.appendChild(cell);
   });
   document.getElementById('picker-overlay').classList.add('on');
   document.getElementById('picker-modal').classList.add('on');
 };
-window.closePicker = () => {
+window.closePicker = ()=>{
   document.getElementById('picker-overlay').classList.remove('on');
   document.getElementById('picker-modal').classList.remove('on');
 };
 
-// ── Password ───────────────────────────────────────────────────
-document.getElementById('btn-save-pw').onclick = async () => {
-  const np = document.getElementById('new-pw').value;
-  const cp = document.getElementById('confirm-pw').value;
+// ── Password ──────────────────────────────────────────────────
+document.getElementById('btn-save-pw').onclick = async ()=>{
+  const np=document.getElementById('new-pw').value;
+  const cp=document.getElementById('confirm-pw').value;
   if(!np) return toast('Enter a new password','err');
-  if(np !== cp) return toast('Passwords do not match','err');
-  const r = await fetch('/api/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({newPassword:np})});
-  if(r.ok){ toast('Password updated','ok'); document.getElementById('new-pw').value=''; document.getElementById('confirm-pw').value=''; }
-  else toast('Failed to update password','err');
+  if(np!==cp) return toast('Passwords do not match','err');
+  const r=await fetch('/api/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({newPassword:np})});
+  if(r.ok){toast('Password updated','ok');document.getElementById('new-pw').value='';document.getElementById('confirm-pw').value='';}
+  else toast('Failed','err');
 };
 
-// ── Auth check on load ─────────────────────────────────────────
+// ── Auth check on load ────────────────────────────────────────
 fetch('/api/auth').then(r=>r.json()).then(d=>{
   if(d.ok){
     document.getElementById('login-screen').style.display='none';

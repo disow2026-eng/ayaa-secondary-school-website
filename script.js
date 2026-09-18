@@ -283,14 +283,16 @@ function render(d){
   `;
 }
 
-/* ── Init: load content.json then render ── */
+/* ── Init: load content then render ── */
 async function init(){
   try {
-    const res = await fetch('./content.json?t='+Date.now());
+    const isPreview = new URLSearchParams(location.search).has('preview');
+    const url = isPreview ? '/api/content/preview' : './content.json?t='+Date.now();
+    const res = await fetch(url);
     const data = await res.json();
     render(data);
   } catch(e) {
-    console.error('Could not load content.json:', e);
+    console.error('Could not load content:', e);
   }
   setupListeners();
 }

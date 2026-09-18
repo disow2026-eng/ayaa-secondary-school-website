@@ -84,6 +84,18 @@ app.post('/api/login', async (req, res) => {
 
 app.post('/api/logout', (req, res) => { req.session.destroy(); res.json({ ok: true }); });
 
+// ── Preview (in-memory, no disk write) ───────────────────────
+let previewContent = null;
+app.post('/api/content/preview', auth, (req, res) => {
+  previewContent = req.body;
+  res.json({ ok: true });
+});
+app.get('/api/content/preview', async (req, res) => {
+  if(previewContent) return res.json(previewContent);
+  try { res.json(JSON.parse(await fs.readFile(CONTENT_FILE, 'utf8'))); }
+  catch { res.status(404).json({ error: 'No content' }); }
+});
+
 // ── Content ───────────────────────────────────────────────────
 app.get('/api/content', auth, async (req, res) => {
   try { res.json(JSON.parse(await fs.readFile(CONTENT_FILE, 'utf8'))); }
