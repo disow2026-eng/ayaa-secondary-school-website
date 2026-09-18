@@ -1,0 +1,47 @@
+{
+  "contact": {
+    "email": "SimonORealtor@gmail.com",
+    "phone": "502-235-3913",
+    "facebookSchool": "https://www.facebook.com/61552396897213/",
+    "facebookSimon": "https://www.facebook.com/simon.ottaviano.50"
+  },
+  "gofundmeUrl": "https://www.gofundme.com/f/building-of-girls-dormitory-at-ayaa-secondary-scho",
+  "hero": {
+    "eyebrow": "Louisville, Kentucky · South Sudan",
+    "headline": "Building a future through education.",
+    "description": "A nonprofit organization headquartered in Louisville, Kentucky, dedicated to raising funds and support for Ayaa Senior Secondary School in Magwi County, South Sudan.",
+    "cardSpan": "Established 2022 · 200+ Students",
+    "cardHeading": "Education is the foundation. Community is the force.",
+    "heroImage": "493254739_29723280290603654_3983025169921132813_n.jpg"
+  },
+  "story": {
+    "quote": "The goal is bigger than a building. It is about giving the next generation a place to learn, grow, and imagine what comes next.",
+    "paragraph1": "Simon Ottaviano survived war as one of Sudan's Lost Boys, eventually finding his way to Louisville, Kentucky, where he served in the United States Army and built a life over 30 years.",
+    "paragraph2": "In 2021, with his wife's full support, he sold their family home and cashed out his entire 401(k) retirement savings — and used every dollar to build a school back in Magwi County, naming it after his mother, Ayaa.",
+    "paragraph3": "Ayaa Senior Secondary School opened in 2022 and today serves over 200 students across Senior One through Senior Four. Ayaa South Sudanese Organization — based in Louisville, Kentucky — exists to raise the funds and support that keep it running and growing."
+  },
+  "founder": {
+    "name": "Simon Ottaviano",
+    "role": "Founder & Director — Ayaa South Sudanese Organization, Louisville, KY",
+    "bio": "Lost Boy of Sudan. U.S. Army Sergeant. Real estate professional in Louisville, Kentucky. And the man who sold his house and his retirement to give the children of Magwi County a school. Simon's journey is one of the most remarkable stories of sacrifice and love — and it is still being written.",
+    "photo": "SImon.jpg",
+    "armyPhoto": "506983646_30412514435013566_2838732963934347879_n.jpg"
+  },
+  "gallery": [
+    { "src": "IMG_0568.WEBP", "alt": "Ayaa student in school uniform", "caption": "A proud Ayaa student — uniform on, ready to learn.", "tall": true },
+    { "src": "778231257_38260473110217620_47152937520564275_n.jpg", "alt": "Students studying in an open-air classroom at Ayaa", "caption": "Students writing and studying at Ayaa.", "tall": false },
+    { "src": "777186588_38260471500217781_2528621645228580944_n.jpg", "alt": "Students gathered in class at Ayaa", "caption": "Ayaa students listening and learning.", "tall": false },
+    { "src": "IMG_0570.WEBP", "alt": "Ayaa Secondary School football team", "caption": "The Ayaa football team — Sport Unites Us Beyond Differences.", "wide": true }
+  ],
+  "impact": [
+    { "number": "2021", "format": "year", "title": "Simon sells everything", "desc": "Simon and his wife sell their family home and cash out their 401(k) retirement savings to fund construction of a school in Magwi County." },
+    { "number": "2022", "format": "year", "title": "Ayaa opens its doors", "desc": "Ayaa Senior Secondary School opens to great celebration in Magwi County, welcoming its first students to Senior One through Senior Four." },
+    { "number": "2023", "format": "year", "title": "Safe water arrives", "desc": "WaterStep partners with Ayaa to install a clean-water system, ending the school's reliance on unsafe river water and expensive tanker deliveries." },
+    { "number": "200", "format": "plus", "title": "Students enrolled today", "desc": "Over 200 young people from Magwi County now attend Ayaa — studying, growing, and building toward their futures." }
+  ],
+  "projects": [
+    { "title": "Girls' Dormitory", "desc": "Most girls at Ayaa travel long distances on dangerous roads every day. A dormitory would give ~100 girls a safe, clean place to sleep and focus fully on their studies.", "link": "https://www.gofundme.com/f/building-of-girls-dormitory-at-ayaa-secondary-scho", "linkText": "Donate on GoFundMe", "highlight": true },
+    { "title": "Library", "desc": "A dedicated library would give students greater access to books, study resources, and independent learning — critical for academic growth beyond the classroom.", "link": "", "linkText": "", "highlight": false },
+    { "title": "Water & Sanitation", "desc": "Continue expanding and maintaining the clean-water infrastructure WaterStep helped establish — ensuring every student has access to safe water every day.", "link": "", "linkText": "", "highlight": false }
+  ]
+}

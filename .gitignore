@@ -1,0 +1,6 @@
+node_modules/
+*.bak
+*.deleted
+*.restored-bak
+admin/config.json
+.DS_Store
