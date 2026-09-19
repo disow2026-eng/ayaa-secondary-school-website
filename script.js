@@ -27,6 +27,7 @@ function render(d){
   const s = d.story;
   const f = d.founder;
   const h = d.hero;
+  const sec = d.sections || {};
 
   app.innerHTML=`
     <div id="progress-bar"></div>
@@ -77,8 +78,8 @@ function render(d){
       <section id="story">
         <div class="container">
           <div class="section-head reveal">
-            <div><div class="eyebrow">The beginning</div><h2>A school born from sacrifice.</h2></div>
-            <p>From the Lost Boys of Sudan to the United States Army — and back home to build something that lasts.</p>
+            <div><div class="eyebrow">${sec.storyEyebrow||'The beginning'}</div><h2>${sec.storyTitle||'A school born from sacrifice.'}</h2></div>
+            <p>${sec.storyDesc||'From the Lost Boys of Sudan to the United States Army — and back home to build something that lasts.'}</p>
           </div>
           <div class="story">
             <div class="story-big reveal">"${s.quote}"</div>
@@ -106,7 +107,7 @@ function render(d){
               </div>
             </div>
             <div class="founder-info">
-              <div class="eyebrow">Meet the founder</div>
+              <div class="eyebrow">${sec.founderEyebrow||'Meet the founder'}</div>
               <h3 class="founder-name">${f.name}</h3>
               <p class="founder-role">${f.role}</p>
               <p class="founder-bio">${f.bio}</p>
@@ -124,8 +125,8 @@ function render(d){
       <section id="gallery" class="gallery-section">
         <div class="container">
           <div class="section-head reveal">
-            <div><div class="eyebrow">Life at Ayaa</div><h2>See the school.</h2></div>
-            <p>Real students. Real classrooms. Real community in Magwi County, South Sudan.</p>
+            <div><div class="eyebrow">${sec.galleryEyebrow||'Life at Ayaa'}</div><h2>${sec.galleryTitle||'See the school.'}</h2></div>
+            <p>${sec.galleryDesc||'Real students. Real classrooms. Real community in Magwi County, South Sudan.'}</p>
           </div>
           <div class="gallery-grid">
             ${d.gallery.map((img,i)=>`
@@ -142,8 +143,8 @@ function render(d){
       <section id="watch" class="watch-section">
         <div class="container">
           <div class="section-head reveal">
-            <div><div class="eyebrow">Featured story</div><h2>Simon's story, in his own words.</h2></div>
-            <p>WaterStep documented Simon Ottaviano's extraordinary journey — from war and displacement to building a school for the next generation.</p>
+            <div><div class="eyebrow">${sec.watchEyebrow||'Featured story'}</div><h2>${sec.watchTitle||"Simon's story, in his own words."}</h2></div>
+            <p>${sec.watchSubtitle||'WaterStep documented Simon Ottaviano\u2019s extraordinary journey \u2014 from war and displacement to building a school for the next generation.'}</p>
           </div>
           <div class="watch-layout reveal">
             <div class="video-wrap">
@@ -166,8 +167,8 @@ function render(d){
       <section id="mission">
         <div class="container">
           <div class="section-head reveal">
-            <div><div class="eyebrow">What matters</div><h2>More than a classroom.</h2></div>
-            <p>Ayaa's work spans education, clean water, and community — building something whole, not just a building.</p>
+            <div><div class="eyebrow">${sec.missionEyebrow||'What matters'}</div><h2>${sec.missionTitle||'More than a classroom.'}</h2></div>
+            <p>${sec.missionDesc||"Ayaa\u2019s work spans education, clean water, and community \u2014 building something whole, not just a building."}</p>
           </div>
           <div class="feature-grid">
             <article class="feature reveal" style="--d:0s"><div class="icon">${icon('book')}</div><h3>Education</h3><p>A full Senior 1–4 secondary curriculum giving students in Magwi County the credentials and knowledge to shape their own future.</p></article>
@@ -181,8 +182,8 @@ function render(d){
       <section class="impact" id="impact">
         <div class="container">
           <div class="section-head reveal">
-            <div><div class="eyebrow">Progress</div><h2>Turning needs into action.</h2></div>
-            <p>Milestones from the school's verified public story.</p>
+            <div><div class="eyebrow">${sec.impactEyebrow||'Progress'}</div><h2>${sec.impactTitle||'Turning needs into action.'}</h2></div>
+            <p>${sec.impactDesc||"Milestones from the school\u2019s verified public story."}</p>
           </div>
           <div class="impact-grid">
             ${d.impact.map((item,i)=>`
@@ -205,8 +206,8 @@ function render(d){
       <section id="projects">
         <div class="container">
           <div class="section-head reveal">
-            <div><div class="eyebrow">What comes next</div><h2>Help us keep building.</h2></div>
-            <p>Each project below represents a real need at Ayaa — and an opportunity to make a lasting difference.</p>
+            <div><div class="eyebrow">${sec.projectsEyebrow||'What comes next'}</div><h2>${sec.projectsTitle||'Help us keep building.'}</h2></div>
+            <p>${sec.projectsDesc||'Each project below represents a real need at Ayaa \u2014 and an opportunity to make a lasting difference.'}</p>
           </div>
           <div class="feature-grid">
             ${d.projects.map((p,i)=>`
@@ -227,9 +228,9 @@ function render(d){
         <div class="container">
           <div class="contact-box reveal">
             <div class="contact-box-left">
-              <div class="eyebrow">Get involved</div>
-              <h2>Ready to help?</h2>
-              <p>Whether you want to donate, ask a question, or explore a partnership — Simon would love to hear from you. Every conversation can become part of Ayaa's story.</p>
+              <div class="eyebrow">${sec.contactEyebrow||'Get involved'}</div>
+              <h2>${sec.contactTitle||'Ready to help?'}</h2>
+              <p>${sec.contactDesc||'Whether you want to donate, ask a question, or explore a partnership \u2014 Simon would love to hear from you. Every conversation can become part of Ayaa\u2019s story.'}</p>
               <a class="btn btn-primary" href="${d.gofundmeUrl}" target="_blank" rel="noopener">Donate on GoFundMe ${icon('arrow')}</a>
             </div>
             <div class="contact-box-right">
@@ -267,9 +268,9 @@ function render(d){
     <footer>
       <div class="container footer-inner">
         <div class="footer-left">
-          <div class="footer-brand">Ayaa South Sudanese Organization</div>
-          <div class="footer-note">Headquartered in Louisville, Kentucky, USA</div>
-          <div class="footer-note" style="margin-top:4px">Supporting Ayaa Senior Secondary School · Magwi County, South Sudan</div>
+          <div class="footer-brand">${sec.footerBrand||'Ayaa South Sudanese Organization'}</div>
+          <div class="footer-note">${sec.footerNote1||'Headquartered in Louisville, Kentucky, USA'}</div>
+          <div class="footer-note" style="margin-top:4px">${sec.footerNote2||'Supporting Ayaa Senior Secondary School \xb7 Magwi County, South Sudan'}</div>
           <div class="footer-note" style="margin-top:4px">Founded by ${f.name} · Est. 2022</div>
         </div>
         <div class="footer-contact">

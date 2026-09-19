@@ -23,22 +23,89 @@
   "founder": {
     "name": "Simon Ottaviano",
     "role": "Founder & Director — Ayaa South Sudanese Organization, Louisville, KY",
-    "bio": "Lost Boy of Sudan. U.S. Army Sergeant. Real estate professional in Louisville, Kentucky. And the man who sold his house and his retirement to give the children of Magwi County a school. Simon's journey is one of the most remarkable stories of sacrifice and love — and it is still being written.",
+    "bio": "U.S. Army veteran. Real estate professional in Louisville, Kentucky. And the man who sold his house and his retirement to give the children of Magwi County a school. Simon's journey is one of the most remarkable stories of sacrifice and love — and it is still being written.\nU.S. Army veteran. Real estate professional in Louisville, Kentucky. And the man who sold his house and his retirement to give the children of Magwi County a school. Simon's journey is one of the most remarkable stories of sacrifice and love — and it is still being written.\nU.S. Army veteran. Real estate professional in Louisville, Kentucky. And the man who sold his house and his retirement to give the children of Magwi County a school. Simon's journey is one of the most remarkable stories of sacrifice and love — and it is still being written.",
     "photo": "SImon.jpg",
     "armyPhoto": "506983646_30412514435013566_2838732963934347879_n.jpg"
   },
   "gallery": [
-    { "src": "IMG_0568.WEBP", "alt": "Ayaa student in school uniform", "caption": "A proud Ayaa student — uniform on, ready to learn.", "tall": true },
-    { "src": "778231257_38260473110217620_47152937520564275_n.jpg", "alt": "Students studying in an open-air classroom at Ayaa", "caption": "Students writing and studying at Ayaa.", "tall": false },
-    { "src": "777186588_38260471500217781_2528621645228580944_n.jpg", "alt": "Students gathered in class at Ayaa", "caption": "Ayaa students listening and learning.", "tall": false },
-    { "src": "IMG_0570.WEBP", "alt": "Ayaa Secondary School football team", "caption": "The Ayaa football team — Sport Unites Us Beyond Differences.", "wide": true }
+    {
+      "src": "IMG_0568.WEBP",
+      "alt": "Ayaa student in school uniform",
+      "caption": "A proud Ayaa student — uniform on, ready to learn.",
+      "tall": true
+    },
+    {
+      "src": "778231257_38260473110217620_47152937520564275_n.jpg",
+      "alt": "Students studying in an open-air classroom at Ayaa",
+      "caption": "Students writing and studying at Ayaa.",
+      "tall": false
+    },
+    {
+      "src": "777186588_38260471500217781_2528621645228580944_n.jpg",
+      "alt": "Students gathered in class at Ayaa",
+      "caption": "Ayaa students listening and learning.",
+      "tall": false
+    },
+    {
+      "src": "IMG_0570.WEBP",
+      "alt": "Ayaa Secondary School football team",
+      "caption": "The Ayaa football team — Sport Unites Us Beyond Differences.",
+      "wide": true
+    }
   ],
   "impact": [
-    { "number": "2021", "format": "year", "title": "Simon sells everything", "desc": "Simon and his wife sell their family home and cash out their 401(k) retirement savings to fund construction of a school in Magwi County." },
-    { "number": "2022", "format": "year", "title": "Ayaa opens its doors", "desc": "Ayaa Senior Secondary School opens to great celebration in Magwi County, welcoming its first students to Senior One through Senior Four." },
-    { "number": "2023", "format": "year", "title": "Safe water arrives", "desc": "WaterStep partners with Ayaa to install a clean-water system, ending the school's reliance on unsafe river water and expensive tanker deliveries." },
-    { "number": "200", "format": "plus", "title": "Students enrolled today", "desc": "Over 200 young people from Magwi County now attend Ayaa — studying, growing, and building toward their futures." }
+    {
+      "number": "2021",
+      "format": "year",
+      "title": "Simon sells everything",
+      "desc": "Simon and his wife sell their family home and cash out their 401(k) retirement savings to fund construction of a school in Magwi County."
+    },
+    {
+      "number": "2022",
+      "format": "year",
+      "title": "Ayaa opens its doors",
+      "desc": "Ayaa Senior Secondary School opens to great celebration in Magwi County, welcoming its first students to Senior One through Senior Four."
+    },
+    {
+      "number": "2023",
+      "format": "year",
+      "title": "Safe water arrives",
+      "desc": "WaterStep partners with Ayaa to install a clean-water system, ending the school's reliance on unsafe river water and expensive tanker deliveries."
+    },
+    {
+      "number": "200",
+      "format": "plus",
+      "title": "Students enrolled today",
+      "desc": "Over 200 young people from Magwi County now attend Ayaa — studying, growing, and building toward their futures."
+    }
   ],
+  "sections": {
+    "storyEyebrow": "The beginning",
+    "storyTitle": "A school born from sacrifice.",
+    "storyDesc": "From the Lost Boys of Sudan to the United States Army — and back home to build something that lasts.",
+    "founderEyebrow": "Meet the founder",
+    "galleryEyebrow": "Life at Ayaa",
+    "galleryTitle": "See the school.",
+    "galleryDesc": "Real students. Real classrooms. Real community in Magwi County, South Sudan.",
+    "watchEyebrow": "Featured story",
+    "watchTitle": "Simon's story, in his own words.",
+    "watchSubtitle": "WaterStep documented Simon Ottaviano's extraordinary journey — from war and displacement to building a school for the next generation.",
+    "missionEyebrow": "What matters",
+    "missionTitle": "More than a classroom.",
+    "missionDesc": "Ayaa's work spans education, clean water, and community — building something whole, not just a building.",
+    "impactEyebrow": "Progress",
+    "impactTitle": "Turning needs into action.",
+    "impactDesc": "Milestones from the school's verified public story.",
+    "projectsEyebrow": "What comes next",
+    "projectsTitle": "Help us keep building.",
+    "projectsDesc": "Each project below represents a real need at Ayaa — and an opportunity to make a lasting difference.",
+    "contactEyebrow": "Get involved",
+    "contactTitle": "Ready to help?",
+    "contactDesc": "Whether you want to donate, ask a question, or explore a partnership — Simon would love to hear from you. Every conversation can become part of Ayaa's story.",
+    "footerBrand": "Ayaa South Sudanese Organization",
+    "footerNote1": "Headquartered in Louisville, Kentucky, USA",
+    "footerNote2": "Supporting Ayaa Senior Secondary School · Magwi County, South Sudan"
+  },
   "watch": {
     "videoUrl": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FWaterStep%2Fvideos%2F572520868981967%2F&show_text=false&mute=0",
     "tag": "WaterStep · 2023",
@@ -48,8 +115,26 @@
     "articleText": "Read the full story"
   },
   "projects": [
-    { "title": "Girls' Dormitory", "desc": "Most girls at Ayaa travel long distances on dangerous roads every day. A dormitory would give ~100 girls a safe, clean place to sleep and focus fully on their studies.", "link": "https://www.gofundme.com/f/building-of-girls-dormitory-at-ayaa-secondary-scho", "linkText": "Donate on GoFundMe", "highlight": true },
-    { "title": "Library", "desc": "A dedicated library would give students greater access to books, study resources, and independent learning — critical for academic growth beyond the classroom.", "link": "", "linkText": "", "highlight": false },
-    { "title": "Water & Sanitation", "desc": "Continue expanding and maintaining the clean-water infrastructure WaterStep helped establish — ensuring every student has access to safe water every day.", "link": "", "linkText": "", "highlight": false }
+    {
+      "title": "Girls' Dormitory",
+      "desc": "Most girls at Ayaa travel long distances on dangerous roads every day. A dormitory would give ~100 girls a safe, clean place to sleep and focus fully on their studies.",
+      "link": "https://www.gofundme.com/f/building-of-girls-dormitory-at-ayaa-secondary-scho",
+      "linkText": "Donate on GoFundMe",
+      "highlight": true
+    },
+    {
+      "title": "Library",
+      "desc": "A dedicated library would give students greater access to books, study resources, and independent learning — critical for academic growth beyond the classroom.",
+      "link": "",
+      "linkText": "",
+      "highlight": false
+    },
+    {
+      "title": "Water & Sanitation",
+      "desc": "Continue expanding and maintaining the clean-water infrastructure WaterStep helped establish — ensuring every student has access to safe water every day.",
+      "link": "",
+      "linkText": "",
+      "highlight": false
+    }
   ]
 }

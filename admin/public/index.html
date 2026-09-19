@@ -8,12 +8,13 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
   --accent:#6366f1;--accent2:#4f46e5;--green:#059669;--red:#dc2626;--gold:#d97706;
-  --sb:#0f1117;--sb2:#1a1d26;--border:#e5e7eb;--text:#111827;--muted:#6b7280;--bg:#f3f4f6;
+  --sb:#0f1117;--border:#e5e7eb;--text:#111827;--muted:#6b7280;--bg:#f3f4f6;
   --sh:0 1px 3px rgba(0,0,0,.1);--shlg:0 12px 40px rgba(0,0,0,.18);
 }
+*{box-sizing:border-box}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;color:var(--text);background:var(--bg);height:100vh;overflow:hidden}
 button{cursor:pointer;font:inherit;border:none;background:none}
-input,textarea,select{font:inherit}
+input,textarea{font:inherit}
 svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 
 /* ── Login ── */
@@ -33,75 +34,73 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 #app.on{display:flex}
 
 /* ── Topbar ── */
-.topbar{height:48px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 .85rem;gap:.4rem;flex-shrink:0;box-shadow:var(--sh);z-index:20}
+.topbar{height:48px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 .85rem;gap:.35rem;flex-shrink:0;box-shadow:var(--sh);z-index:20}
 .tb-logo{font-weight:800;font-size:.95rem;color:var(--accent);letter-spacing:-.3px;white-space:nowrap;margin-right:.1rem}
 .tb-sep{width:1px;height:18px;background:var(--border);flex-shrink:0}
 .tb-status{font-size:.78rem;color:var(--muted);white-space:nowrap}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);display:none;flex-shrink:0}
 .dot.on{display:inline-block}
-.tb-right{margin-left:auto;display:flex;align-items:center;gap:.32rem}
-
-/* ── Buttons ── */
-.btn{display:inline-flex;align-items:center;gap:.3rem;padding:.38rem .72rem;border-radius:6px;font-size:.8rem;font-weight:600;white-space:nowrap;border:1.5px solid transparent;transition:all .15s}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:.3rem}
+.btn{display:inline-flex;align-items:center;gap:.3rem;padding:.38rem .68rem;border-radius:6px;font-size:.79rem;font-weight:600;white-space:nowrap;border:1.5px solid transparent;transition:all .15s}
 .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}.btn-primary:hover{background:var(--accent2)}
 .btn-success{background:var(--green);color:#fff}.btn-success:hover{background:#047857}
 .btn-ghost{background:transparent;color:var(--muted);border-color:var(--border)}.btn-ghost:hover{background:var(--bg);color:var(--text)}
-.btn-warn{color:var(--gold);border-color:rgba(217,119,6,.35)}.btn-warn:hover{background:rgba(217,119,6,.07)}
+.btn-warn{color:var(--gold);border-color:rgba(217,119,6,.3)}.btn-warn:hover{background:rgba(217,119,6,.07)}
+.btn-edit-on{background:rgba(99,102,241,.12);color:#6366f1;border-color:rgba(99,102,241,.4)}.btn-edit-on:hover{background:rgba(99,102,241,.2)}
+.btn-edit-off{background:transparent;color:var(--muted);border-color:var(--border)}.btn-edit-off:hover{background:var(--bg)}
 .btn-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:6px;border:1.5px solid var(--border);color:var(--muted);transition:all .15s}
 .btn-icon:hover{background:var(--bg);color:var(--text)}
-.btn-icon:disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
-.btn:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+.btn-icon:disabled,.btn:disabled{opacity:.38;cursor:not-allowed;pointer-events:none}
 
 /* ── Layout ── */
 .body{display:flex;flex:1;overflow:hidden}
 
 /* ── Sidebar ── */
 .sidebar{width:208px;background:var(--sb);display:flex;flex-direction:column;flex-shrink:0}
-.stabs{display:grid;grid-template-columns:repeat(3,1fr);background:#07090f;flex-shrink:0;border-bottom:1px solid #181b24}
-.stab{padding:.54rem .15rem;display:flex;flex-direction:column;align-items:center;gap:.18rem;font-size:.53rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#4b5563;border-bottom:2px solid transparent;transition:all .15s}
+.stabs{display:grid;grid-template-columns:repeat(3,1fr);background:#07090f;border-bottom:1px solid #181b24}
+.stab{padding:.52rem .1rem;display:flex;flex-direction:column;align-items:center;gap:.16rem;font-size:.53rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#4b5563;border-bottom:2px solid transparent;transition:all .15s}
 .stab:hover{color:#9ca3af;background:rgba(255,255,255,.03)}
 .stab.on{color:#a5b4fc;border-bottom-color:var(--accent)}
 .stab svg{width:15px;height:15px}
 .sb-pane{display:none;flex-direction:column;flex:1;overflow:hidden}.sb-pane.on{display:flex}
-.sb-scroll{flex:1;overflow-y:auto;padding:.55rem .45rem}
+.sb-scroll{flex:1;overflow-y:auto;padding:.5rem .4rem}
 .sb-scroll::-webkit-scrollbar{width:3px}.sb-scroll::-webkit-scrollbar-thumb{background:#2e323b;border-radius:2px}
-.sb-head{padding:.45rem .65rem .2rem;color:#374151;font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
-.sb-item{display:flex;align-items:center;gap:.42rem;padding:.42rem .65rem;border-radius:7px;color:#8a95a3;font-size:.8rem;cursor:pointer;transition:all .15s;margin-bottom:1px;user-select:none}
+.sb-head{padding:.42rem .6rem .18rem;color:#374151;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.sb-item{display:flex;align-items:center;gap:.4rem;padding:.4rem .6rem;border-radius:7px;color:#8a95a3;font-size:.79rem;cursor:pointer;transition:all .12s;margin-bottom:1px;user-select:none}
 .sb-item:hover{background:rgba(255,255,255,.05);color:#e5e7eb}
 .sb-item.on{background:rgba(99,102,241,.18);color:#a5b4fc;font-weight:600}
 .sb-item svg{width:13px;height:13px;flex-shrink:0}
-.sb-div{height:1px;background:#181b24;margin:.45rem .4rem}
-
-/* Media */
-.upload-drop{border:1.5px dashed #2e323b;border-radius:8px;padding:.75rem .6rem;text-align:center;color:#4b5563;cursor:pointer;transition:all .2s;margin-bottom:.5rem;display:block}
+.sb-div{height:1px;background:#181b24;margin:.4rem .35rem}
+.upload-drop{border:1.5px dashed #2e323b;border-radius:8px;padding:.7rem .55rem;text-align:center;color:#4b5563;cursor:pointer;transition:all .2s;margin-bottom:.5rem;display:block}
 .upload-drop:hover,.upload-drop.drag{border-color:var(--accent);color:#a5b4fc;background:rgba(99,102,241,.05)}
 .upload-drop input{display:none}
-.media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem}
+.media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.28rem}
 .media-cell{border-radius:5px;overflow:hidden;aspect-ratio:1;position:relative;background:#1a1d26}
 .media-cell img{width:100%;height:100%;object-fit:cover;display:block}
-.media-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s}
+.media-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .12s}
 .media-cell:hover .media-overlay{opacity:1}
-.del-img{font-size:.65rem;background:var(--red);color:#fff;border-radius:4px;padding:.15rem .4rem;font-weight:700;border:none;cursor:pointer}
-
-/* Settings */
-.sf{padding:.65rem .7rem}
-.sf-label{display:block;font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#4b5563;margin-bottom:.26rem}
-.sf-input{width:100%;background:#1a1d26;border:1px solid #2e323b;border-radius:6px;color:#e5e7eb;padding:.45rem .65rem;font-size:.82rem;outline:none;margin-bottom:.52rem}
+.del-img{font-size:.65rem;background:var(--red);color:#fff;border-radius:4px;padding:.15rem .4rem;font-weight:700;cursor:pointer;border:none}
+.sf{padding:.6rem .65rem}
+.sf-label{display:block;font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#4b5563;margin-bottom:.25rem}
+.sf-input{width:100%;background:#1a1d26;border:1px solid #2e323b;border-radius:6px;color:#e5e7eb;padding:.43rem .6rem;font-size:.81rem;outline:none;margin-bottom:.5rem}
 .sf-input:focus{border-color:var(--accent)}
-.deploy-status{padding:.45rem .7rem;border-radius:6px;font-size:.76rem;display:none;margin-top:.45rem;line-height:1.5}
+.deploy-status{padding:.42rem .65rem;border-radius:6px;font-size:.75rem;display:none;margin-top:.42rem;line-height:1.5}
 
 /* ── Main ── */
 .main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
-.hint-bar{height:30px;background:linear-gradient(90deg,#1e1b4b,#312e81);display:flex;align-items:center;padding:0 .9rem;gap:.45rem;flex-shrink:0}
-.hint-bar span{font-size:.74rem;color:#a5b4fc}
+.hint-bar{height:30px;background:linear-gradient(90deg,#1e1b4b,#312e81);display:flex;align-items:center;padding:0 .85rem;gap:.4rem;flex-shrink:0;transition:opacity .3s}
+.hint-bar.off{background:#1a1d26}
 .hint-pulse{width:6px;height:6px;border-radius:50%;background:#818cf8;animation:pulse 2s infinite;flex-shrink:0}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
-.dev-bar{height:34px;background:#0d0f14;border-bottom:1px solid #181b24;display:flex;align-items:center;padding:0 .7rem;gap:.3rem;flex-shrink:0}
-.dev-btn{padding:.22rem .52rem;border-radius:5px;border:1px solid #2e323b;color:#6b7280;font-size:.72rem;font-weight:600;transition:all .15s}
+.hint-bar.off .hint-pulse{background:#4b5563;animation:none}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.75)}}
+.hint-bar span{font-size:.73rem;color:#a5b4fc}
+.hint-bar.off span{color:#6b7280}
+.dev-bar{height:34px;background:#0d0f14;border-bottom:1px solid #181b24;display:flex;align-items:center;padding:0 .65rem;gap:.28rem}
+.dev-btn{padding:.22rem .5rem;border-radius:5px;border:1px solid #2e323b;color:#6b7280;font-size:.72rem;font-weight:600;transition:all .12s}
 .dev-btn:hover{background:#1a1d26;color:#e5e7eb}
 .dev-btn.on{background:rgba(99,102,241,.18);border-color:rgba(99,102,241,.45);color:#a5b4fc}
-.dev-bar-right{margin-left:auto;display:flex;align-items:center;gap:.35rem}
-.frame-area{flex:1;overflow:hidden;background:#111;display:flex;align-items:stretch;justify-content:center}
+.dev-bar-right{margin-left:auto;display:flex;align-items:center;gap:.32rem}
+.frame-area{flex:1;overflow:hidden;background:#111;display:flex}
 .frame-wrap{flex:1;overflow:hidden;transition:padding .3s}
 .frame-wrap.tablet{padding:0 11%}
 .frame-wrap.mobile{padding:0 27%}
@@ -115,22 +114,19 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 .mhead h3{font-size:.95rem;font-weight:700}
 .mbody{padding:1rem;overflow-y:auto;flex:1}
 .picker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem}
-.picker-cell{border-radius:7px;overflow:hidden;aspect-ratio:1;cursor:pointer;border:2.5px solid transparent;transition:border-color .15s;background:#f3f4f6}
+.picker-cell{border-radius:7px;overflow:hidden;aspect-ratio:1;cursor:pointer;border:2.5px solid transparent;transition:border-color .12s;background:#f3f4f6}
 .picker-cell:hover{border-color:var(--accent)}
 .picker-cell img{width:100%;height:100%;object-fit:cover;display:block}
 .picker-name{font-size:.58rem;color:var(--muted);padding:.1rem .25rem;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-
-/* Contact modal */
-.cf-row{margin-bottom:.65rem}
-.cf-label{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.25rem}
-.cf-input{width:100%;padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-size:.88rem;outline:none;transition:border-color .2s}
+.cf-row{margin-bottom:.6rem}
+.cf-label{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.24rem}
+.cf-input{width:100%;padding:.5rem .72rem;border:1.5px solid var(--border);border-radius:7px;font-size:.88rem;outline:none;transition:border-color .2s}
 .cf-input:focus{border-color:var(--accent)}
 
 /* ── Toast ── */
 #toast{position:fixed;bottom:1.1rem;right:1.1rem;background:#1f2937;color:#f9fafb;padding:.5rem 1rem;border-radius:8px;font-size:.82rem;box-shadow:var(--shlg);z-index:600;opacity:0;transform:translateY(6px);transition:all .22s;pointer-events:none;max-width:300px}
 #toast.on{opacity:1;transform:none}
-#toast.ok{background:#064e3b}
-#toast.err{background:#7f1d1d}
+#toast.ok{background:#064e3b}#toast.err{background:#7f1d1d}
 </style>
 </head>
 <body>
@@ -156,6 +152,12 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
     <span class="dot" id="dot"></span>
     <span class="tb-status" id="tb-status">Loading…</span>
     <div class="tb-right">
+      <!-- Edit mode toggle -->
+      <button class="btn btn-edit-on" id="btn-editmode" title="Toggle edit mode">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        Edit: ON
+      </button>
+      <span class="tb-sep"></span>
       <button class="btn-icon" id="btn-undo" title="Undo (Ctrl+Z)" disabled>
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.8"/></svg>
       </button>
@@ -180,7 +182,6 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
   </header>
 
   <div class="body">
-    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="stabs">
         <button class="stab on" data-stab="sections">
@@ -197,45 +198,49 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
         </button>
       </div>
 
-      <!-- Sections -->
       <div class="sb-pane on" id="sp-sections">
         <div class="sb-scroll">
           <div class="sb-head">Jump to section</div>
-          <div class="sb-item" data-scroll="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Hero Banner</div>
-          <div class="sb-item" data-scroll="story"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Story & Founder</div>
+          <div class="sb-item" data-scroll="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Hero</div>
+          <div class="sb-item" data-scroll="story"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Story &amp; Founder</div>
           <div class="sb-item" data-scroll="gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Gallery</div>
           <div class="sb-item" data-scroll="watch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Watch Video</div>
           <div class="sb-item" data-scroll="impact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Impact</div>
           <div class="sb-item" data-scroll="projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Projects</div>
           <div class="sb-item" data-scroll="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact</div>
           <div class="sb-div"></div>
-          <div class="sb-head">Edit links & info</div>
+          <div class="sb-head">Links &amp; info</div>
           <div class="sb-item" id="btn-open-contact">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
             Edit URLs &amp; Email
           </div>
+          <div class="sb-div"></div>
+          <div class="sb-head">Right-click tips</div>
+          <div style="padding:.35rem .65rem;color:#4b5563;font-size:.72rem;line-height:1.6">
+            Right-click any text → edit, bold, copy<br>
+            Right-click any photo → swap, remove<br>
+            Right-click gallery/impact/project cards → add or remove items
+          </div>
         </div>
       </div>
 
-      <!-- Media -->
       <div class="sb-pane" id="sp-media">
         <div class="sb-scroll">
           <label class="upload-drop" id="upload-zone">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
             <div style="font-size:.77rem;font-weight:600;color:#6b7280;margin-top:.2rem">Upload photos</div>
-            <div style="font-size:.68rem;color:#4b5563;margin-top:.1rem">JPG · PNG · WEBP</div>
+            <div style="font-size:.67rem;color:#4b5563;margin-top:.1rem">JPG · PNG · WEBP</div>
             <input type="file" id="upload-input" accept="image/*" multiple/>
           </label>
           <div class="media-grid" id="media-grid"></div>
         </div>
       </div>
 
-      <!-- Settings -->
       <div class="sb-pane" id="sp-settings">
         <div class="sb-scroll">
-          <div class="sb-head">Deploy</div>
+          <div class="sb-head">Deploy to live site</div>
           <div class="sf">
-            <button class="btn btn-success" style="width:100%;justify-content:center;margin-bottom:.45rem" id="btn-deploy-side">
+            <button class="btn btn-success" style="width:100%;justify-content:center;margin-bottom:.4rem" id="btn-deploy-side">
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
               Deploy Now
             </button>
@@ -254,23 +259,22 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
       </div>
     </aside>
 
-    <!-- MAIN -->
     <div class="main">
-      <div class="hint-bar">
-        <span class="hint-pulse"></span>
-        <span>Click any <strong style="color:#e0e7ff">text</strong> to edit it directly · Click any <strong style="color:#e0e7ff">photo</strong> to swap it · Press <strong style="color:#e0e7ff">Save</strong> when done</span>
+      <div class="hint-bar" id="hint-bar">
+        <span class="hint-pulse" id="hint-pulse"></span>
+        <span id="hint-text">Click any <strong style="color:#e0e7ff">text</strong> to edit · Click any <strong style="color:#e0e7ff">photo</strong> to swap · <strong style="color:#e0e7ff">Right-click</strong> for more options</span>
       </div>
       <div class="dev-bar">
-        <span style="color:#374151;font-size:.72rem;font-weight:600;margin-right:.2rem">View:</span>
+        <span style="color:#374151;font-size:.72rem;font-weight:600;margin-right:.18rem">View:</span>
         <button class="dev-btn on" onclick="setDevice('desktop')">Desktop</button>
         <button class="dev-btn" onclick="setDevice('tablet')">Tablet</button>
         <button class="dev-btn" onclick="setDevice('mobile')">Mobile</button>
         <div class="dev-bar-right">
-          <button class="dev-btn" id="btn-reload" style="display:inline-flex;align-items:center;gap:.28rem">
+          <button class="dev-btn" id="btn-reload" style="display:inline-flex;align-items:center;gap:.25rem">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
             Reload
           </button>
-          <a href="/?preview" target="_blank" class="dev-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:.28rem">
+          <a href="/?preview" target="_blank" class="dev-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:.25rem">
             <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             Open site
           </a>
@@ -285,24 +289,18 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
   </div>
 </div>
 
-<!-- Image picker modal -->
+<!-- Image picker -->
 <div class="overlay" id="picker-overlay" onclick="closePicker()"></div>
 <div class="modal" id="picker-modal">
-  <div class="mhead">
-    <h3>Choose a Photo</h3>
-    <button class="btn btn-ghost" style="padding:.25rem .6rem;font-size:.78rem" onclick="closePicker()">✕ Close</button>
-  </div>
+  <div class="mhead"><h3>Choose a Photo</h3><button class="btn btn-ghost" style="padding:.25rem .6rem;font-size:.78rem" onclick="closePicker()">✕ Close</button></div>
   <div class="mbody"><div class="picker-grid" id="picker-grid"></div></div>
 </div>
 
-<!-- Contact / URL modal -->
+<!-- Contact/URL modal -->
 <div class="overlay" id="contact-overlay" onclick="closeContact()"></div>
 <div class="modal" id="contact-modal">
-  <div class="mhead">
-    <h3>Edit Links &amp; Contact Info</h3>
-    <button class="btn btn-ghost" style="padding:.25rem .6rem;font-size:.78rem" onclick="closeContact()">✕ Close</button>
-  </div>
-  <div class="mbody" style="display:flex;flex-direction:column;gap:.6rem">
+  <div class="mhead"><h3>Edit Links &amp; Contact Info</h3><button class="btn btn-ghost" style="padding:.25rem .6rem;font-size:.78rem" onclick="closeContact()">✕ Close</button></div>
+  <div class="mbody" style="display:flex;flex-direction:column;gap:.55rem">
     <div class="cf-row"><label class="cf-label">Email</label><input class="cf-input" id="c-email" type="email" placeholder="email@example.com"/></div>
     <div class="cf-row"><label class="cf-label">Phone</label><input class="cf-input" id="c-phone" type="tel" placeholder="502-000-0000"/></div>
     <div class="cf-row"><label class="cf-label">GoFundMe URL</label><input class="cf-input" id="c-gofundme" type="url" placeholder="https://gofundme.com/..."/></div>
@@ -318,455 +316,651 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 
 <script>
 'use strict';
-
 let content = null;
+let editMode = true;
 let pickerPath = null;
 let toastTimer;
 const undoStack = [];
 let undoIndex = -1;
 
-// ── Helpers ───────────────────────────────────────────────────────
+// ── Helpers ───────────────────────────────────────────────
 function toast(msg, type) {
   const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = 'on' + (type ? ' ' + type : '');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => (el.className = ''), 3400);
+  el.textContent = msg; el.className = 'on' + (type ? ' ' + type : '');
+  clearTimeout(toastTimer); toastTimer = setTimeout(() => (el.className = ''), 3400);
 }
 function setStatus(msg) { document.getElementById('tb-status').textContent = msg; }
 function markUnsaved() { document.getElementById('dot').classList.add('on'); setStatus('Unsaved changes'); }
 function markSaved()   { document.getElementById('dot').classList.remove('on'); setStatus('All saved'); }
 
-function getPath(obj, path) { return path.reduce((o, k) => (o != null ? o[k] : undefined), obj); }
+function getPath(obj, path) { return path.reduce((o,k) => (o!=null?o[k]:undefined), obj); }
 function setPath(obj, path, val) {
-  const keys = [...path]; const last = keys.pop();
-  let cur = obj; for (const k of keys) cur = cur[k];
-  cur[last] = val;
+  const keys=[...path]; const last=keys.pop();
+  let cur=obj; for(const k of keys){ if(cur[k]==null) cur[k]={}; cur=cur[k]; }
+  cur[last]=val;
 }
-function normalizeUrl(url) {
-  if (!url) return url;
-  if (/^(https?:\/\/|mailto:|tel:|#|\/)/.test(url)) return url;
-  return 'https://' + url;
+function normalizeUrl(u) {
+  if(!u) return u;
+  if(/^(https?:\/\/|mailto:|tel:|#|\/)/.test(u)) return u;
+  return 'https://'+u;
 }
 
-// ── Undo/Redo ─────────────────────────────────────────────────────
+// ── Undo/Redo ─────────────────────────────────────────────
 function pushUndo() {
-  if (!content) return;
+  if(!content) return;
   const snap = JSON.stringify(content);
-  if (undoIndex >= 0 && undoStack[undoIndex] === snap) return;
-  undoStack.splice(undoIndex + 1);
+  if(undoIndex>=0 && undoStack[undoIndex]===snap) return;
+  undoStack.splice(undoIndex+1);
   undoStack.push(snap);
-  if (undoStack.length > 40) undoStack.shift(); else undoIndex++;
+  if(undoStack.length>50) undoStack.shift(); else undoIndex++;
   updateUndoBtns();
 }
 function updateUndoBtns() {
-  document.getElementById('btn-undo').disabled = undoIndex <= 0;
-  document.getElementById('btn-redo').disabled = undoIndex >= undoStack.length - 1;
+  document.getElementById('btn-undo').disabled = undoIndex<=0;
+  document.getElementById('btn-redo').disabled = undoIndex>=undoStack.length-1;
 }
 document.getElementById('btn-undo').onclick = async () => {
-  if (undoIndex <= 0) return;
-  undoIndex--; content = JSON.parse(undoStack[undoIndex]);
-  markUnsaved(); updateUndoBtns(); await reloadFrame();
+  if(undoIndex<=0) return; undoIndex--;
+  content=JSON.parse(undoStack[undoIndex]); markUnsaved(); updateUndoBtns(); await reloadFrame();
 };
 document.getElementById('btn-redo').onclick = async () => {
-  if (undoIndex >= undoStack.length - 1) return;
-  undoIndex++; content = JSON.parse(undoStack[undoIndex]);
-  markUnsaved(); updateUndoBtns(); await reloadFrame();
+  if(undoIndex>=undoStack.length-1) return; undoIndex++;
+  content=JSON.parse(undoStack[undoIndex]); markUnsaved(); updateUndoBtns(); await reloadFrame();
 };
 document.addEventListener('keydown', e => {
-  if ((e.ctrlKey||e.metaKey) && e.key==='z' && !e.shiftKey) { e.preventDefault(); document.getElementById('btn-undo').click(); }
-  if ((e.ctrlKey||e.metaKey) && (e.key==='y'||(e.key==='z'&&e.shiftKey))) { e.preventDefault(); document.getElementById('btn-redo').click(); }
-  if ((e.ctrlKey||e.metaKey) && e.key==='s') { e.preventDefault(); document.getElementById('btn-save').click(); }
+  if((e.ctrlKey||e.metaKey)&&e.key==='z'&&!e.shiftKey){e.preventDefault();document.getElementById('btn-undo').click();}
+  if((e.ctrlKey||e.metaKey)&&(e.key==='y'||(e.key==='z'&&e.shiftKey))){e.preventDefault();document.getElementById('btn-redo').click();}
+  if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();document.getElementById('btn-save').click();}
 });
 
-// ── Login ─────────────────────────────────────────────────────────
+// ── Edit mode toggle ──────────────────────────────────────
+document.getElementById('btn-editmode').onclick = () => {
+  editMode = !editMode;
+  const btn = document.getElementById('btn-editmode');
+  const hintBar = document.getElementById('hint-bar');
+  const pulse = document.getElementById('hint-pulse');
+  const hintText = document.getElementById('hint-text');
+  if(editMode) {
+    btn.className = 'btn btn-edit-on';
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>Edit: ON`;
+    hintBar.classList.remove('off');
+    hintText.innerHTML = 'Click any <strong style="color:#e0e7ff">text</strong> to edit · Click any <strong style="color:#e0e7ff">photo</strong> to swap · <strong style="color:#e0e7ff">Right-click</strong> for more options';
+    pulse.style.animation = 'pulse 2s infinite';
+    // re-inject
+    try { const doc=document.getElementById('site-frame').contentDocument; if(doc&&doc.body) injectEditMode(doc); } catch(e){}
+  } else {
+    btn.className = 'btn btn-edit-off';
+    btn.innerHTML = `<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/></svg>Edit: OFF`;
+    hintBar.classList.add('off');
+    hintText.textContent = 'View mode — click "Edit: OFF" to enable editing';
+    pulse.style.animation = 'none';
+    // remove editable
+    try {
+      const doc = document.getElementById('site-frame').contentDocument;
+      if(!doc||!doc.body) return;
+      const st=doc.getElementById('__ae__'); if(st) st.remove();
+      const ctx=doc.getElementById('__ctx__'); if(ctx) ctx.remove();
+      doc.querySelectorAll('[data-ae]').forEach(el=>{ el.contentEditable='false'; el.removeAttribute('data-ae'); });
+      doc.querySelectorAll('.__img-wrap').forEach(wrap=>{ const img=wrap.querySelector('img'); if(img){wrap.parentNode.insertBefore(img,wrap);} wrap.remove(); });
+    } catch(e){}
+  }
+};
+
+// ── Login ─────────────────────────────────────────────────
 document.getElementById('login-form').onsubmit = async e => {
   e.preventDefault();
-  const r = await fetch('/api/login', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ password: document.getElementById('pw').value }) });
-  if (r.ok) {
-    document.getElementById('login').style.display = 'none';
-    document.getElementById('app').classList.add('on');
-    initAdmin();
-  } else {
-    document.getElementById('lc-err').textContent = 'Wrong password. Try again.';
-  }
+  const r = await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:document.getElementById('pw').value})});
+  if(r.ok){ document.getElementById('login').style.display='none'; document.getElementById('app').classList.add('on'); initAdmin(); }
+  else document.getElementById('lc-err').textContent='Wrong password. Try again.';
 };
 document.getElementById('btn-logout').onclick = async () => { await fetch('/api/logout',{method:'POST'}); location.reload(); };
 
-// ── Sidebar tabs ──────────────────────────────────────────────────
+// ── Sidebar ───────────────────────────────────────────────
 document.querySelectorAll('.stab').forEach(tab => {
   tab.onclick = () => {
-    document.querySelectorAll('.stab').forEach(t => t.classList.remove('on'));
-    document.querySelectorAll('.sb-pane').forEach(p => p.classList.remove('on'));
+    document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));
+    document.querySelectorAll('.sb-pane').forEach(p=>p.classList.remove('on'));
     tab.classList.add('on');
-    document.getElementById('sp-' + tab.dataset.stab).classList.add('on');
-    if (tab.dataset.stab === 'media') loadMedia();
+    document.getElementById('sp-'+tab.dataset.stab).classList.add('on');
+    if(tab.dataset.stab==='media') loadMedia();
   };
 });
-
-// Section scroll
 document.querySelectorAll('[data-scroll]').forEach(item => {
   item.onclick = () => {
-    document.querySelectorAll('[data-scroll]').forEach(i => i.classList.remove('on'));
+    document.querySelectorAll('[data-scroll]').forEach(i=>i.classList.remove('on'));
     item.classList.add('on');
     try {
-      const doc = document.getElementById('site-frame').contentDocument;
-      const el = doc.getElementById(item.dataset.scroll);
-      if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
-    } catch(e) {}
+      const doc=document.getElementById('site-frame').contentDocument;
+      const el=doc.getElementById(item.dataset.scroll);
+      if(el) el.scrollIntoView({behavior:'smooth',block:'start'});
+    } catch(e){}
   };
 });
 document.getElementById('btn-open-contact').onclick = openContact;
 
-// ── Device ────────────────────────────────────────────────────────
+// ── Device ────────────────────────────────────────────────
 function setDevice(d) {
-  document.getElementById('frame-wrap').className = 'frame-wrap' + (d==='tablet'?' tablet':d==='mobile'?' mobile':'');
-  document.querySelectorAll('.dev-btn').forEach(b => {
-    if (['Desktop','Tablet','Mobile'].includes(b.textContent)) b.classList.toggle('on', b.textContent.toLowerCase()===d);
-  });
+  document.getElementById('frame-wrap').className='frame-wrap'+(d==='tablet'?' tablet':d==='mobile'?' mobile':'');
+  document.querySelectorAll('.dev-btn').forEach(b=>{ if(['Desktop','Tablet','Mobile'].includes(b.textContent)) b.classList.toggle('on',b.textContent.toLowerCase()===d); });
 }
 document.getElementById('btn-reload').onclick = reloadFrame;
 
-// ── Frame ─────────────────────────────────────────────────────────
+// ── Frame ─────────────────────────────────────────────────
 async function reloadFrame() {
-  if (content) {
-    await fetch('/api/content/preview', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(content) }).catch(()=>{});
-  }
-  document.getElementById('site-frame').src = '/?preview&t=' + Date.now();
+  if(content) await fetch('/api/content/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(content)}).catch(()=>{});
+  document.getElementById('site-frame').src='/?preview&t='+Date.now();
 }
 
 document.getElementById('site-frame').addEventListener('load', function() {
   try {
-    const doc = this.contentDocument;
-    if (!doc || !doc.body || !content) return;
+    const doc=this.contentDocument;
+    if(!doc||!doc.body||!content||!editMode) return;
     injectEditMode(doc);
-  } catch(e) { console.warn('Frame inject:', e); }
+  } catch(e){ console.warn('Frame inject:',e); }
 });
 
-// ── Edit mode injection ───────────────────────────────────────────
+// ── Text fields map ───────────────────────────────────────
 const TEXT_FIELDS = [
-  { sel: '#home .eyebrow',               path: ['hero','eyebrow'],       ml: false },
-  { sel: '#home h1',                     path: ['hero','headline'],       ml: false },
-  { sel: '.hero-copy > p',               path: ['hero','description'],    ml: true  },
-  { sel: '.hero-card-content > span',    path: ['hero','cardSpan'],       ml: false },
-  { sel: '.hero-card-content > h3',      path: ['hero','cardHeading'],    ml: false },
-  { sel: '.story-big',                   path: ['story','quote'],         ml: true,
-    unwrap: v => v.replace(/^[\u201c"]+|[\u201d"]+$/g,'').trim() },
-  { sel: '.story-copy p:nth-of-type(1)', path: ['story','paragraph1'],   ml: true  },
-  { sel: '.story-copy p:nth-of-type(2)', path: ['story','paragraph2'],   ml: true  },
-  { sel: '.story-copy p:nth-of-type(3)', path: ['story','paragraph3'],   ml: true  },
-  { sel: '.founder-name',                path: ['founder','name'],        ml: false },
-  { sel: '.founder-role',                path: ['founder','role'],        ml: false },
-  { sel: '.founder-bio',                 path: ['founder','bio'],         ml: true  },
-  { sel: '.watch-tag',                   path: ['watch','tag'],           ml: false },
-  { sel: '.watch-title',                 path: ['watch','title'],         ml: true  },
-  { sel: '.watch-desc',                  path: ['watch','description'],   ml: true  },
+  // Hero
+  {sel:'#home .eyebrow',                 path:['hero','eyebrow'],            ml:false},
+  {sel:'#home h1',                       path:['hero','headline'],            ml:false},
+  {sel:'.hero-copy > p',                 path:['hero','description'],         ml:true },
+  {sel:'.hero-card-content > span',      path:['hero','cardSpan'],            ml:false},
+  {sel:'.hero-card-content > h3',        path:['hero','cardHeading'],         ml:false},
+  // Story section heading
+  {sel:'#story .section-head .eyebrow',  path:['sections','storyEyebrow'],    ml:false},
+  {sel:'#story .section-head h2',        path:['sections','storyTitle'],      ml:false},
+  {sel:'#story .section-head p',         path:['sections','storyDesc'],       ml:true },
+  // Story content
+  {sel:'.story-big',                     path:['story','quote'],              ml:true, unwrap:v=>v.replace(/^[\u201c"]+|[\u201d"]+$/g,'').trim()},
+  {sel:'.story-copy p:nth-of-type(1)',   path:['story','paragraph1'],         ml:true },
+  {sel:'.story-copy p:nth-of-type(2)',   path:['story','paragraph2'],         ml:true },
+  {sel:'.story-copy p:nth-of-type(3)',   path:['story','paragraph3'],         ml:true },
+  // Founder
+  {sel:'.founder-info .eyebrow',         path:['sections','founderEyebrow'],  ml:false},
+  {sel:'.founder-name',                  path:['founder','name'],             ml:false},
+  {sel:'.founder-role',                  path:['founder','role'],             ml:false},
+  {sel:'.founder-bio',                   path:['founder','bio'],              ml:true },
+  // Gallery heading
+  {sel:'#gallery .section-head .eyebrow',path:['sections','galleryEyebrow'],  ml:false},
+  {sel:'#gallery .section-head h2',      path:['sections','galleryTitle'],    ml:false},
+  {sel:'#gallery .section-head p',       path:['sections','galleryDesc'],     ml:true },
+  // Watch heading
+  {sel:'#watch .section-head .eyebrow',  path:['sections','watchEyebrow'],    ml:false},
+  {sel:'#watch .section-head h2',        path:['sections','watchTitle'],      ml:false},
+  {sel:'#watch .section-head p',         path:['sections','watchSubtitle'],   ml:true },
+  {sel:'.watch-tag',                     path:['watch','tag'],                ml:false},
+  {sel:'.watch-title',                   path:['watch','title'],              ml:true },
+  {sel:'.watch-desc',                    path:['watch','description'],        ml:true },
+  // Mission heading
+  {sel:'#mission .section-head .eyebrow',path:['sections','missionEyebrow'],  ml:false},
+  {sel:'#mission .section-head h2',      path:['sections','missionTitle'],    ml:false},
+  {sel:'#mission .section-head p',       path:['sections','missionDesc'],     ml:true },
+  // Impact heading
+  {sel:'#impact .section-head .eyebrow', path:['sections','impactEyebrow'],   ml:false},
+  {sel:'#impact .section-head h2',       path:['sections','impactTitle'],     ml:false},
+  {sel:'#impact .section-head p',        path:['sections','impactDesc'],      ml:true },
+  // Projects heading
+  {sel:'#projects .section-head .eyebrow',path:['sections','projectsEyebrow'],ml:false},
+  {sel:'#projects .section-head h2',      path:['sections','projectsTitle'],  ml:false},
+  {sel:'#projects .section-head p',       path:['sections','projectsDesc'],   ml:true },
+  // Contact heading
+  {sel:'.contact-box-left .eyebrow',     path:['sections','contactEyebrow'],  ml:false},
+  {sel:'.contact-box-left h2',           path:['sections','contactTitle'],    ml:false},
+  {sel:'.contact-box-left > p',          path:['sections','contactDesc'],     ml:true },
+  // Footer
+  {sel:'.footer-brand',                  path:['sections','footerBrand'],     ml:false},
+  {sel:'.footer-note:nth-of-type(1)',    path:['sections','footerNote1'],     ml:false},
+  {sel:'.footer-note:nth-of-type(2)',    path:['sections','footerNote2'],     ml:false},
 ];
 
+// ── Edit mode injection ───────────────────────────────────
 function injectEditMode(doc) {
-  // Inject CSS
-  let st = doc.getElementById('__ae__');
-  if (st) st.remove();
-  st = doc.createElement('style');
-  st.id = '__ae__';
-  st.textContent = `
-    [data-ae]{outline:none!important;cursor:text!important;border-radius:4px;transition:box-shadow .15s,background .15s;display:inline;}
+  let st=doc.getElementById('__ae__'); if(st) st.remove();
+  st=doc.createElement('style'); st.id='__ae__';
+  st.textContent=`
+    [data-ae]{outline:none!important;cursor:text!important;border-radius:3px;transition:box-shadow .12s,background .12s;}
     [data-ae]:hover{background:rgba(99,102,241,.09)!important;box-shadow:0 0 0 2px rgba(99,102,241,.28)!important;}
     [data-ae]:focus{background:rgba(99,102,241,.13)!important;box-shadow:0 0 0 2.5px rgba(99,102,241,.6)!important;}
     .__img-wrap{position:relative;display:inline-block;cursor:pointer!important;}
     .__img-wrap img{display:block;}
-    .__img-lbl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.78);color:#fff;padding:.4rem .85rem;border-radius:7px;font:600 13px/-apple-system,sans-serif;font-family:-apple-system,sans-serif;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;z-index:10;}
+    .__img-lbl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.8);color:#fff;padding:.4rem .85rem;border-radius:7px;font:600 13px -apple-system,sans-serif;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .18s;z-index:10;}
     .__img-wrap:hover .__img-lbl{opacity:1;}
+    #__ctx__{position:fixed;z-index:99999;background:#1c1f2e;border-radius:10px;padding:.35rem 0;box-shadow:0 8px 32px rgba(0,0,0,.5);min-width:175px;font-family:-apple-system,BlinkMacSystemFont,sans-serif;border:1px solid rgba(255,255,255,.07);}
+    .__ctx-item{padding:.42rem .85rem;cursor:pointer;display:flex;align-items:center;gap:.5rem;font-size:12.5px;color:#e5e7eb;transition:background .1s;user-select:none;}
+    .__ctx-item:hover{background:rgba(255,255,255,.08);}
+    .__ctx-item.danger{color:#f87171;}.__ctx-item.danger:hover{background:rgba(239,68,68,.15);}
+    .__ctx-sep{height:1px;background:rgba(255,255,255,.07);margin:.3rem 0;}
+    .__ctx-label{padding:.25rem .85rem;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#4b5563;}
   `;
   doc.head.appendChild(st);
 
-  // Text fields
   TEXT_FIELDS.forEach(field => {
-    const el = doc.querySelector(field.sel);
-    if (el) makeText(el, field, doc);
+    const el=doc.querySelector(field.sel);
+    if(el) makeText(el, field, doc);
   });
 
-  // Impact (array)
-  doc.querySelectorAll('.impact-card').forEach((card, i) => {
-    const h3 = card.querySelector('h3');
-    const p  = card.querySelector('p');
-    if (h3) makeText(h3, { path:['impact',i,'title'], ml:false }, doc);
-    if (p)  makeText(p,  { path:['impact',i,'desc'],  ml:true  }, doc);
+  // Impact cards
+  doc.querySelectorAll('.impact-card').forEach((card,i)=>{
+    const h3=card.querySelector('h3'), p=card.querySelector('p');
+    if(h3) makeText(h3,{path:['impact',i,'title'],ml:false},doc);
+    if(p)  makeText(p, {path:['impact',i,'desc'], ml:true }, doc);
   });
-
-  // Projects (array)
-  doc.querySelectorAll('#projects .feature').forEach((card, i) => {
-    const h3 = card.querySelector('h3');
-    const p  = card.querySelector('p');
-    if (h3) makeText(h3, { path:['projects',i,'title'], ml:false }, doc);
-    if (p)  makeText(p,  { path:['projects',i,'desc'],  ml:true  }, doc);
+  // Projects
+  doc.querySelectorAll('#projects .feature').forEach((card,i)=>{
+    const h3=card.querySelector('h3'), p=card.querySelector('p');
+    if(h3) makeText(h3,{path:['projects',i,'title'],ml:false},doc);
+    if(p)  makeText(p, {path:['projects',i,'desc'], ml:true }, doc);
   });
-
   // Gallery captions
-  doc.querySelectorAll('.gallery-item figcaption').forEach((cap, i) => {
-    makeText(cap, { path:['gallery',i,'caption'], ml:true }, doc);
+  doc.querySelectorAll('.gallery-item figcaption').forEach((cap,i)=>{
+    makeText(cap,{path:['gallery',i,'caption'],ml:true},doc);
+  });
+  // Mission feature cards
+  doc.querySelectorAll('#mission .feature').forEach((card)=>{
+    const h3=card.querySelector('h3'), p=card.querySelector('p');
+    if(h3) h3.dataset.ae='1', h3.contentEditable='true', preventNL(h3,doc);
+    if(p)  p.dataset.ae='1',  p.contentEditable='true';
+    // these are hardcoded in script.js so we don't save them to content
+    // but we mark them as editable visually — user sees they can click
+    // (saving would need a mission array; for now just visual)
   });
 
   // Images
-  [
-    { sel:'.hero-card-img',                    path:['hero','heroImage']      },
-    { sel:'.founder-photo:not(.founder-army)', path:['founder','photo']       },
-    { sel:'.founder-army',                     path:['founder','armyPhoto']   },
-    { sel:'.contact-avatar',                   path:['founder','photo']       },
-  ].forEach(f => {
-    const el = doc.querySelector(f.sel);
-    if (el) makeImg(el, f.path, doc);
-  });
-  doc.querySelectorAll('.gallery-item img').forEach((img, i) => makeImg(img, ['gallery',i,'src'], doc));
+  [{sel:'.hero-card-img',path:['hero','heroImage']},
+   {sel:'.founder-photo:not(.founder-army)',path:['founder','photo']},
+   {sel:'.founder-army',path:['founder','armyPhoto']},
+   {sel:'.contact-avatar',path:['founder','photo']},
+  ].forEach(f=>{ const el=doc.querySelector(f.sel); if(el) makeImg(el,f.path,doc); });
+  doc.querySelectorAll('.gallery-item img').forEach((img,i)=>makeImg(img,['gallery',i,'src'],doc));
+
+  // Context menu
+  injectContextMenu(doc);
 }
 
 let editDebounce;
+function preventNL(el, doc) {
+  el.addEventListener('keydown', e=>{ if(e.key==='Enter') e.preventDefault(); });
+}
 function makeText(el, field, doc) {
-  el.contentEditable = 'true';
-  el.dataset.ae = '1';
-  el.spellcheck = true;
-
-  if (!field.ml) {
-    el.addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); });
-  }
-  el.addEventListener('paste', e => {
+  el.contentEditable='true'; el.dataset.ae='1'; el.spellcheck=true;
+  if(!field.ml) preventNL(el, doc);
+  el.addEventListener('paste', e=>{
     e.preventDefault();
-    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
-    doc.execCommand('insertText', false, text);
+    doc.execCommand('insertText',false,(e.clipboardData||window.clipboardData).getData('text/plain'));
   });
-  el.addEventListener('input', () => {
-    let t = el.innerText;
-    if (field.unwrap) t = field.unwrap(t);
-    setPath(content, field.path, t);
-    markUnsaved();
-    clearTimeout(editDebounce);
-    editDebounce = setTimeout(pushUndo, 900);
+  el.addEventListener('input', ()=>{
+    let t=el.innerText; if(field.unwrap) t=field.unwrap(t);
+    setPath(content,field.path,t); markUnsaved();
+    clearTimeout(editDebounce); editDebounce=setTimeout(pushUndo,900);
   });
-  el.addEventListener('blur', () => {
-    let t = el.innerText.trim();
-    if (field.unwrap) t = field.unwrap(t);
-    setPath(content, field.path, t);
-    pushUndo();
+  el.addEventListener('blur', ()=>{
+    let t=el.innerText.trim(); if(field.unwrap) t=field.unwrap(t);
+    setPath(content,field.path,t); pushUndo();
   });
 }
-
 function makeImg(el, path, doc) {
-  const wrap = doc.createElement('div');
-  wrap.className = '__img-wrap';
-  const lbl = doc.createElement('div');
-  lbl.className = '__img-lbl';
-  lbl.textContent = '📷  Change photo';
-  el.parentNode.insertBefore(wrap, el);
-  wrap.appendChild(el);
-  wrap.appendChild(lbl);
-  wrap.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); openPicker(path); });
+  const wrap=doc.createElement('div');
+  wrap.className='__img-wrap'; wrap._imgPath=path;
+  const lbl=doc.createElement('div'); lbl.className='__img-lbl'; lbl.textContent='📷  Change photo';
+  el.parentNode.insertBefore(wrap,el); wrap.appendChild(el); wrap.appendChild(lbl);
+  wrap.addEventListener('click', e=>{ e.preventDefault(); e.stopPropagation(); openPicker(path); });
 }
 
-// ── Image picker ──────────────────────────────────────────────────
+// ── Right-click context menu ──────────────────────────────
+function injectContextMenu(doc) {
+  let menu=doc.getElementById('__ctx__'); if(menu) menu.remove();
+  menu=doc.createElement('div'); menu.id='__ctx__'; menu.style.display='none';
+  doc.body.appendChild(menu);
+
+  doc.addEventListener('contextmenu', e=>{
+    e.preventDefault();
+    buildCtxMenu(menu, e, doc);
+    const maxX=doc.documentElement.clientWidth-190, maxY=doc.documentElement.clientHeight-280;
+    menu.style.left=Math.min(e.clientX,maxX)+'px';
+    menu.style.top=Math.min(e.clientY,maxY)+'px';
+    menu.style.display='block';
+  });
+  doc.addEventListener('click', ()=>{ menu.style.display='none'; });
+  doc.addEventListener('scroll', ()=>{ menu.style.display='none'; }, {passive:true,capture:true});
+}
+
+function buildCtxMenu(menu, e, doc) {
+  menu.innerHTML='';
+  const t=e.target;
+  const aeEl=t.closest('[data-ae]');
+  const imgWrap=t.closest('.__img-wrap');
+  const galleryItem=t.closest('.gallery-item');
+  const impactCard=t.closest('.impact-card');
+  const projectCard=t.closest('#projects .feature');
+  const linkEl=t.closest('a');
+
+  const item=(icon,label,fn,danger=false)=>{
+    const el=doc.createElement('div');
+    el.className='__ctx-item'+(danger?' danger':'');
+    el.innerHTML=`<span style="width:16px;text-align:center;font-size:14px">${icon}</span>${label}`;
+    el.onclick=()=>{ menu.style.display='none'; fn(); };
+    menu.appendChild(el);
+  };
+  const sep=()=>{ const s=doc.createElement('div'); s.className='__ctx-sep'; menu.appendChild(s); };
+  const lbl=(text)=>{ const l=doc.createElement('div'); l.className='__ctx-label'; l.textContent=text; menu.appendChild(l); };
+
+  // ── IMAGE ────────────────────────────────────────────────
+  if(imgWrap) {
+    lbl('Photo');
+    item('📷','Change Photo',()=>openPicker(imgWrap._imgPath));
+    if(galleryItem) {
+      const idx=[...doc.querySelectorAll('.gallery-item')].indexOf(galleryItem);
+      sep();
+      item('➕','Add Photo After',()=>addGalleryItem(idx));
+      item('🗑','Remove This Photo',()=>removeGalleryItem(idx),true);
+    }
+    return;
+  }
+
+  // ── GALLERY ITEM (right-click on caption or figure) ─────
+  if(galleryItem && !imgWrap) {
+    lbl('Gallery Photo');
+    const idx=[...doc.querySelectorAll('.gallery-item')].indexOf(galleryItem);
+    const imgEl=galleryItem.querySelector('img');
+    // find path
+    const path=['gallery',idx,'src'];
+    item('📷','Change Photo',()=>openPicker(path));
+    item('✏️','Edit Caption',()=>{ const cap=galleryItem.querySelector('[data-ae]'); if(cap){cap.focus();selAll(cap,doc);} });
+    sep();
+    item('➕','Add Photo After',()=>addGalleryItem(idx));
+    item('🗑','Remove This Photo',()=>removeGalleryItem(idx),true);
+    return;
+  }
+
+  // ── IMPACT CARD ──────────────────────────────────────────
+  if(impactCard) {
+    lbl('Impact Card');
+    const idx=[...doc.querySelectorAll('.impact-card')].indexOf(impactCard);
+    if(aeEl){ item('✏️','Edit Text',()=>{ aeEl.focus(); selAll(aeEl,doc); }); sep(); }
+    item('➕','Add Milestone After',()=>addImpactItem(idx));
+    item('🗑','Remove This Card',()=>removeImpactItem(idx),true);
+    return;
+  }
+
+  // ── PROJECT CARD ─────────────────────────────────────────
+  if(projectCard) {
+    lbl('Project Card');
+    const idx=[...doc.querySelectorAll('#projects .feature')].indexOf(projectCard);
+    if(aeEl){ item('✏️','Edit Text',()=>{ aeEl.focus(); selAll(aeEl,doc); }); sep(); }
+    item('🔗','Edit Donate Link',()=>promptProjectLink(idx));
+    item('➕','Add Project After',()=>addProjectItem(idx));
+    item('🗑','Remove This Project',()=>removeProjectItem(idx),true);
+    return;
+  }
+
+  // ── EDITABLE TEXT ────────────────────────────────────────
+  if(aeEl) {
+    lbl('Text');
+    item('✏️','Edit Text',()=>{ aeEl.focus(); selAll(aeEl,doc); });
+    item('📋','Select All Text',()=>selAll(aeEl,doc));
+    if(linkEl){ sep(); item('🔗','Edit Link URL',()=>promptLink(linkEl)); }
+    sep();
+    item('📄','Copy Text',()=>{
+      const sel=doc.defaultView.getSelection();
+      const range=doc.createRange(); range.selectNodeContents(aeEl);
+      sel.removeAllRanges(); sel.addRange(range);
+      doc.execCommand('copy');
+      sel.removeAllRanges();
+      toast('Copied to clipboard','ok');
+    });
+    return;
+  }
+
+  // ── LINK ─────────────────────────────────────────────────
+  if(linkEl) {
+    lbl('Link');
+    item('🔗','Edit URL',()=>promptLink(linkEl));
+    return;
+  }
+
+  // ── GENERIC ──────────────────────────────────────────────
+  lbl('Page');
+  item('🔄','Reload Preview',()=>reloadFrame());
+  item('👁','Toggle Edit Mode',()=>document.getElementById('btn-editmode').click());
+}
+
+function selAll(el, doc) {
+  const r=doc.createRange(); r.selectNodeContents(el);
+  const sel=doc.defaultView.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+}
+
+function promptLink(linkEl) {
+  const cur=linkEl.getAttribute('href')||'';
+  const val=prompt('Edit URL:',cur);
+  if(val!==null&&val!==cur){
+    linkEl.href=normalizeUrl(val);
+    toast('Link updated — use Edit URLs & Email to save permanently','ok');
+  }
+}
+
+function promptProjectLink(idx) {
+  const proj=content.projects&&content.projects[idx];
+  const cur=proj?proj.link||'':'';
+  const val=prompt('Donate link URL:',cur);
+  if(val===null) return;
+  if(!content.projects) content.projects=[];
+  if(!content.projects[idx]) content.projects[idx]={};
+  content.projects[idx].link=normalizeUrl(val);
+  const txt=prompt('Button text:',proj&&proj.linkText||'Donate');
+  if(txt!==null) content.projects[idx].linkText=txt;
+  markUnsaved(); pushUndo(); reloadFrame();
+}
+
+// ── Gallery add/remove ─────────────────────────────────────
+async function addGalleryItem(afterIdx) {
+  if(!content.gallery) content.gallery=[];
+  content.gallery.splice(afterIdx+1,0,{src:'',alt:'New photo',caption:'New photo',tall:false,wide:false});
+  markUnsaved(); pushUndo(); await reloadFrame();
+  setTimeout(()=>openPicker(['gallery',afterIdx+1,'src']),400);
+}
+async function removeGalleryItem(idx) {
+  if(!confirm('Remove this photo from the gallery?')) return;
+  content.gallery.splice(idx,1);
+  markUnsaved(); pushUndo(); await reloadFrame();
+}
+
+// ── Impact add/remove ─────────────────────────────────────
+async function addImpactItem(afterIdx) {
+  if(!content.impact) content.impact=[];
+  content.impact.splice(afterIdx+1,0,{number:'2024',format:'year',title:'New Milestone',desc:'Describe what happened here.'});
+  markUnsaved(); pushUndo(); await reloadFrame();
+}
+async function removeImpactItem(idx) {
+  if(!confirm('Remove this milestone card?')) return;
+  content.impact.splice(idx,1);
+  markUnsaved(); pushUndo(); await reloadFrame();
+}
+
+// ── Project add/remove ────────────────────────────────────
+async function addProjectItem(afterIdx) {
+  if(!content.projects) content.projects=[];
+  content.projects.splice(afterIdx+1,0,{title:'New Project',desc:'Describe this project.',link:'',linkText:'',highlight:false});
+  markUnsaved(); pushUndo(); await reloadFrame();
+}
+async function removeProjectItem(idx) {
+  if(!confirm('Remove this project?')) return;
+  content.projects.splice(idx,1);
+  markUnsaved(); pushUndo(); await reloadFrame();
+}
+
+// ── Image picker ──────────────────────────────────────────
 async function openPicker(path) {
-  pickerPath = path;
+  pickerPath=path;
   let images;
-  try { images = await fetch('/api/images').then(r => r.json()); }
-  catch(e) { toast('Could not load images', 'err'); return; }
-  const grid = document.getElementById('picker-grid');
-  grid.innerHTML = '';
-  images.forEach(name => {
-    const cell = document.createElement('div');
-    cell.className = 'picker-cell';
-    cell.innerHTML = `<img src="/${name}" alt="${name}"/><div class="picker-name">${name}</div>`;
-    cell.onclick = () => applyImg(name);
+  try{ images=await fetch('/api/images').then(r=>r.json()); }
+  catch(e){ toast('Could not load images','err'); return; }
+  const grid=document.getElementById('picker-grid');
+  grid.innerHTML='';
+  images.forEach(name=>{
+    const cell=document.createElement('div'); cell.className='picker-cell';
+    cell.innerHTML=`<img src="/${name}" alt="${name}" loading="lazy"/><div class="picker-name">${name}</div>`;
+    cell.onclick=()=>applyImg(name);
     grid.appendChild(cell);
   });
   document.getElementById('picker-overlay').classList.add('on');
   document.getElementById('picker-modal').classList.add('on');
 }
-window.closePicker = () => {
-  document.getElementById('picker-overlay').classList.remove('on');
-  document.getElementById('picker-modal').classList.remove('on');
-  pickerPath = null;
-};
+window.closePicker=()=>{ document.getElementById('picker-overlay').classList.remove('on'); document.getElementById('picker-modal').classList.remove('on'); pickerPath=null; };
 async function applyImg(name) {
-  if (!pickerPath) return;
-  setPath(content, pickerPath, name);
-  markUnsaved(); pushUndo();
-  closePicker();
-  await reloadFrame();
-  toast('Photo updated — click Save to keep it', 'ok');
+  if(!pickerPath) return;
+  setPath(content,pickerPath,name); markUnsaved(); pushUndo(); closePicker();
+  await reloadFrame(); toast('Photo updated — click Save to keep it','ok');
 }
 
-// ── Contact modal ─────────────────────────────────────────────────
+// ── Contact modal ─────────────────────────────────────────
 function openContact() {
-  if (!content) return;
-  const c = content.contact || {};
-  const w = content.watch   || {};
-  document.getElementById('c-email').value      = c.email          || '';
-  document.getElementById('c-phone').value      = c.phone          || '';
-  document.getElementById('c-gofundme').value   = content.gofundmeUrl || '';
-  document.getElementById('c-fbSchool').value   = c.facebookSchool || '';
-  document.getElementById('c-fbSimon').value    = c.facebookSimon  || '';
-  document.getElementById('c-videoUrl').value   = w.videoUrl       || '';
-  document.getElementById('c-articleUrl').value = w.articleUrl     || '';
+  if(!content) return;
+  const c=content.contact||{}, w=content.watch||{};
+  document.getElementById('c-email').value     =c.email||'';
+  document.getElementById('c-phone').value     =c.phone||'';
+  document.getElementById('c-gofundme').value  =content.gofundmeUrl||'';
+  document.getElementById('c-fbSchool').value  =c.facebookSchool||'';
+  document.getElementById('c-fbSimon').value   =c.facebookSimon||'';
+  document.getElementById('c-videoUrl').value  =w.videoUrl||'';
+  document.getElementById('c-articleUrl').value=w.articleUrl||'';
   document.getElementById('contact-overlay').classList.add('on');
   document.getElementById('contact-modal').classList.add('on');
 }
-function closeContact() {
-  document.getElementById('contact-overlay').classList.remove('on');
-  document.getElementById('contact-modal').classList.remove('on');
-}
-window.closeContact = closeContact;
-document.getElementById('btn-save-contact').onclick = async () => {
-  if (!content) return;
-  if (!content.contact) content.contact = {};
-  if (!content.watch)   content.watch   = {};
-  content.contact.email          = document.getElementById('c-email').value.trim();
-  content.contact.phone          = document.getElementById('c-phone').value.trim();
-  content.gofundmeUrl            = normalizeUrl(document.getElementById('c-gofundme').value.trim());
-  content.contact.facebookSchool = normalizeUrl(document.getElementById('c-fbSchool').value.trim());
-  content.contact.facebookSimon  = normalizeUrl(document.getElementById('c-fbSimon').value.trim());
-  content.watch.videoUrl         = document.getElementById('c-videoUrl').value.trim();
-  content.watch.articleUrl       = normalizeUrl(document.getElementById('c-articleUrl').value.trim());
-  markUnsaved(); pushUndo();
-  closeContact();
-  await reloadFrame();
-  toast('Links updated — click Save to keep them', 'ok');
+function closeContact() { document.getElementById('contact-overlay').classList.remove('on'); document.getElementById('contact-modal').classList.remove('on'); }
+window.closeContact=closeContact;
+document.getElementById('btn-save-contact').onclick = async ()=>{
+  if(!content) return;
+  if(!content.contact) content.contact={};
+  if(!content.watch)   content.watch={};
+  content.contact.email         =document.getElementById('c-email').value.trim();
+  content.contact.phone         =document.getElementById('c-phone').value.trim();
+  content.gofundmeUrl           =normalizeUrl(document.getElementById('c-gofundme').value.trim());
+  content.contact.facebookSchool=normalizeUrl(document.getElementById('c-fbSchool').value.trim());
+  content.contact.facebookSimon =normalizeUrl(document.getElementById('c-fbSimon').value.trim());
+  content.watch.videoUrl        =document.getElementById('c-videoUrl').value.trim();
+  content.watch.articleUrl      =normalizeUrl(document.getElementById('c-articleUrl').value.trim());
+  markUnsaved(); pushUndo(); closeContact(); await reloadFrame();
+  toast('Links updated — click Save to keep them','ok');
 };
 
-// ── Init ──────────────────────────────────────────────────────────
+// ── Init ──────────────────────────────────────────────────
 async function initAdmin() {
   setStatus('Loading…');
   let r;
-  try { r = await fetch('/api/content'); } catch(e) { toast('Network error loading content', 'err'); return; }
-  if (r.status === 401) { document.getElementById('login').style.display='flex'; document.getElementById('app').classList.remove('on'); return; }
-  if (!r.ok) { toast('Failed to load content', 'err'); return; }
-  content = await r.json();
-  // Post to preview so iframe uses latest
-  await fetch('/api/content/preview', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(content) }).catch(()=>{});
+  try{ r=await fetch('/api/content'); }catch(e){ toast('Network error loading content','err'); return; }
+  if(r.status===401){ document.getElementById('login').style.display='flex'; document.getElementById('app').classList.remove('on'); return; }
+  if(!r.ok){ toast('Failed to load content','err'); return; }
+  content=await r.json();
+  if(!content.sections) content.sections={};
+  await fetch('/api/content/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(content)}).catch(()=>{});
   setStatus('Ready — click any text to edit');
-  undoStack.push(JSON.stringify(content));
-  undoIndex = 0;
-  updateUndoBtns();
-  // Check backup
-  fetch('/api/content/has-backup').then(r=>r.json()).then(d => {
-    document.getElementById('btn-restore').style.display = d.hasBak ? 'inline-flex' : 'none';
+  undoStack.push(JSON.stringify(content)); undoIndex=0; updateUndoBtns();
+  fetch('/api/content/has-backup').then(r=>r.json()).then(d=>{
+    document.getElementById('btn-restore').style.display=d.hasBak?'inline-flex':'none';
   }).catch(()=>{});
-  // Inject into already-loaded iframe
-  try {
-    const doc = document.getElementById('site-frame').contentDocument;
-    if (doc && doc.body && doc.readyState === 'complete') injectEditMode(doc);
-    else document.getElementById('site-frame').src = '/?preview&t=' + Date.now();
-  } catch(e) {
-    document.getElementById('site-frame').src = '/?preview&t=' + Date.now();
-  }
+  try{
+    const doc=document.getElementById('site-frame').contentDocument;
+    if(doc&&doc.body&&doc.readyState==='complete') injectEditMode(doc);
+    else document.getElementById('site-frame').src='/?preview&t='+Date.now();
+  }catch(e){ document.getElementById('site-frame').src='/?preview&t='+Date.now(); }
   loadMedia();
 }
 
-// ── Save ──────────────────────────────────────────────────────────
-document.getElementById('btn-save').onclick = async () => {
-  const btn = document.getElementById('btn-save');
-  btn.disabled = true;
-  setStatus('Saving…');
+// ── Save ──────────────────────────────────────────────────
+document.getElementById('btn-save').onclick = async ()=>{
+  const btn=document.getElementById('btn-save'); btn.disabled=true; setStatus('Saving…');
   let r;
-  try { r = await fetch('/api/content', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(content) }); }
-  catch(e) { toast('Network error — check your connection', 'err'); setStatus('Save failed'); btn.disabled=false; return; }
-  btn.disabled = false;
-  if (r.status === 401) { toast('Session expired — reload and log in again', 'err'); setStatus('Session expired'); return; }
-  if (r.ok) {
-    markSaved();
-    toast('Saved!', 'ok');
-    document.getElementById('btn-restore').style.display = 'inline-flex';
-    await fetch('/api/content/preview', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(content) }).catch(()=>{});
+  try{ r=await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(content)}); }
+  catch(e){ toast('Network error — check your connection','err'); setStatus('Save failed'); btn.disabled=false; return; }
+  btn.disabled=false;
+  if(r.status===401){ toast('Session expired — reload and log in again','err'); setStatus('Session expired'); return; }
+  if(r.ok){
+    markSaved(); toast('Saved!','ok');
+    document.getElementById('btn-restore').style.display='inline-flex';
+    await fetch('/api/content/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(content)}).catch(()=>{});
   } else {
-    const err = await r.json().catch(()=>({}));
-    toast('Save failed: ' + (err.error || r.status), 'err');
-    setStatus('Save failed');
+    const err=await r.json().catch(()=>({}));
+    toast('Save failed: '+(err.error||r.status),'err'); setStatus('Save failed');
   }
 };
 
-// ── Deploy ────────────────────────────────────────────────────────
+// ── Deploy ────────────────────────────────────────────────
 async function doDeploy() {
-  const ds = document.getElementById('deploy-status');
-  ds.style.display = 'block'; ds.style.background = 'rgba(99,102,241,.1)'; ds.style.color = '#a5b4fc'; ds.textContent = 'Deploying…';
+  const ds=document.getElementById('deploy-status');
+  ds.style.display='block'; ds.style.background='rgba(99,102,241,.1)'; ds.style.color='#a5b4fc'; ds.textContent='Deploying…';
   toast('Deploying…');
   let r;
-  try { r = await fetch('/api/deploy', { method:'POST' }); }
-  catch(e) { toast('Network error','err'); ds.textContent='Network error'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; return; }
-  if (r.status === 401) { toast('Session expired — reload and log in again','err'); ds.textContent='Session expired'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; return; }
-  if (r.ok) { toast('Site is live!','ok'); ds.textContent='✓ Deployed successfully'; ds.style.background='rgba(5,150,105,.1)'; ds.style.color='#059669'; }
-  else { const e=await r.json().catch(()=>({})); toast('Deploy failed: '+(e.error||r.status),'err'); ds.textContent='Deploy failed — check logs'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; }
+  try{ r=await fetch('/api/deploy',{method:'POST'}); }
+  catch(e){ toast('Network error','err'); ds.textContent='Network error'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; return; }
+  if(r.status===401){ toast('Session expired — reload','err'); ds.textContent='Session expired'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; return; }
+  if(r.ok){ toast('Site is live!','ok'); ds.textContent='✓ Deployed successfully'; ds.style.background='rgba(5,150,105,.1)'; ds.style.color='#059669'; }
+  else{ const e=await r.json().catch(()=>({})); toast('Deploy failed: '+(e.error||r.status),'err'); ds.textContent='Deploy failed'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; }
 }
-document.getElementById('btn-deploy').onclick = doDeploy;
-document.getElementById('btn-deploy-side').onclick = doDeploy;
+document.getElementById('btn-deploy').onclick=doDeploy;
+document.getElementById('btn-deploy-side').onclick=doDeploy;
 
-// ── Restore ───────────────────────────────────────────────────────
-document.getElementById('btn-restore').onclick = async () => {
-  if (!confirm('Restore to the previous saved version? Current changes will be lost.')) return;
-  let r;
-  try { r = await fetch('/api/content/restore', { method:'POST' }); } catch(e) { toast('Network error','err'); return; }
-  if (r.ok) {
-    const d = await r.json();
-    content = d.content;
-    markSaved(); toast('Restored to previous version','ok');
-    document.getElementById('btn-restore').style.display = 'none';
-    undoStack.length=0; undoIndex=-1;
-    undoStack.push(JSON.stringify(content)); undoIndex=0;
-    updateUndoBtns();
+// ── Restore ───────────────────────────────────────────────
+document.getElementById('btn-restore').onclick = async ()=>{
+  if(!confirm('Restore to the previous saved version? Current changes will be lost.')) return;
+  let r; try{ r=await fetch('/api/content/restore',{method:'POST'}); }catch(e){ toast('Network error','err'); return; }
+  if(r.ok){
+    const d=await r.json(); content=d.content;
+    if(!content.sections) content.sections={};
+    markSaved(); toast('Restored','ok');
+    document.getElementById('btn-restore').style.display='none';
+    undoStack.length=0; undoIndex=-1; undoStack.push(JSON.stringify(content)); undoIndex=0; updateUndoBtns();
     await reloadFrame();
-  } else { toast('No backup found','err'); }
+  } else toast('No backup found','err');
 };
 
-// ── Media ─────────────────────────────────────────────────────────
+// ── Media ─────────────────────────────────────────────────
 async function loadMedia() {
-  try {
-    const r = await fetch('/api/images');
-    if (!r.ok) return;
-    const imgs = await r.json();
-    const grid = document.getElementById('media-grid');
-    grid.innerHTML = '';
-    imgs.forEach(name => {
-      const cell = document.createElement('div');
-      cell.className = 'media-cell';
-      cell.innerHTML = `<img src="/${name}" alt="${name}" loading="lazy"/><div class="media-overlay"><button class="del-img" onclick="delImg('${name}')">✕</button></div>`;
+  try{
+    const r=await fetch('/api/images'); if(!r.ok) return;
+    const imgs=await r.json();
+    const grid=document.getElementById('media-grid'); grid.innerHTML='';
+    imgs.forEach(name=>{
+      const cell=document.createElement('div'); cell.className='media-cell';
+      cell.innerHTML=`<img src="/${name}" alt="${name}" loading="lazy"/><div class="media-overlay"><button class="del-img" onclick="delImg('${name}')">✕</button></div>`;
       grid.appendChild(cell);
     });
-  } catch(e) {}
+  }catch(e){}
 }
-window.delImg = async name => {
-  if (!confirm('Delete "' + name + '"?')) return;
-  try { await fetch('/api/images/' + encodeURIComponent(name), { method:'DELETE' }); toast('Deleted','ok'); loadMedia(); }
-  catch(e) { toast('Delete failed','err'); }
+window.delImg=async name=>{
+  if(!confirm('Delete "'+name+'"?')) return;
+  try{ await fetch('/api/images/'+encodeURIComponent(name),{method:'DELETE'}); toast('Deleted','ok'); loadMedia(); }
+  catch(e){ toast('Delete failed','err'); }
 };
-const uploadZone  = document.getElementById('upload-zone');
-const uploadInput = document.getElementById('upload-input');
-uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'));
-uploadZone.addEventListener('drop', async e => {
-  e.preventDefault(); uploadZone.classList.remove('drag');
-  for (const f of e.dataTransfer.files) await uploadFile(f);
-  loadMedia();
+const uploadZone=document.getElementById('upload-zone'), uploadInput=document.getElementById('upload-input');
+uploadZone.addEventListener('dragover',e=>{e.preventDefault();uploadZone.classList.add('drag');});
+uploadZone.addEventListener('dragleave',()=>uploadZone.classList.remove('drag'));
+uploadZone.addEventListener('drop',async e=>{
+  e.preventDefault();uploadZone.classList.remove('drag');
+  for(const f of e.dataTransfer.files) await uploadFile(f); loadMedia();
 });
-uploadInput.onchange = async () => { for (const f of uploadInput.files) await uploadFile(f); uploadInput.value=''; loadMedia(); };
-async function uploadFile(file) {
-  const fd = new FormData(); fd.append('image', file);
-  try { const r = await fetch('/api/images',{method:'POST',body:fd}); if(r.ok) toast('Uploaded: '+file.name,'ok'); else toast('Upload failed','err'); }
-  catch(e) { toast('Upload failed','err'); }
+uploadInput.onchange=async()=>{ for(const f of uploadInput.files) await uploadFile(f); uploadInput.value=''; loadMedia(); };
+async function uploadFile(file){
+  const fd=new FormData(); fd.append('image',file);
+  try{ const r=await fetch('/api/images',{method:'POST',body:fd}); if(r.ok) toast('Uploaded: '+file.name,'ok'); else toast('Upload failed','err'); }
+  catch(e){ toast('Upload failed','err'); }
 }
 
-// ── Password ──────────────────────────────────────────────────────
-document.getElementById('btn-save-pw').onclick = async () => {
-  const np = document.getElementById('new-pw').value;
-  const cp = document.getElementById('confirm-pw').value;
-  if (!np) return toast('Enter a new password','err');
-  if (np !== cp) return toast('Passwords do not match','err');
-  try {
-    const r = await fetch('/api/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({newPassword:np})});
-    if (r.ok) { toast('Password updated','ok'); document.getElementById('new-pw').value=''; document.getElementById('confirm-pw').value=''; }
-    else toast('Failed to update password','err');
-  } catch(e) { toast('Network error','err'); }
+// ── Password ──────────────────────────────────────────────
+document.getElementById('btn-save-pw').onclick=async()=>{
+  const np=document.getElementById('new-pw').value, cp=document.getElementById('confirm-pw').value;
+  if(!np) return toast('Enter a new password','err');
+  if(np!==cp) return toast('Passwords do not match','err');
+  try{
+    const r=await fetch('/api/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({newPassword:np})});
+    if(r.ok){ toast('Password updated','ok'); document.getElementById('new-pw').value=''; document.getElementById('confirm-pw').value=''; }
+    else toast('Failed','err');
+  }catch(e){ toast('Network error','err'); }
 };
 
-// ── Auth check on load ────────────────────────────────────────────
-fetch('/api/auth').then(r=>r.json()).then(d => {
-  if (d.ok) { document.getElementById('login').style.display='none'; document.getElementById('app').classList.add('on'); initAdmin(); }
+// ── Auth check ────────────────────────────────────────────
+fetch('/api/auth').then(r=>r.json()).then(d=>{
+  if(d.ok){ document.getElementById('login').style.display='none'; document.getElementById('app').classList.add('on'); initAdmin(); }
 });
 </script>
 </body>
