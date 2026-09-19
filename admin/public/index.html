@@ -7,177 +7,144 @@
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --sb:#13161b;--sb2:#1c1f26;--bg:#eef0f4;
-  --accent:#4f46e5;--accent2:#4338ca;--green:#059669;--red:#dc2626;--gold:#d97706;
-  --text:#111827;--muted:#6b7280;--border:#e5e7eb;
-  --sh:0 1px 3px rgba(0,0,0,.1);--shlg:0 8px 24px rgba(0,0,0,.15);
-  --sw:248px;--th:52px;
+  --accent:#6366f1;--accent2:#4f46e5;--green:#059669;--red:#dc2626;--gold:#d97706;
+  --sb:#0f1117;--sb2:#1a1d26;--border:#e5e7eb;--text:#111827;--muted:#6b7280;--bg:#f3f4f6;
+  --sh:0 1px 3px rgba(0,0,0,.1);--shlg:0 12px 40px rgba(0,0,0,.18);
 }
-body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13.5px;color:var(--text);background:var(--bg);overflow:hidden;height:100vh}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:13px;color:var(--text);background:var(--bg);height:100vh;overflow:hidden}
 button{cursor:pointer;font:inherit;border:none;background:none}
 input,textarea,select{font:inherit}
 svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 
 /* ── Login ── */
-#login-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0d0f14,#1e2130);z-index:900}
-.lc{background:#fff;border-radius:14px;padding:2.5rem;width:360px;box-shadow:0 24px 64px rgba(0,0,0,.5);text-align:center}
-.lc-logo{font-size:1.9rem;font-weight:800;color:var(--accent);letter-spacing:-1px}
-.lc-logo small{display:block;font-size:.85rem;font-weight:400;color:var(--muted);margin-top:-2px}
-.lc h2{font-size:1rem;font-weight:500;color:var(--muted);margin:1.25rem 0}
-.lc input{width:100%;padding:.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;margin-bottom:.9rem;outline:none;transition:border-color .2s}
-.lc input:focus{border-color:var(--accent)}
-.lc-btn{width:100%;padding:.8rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.95rem;font-weight:600}
-.lc-btn:hover{background:var(--accent2)}
-.lc-err{color:var(--red);font-size:.82rem;margin-top:.6rem;min-height:1em}
+#login{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#07090f,#1e2130);z-index:999}
+.lbox{background:#fff;border-radius:16px;padding:2.5rem;width:360px;box-shadow:0 32px 80px rgba(0,0,0,.5);text-align:center}
+.lbox-logo{font-size:2rem;font-weight:800;color:var(--accent);letter-spacing:-1px}
+.lbox-logo small{display:block;font-size:.85rem;font-weight:400;color:var(--muted);margin-top:-3px}
+.lbox h2{font-size:.92rem;font-weight:500;color:var(--muted);margin:1.2rem 0}
+.lbox input{width:100%;padding:.75rem 1rem;border:1.5px solid var(--border);border-radius:8px;font-size:.95rem;outline:none;transition:border-color .2s;margin-bottom:.9rem}
+.lbox input:focus{border-color:var(--accent)}
+.lbox-btn{width:100%;padding:.8rem;background:var(--accent);color:#fff;border-radius:8px;font-size:.95rem;font-weight:600;transition:background .15s}
+.lbox-btn:hover{background:var(--accent2)}
+.lbox-err{color:var(--red);font-size:.82rem;margin-top:.6rem;min-height:1em}
 
 /* ── App ── */
 #app{display:none;flex-direction:column;height:100vh}
 #app.on{display:flex}
 
 /* ── Topbar ── */
-.topbar{height:var(--th);background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 .75rem;gap:.5rem;flex-shrink:0;box-shadow:var(--sh);z-index:10}
-.tb-logo{font-weight:800;font-size:1rem;color:var(--accent);letter-spacing:-.5px;white-space:nowrap;margin-right:.25rem}
+.topbar{height:48px;background:#fff;border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 .85rem;gap:.4rem;flex-shrink:0;box-shadow:var(--sh);z-index:20}
+.tb-logo{font-weight:800;font-size:.95rem;color:var(--accent);letter-spacing:-.3px;white-space:nowrap;margin-right:.1rem}
 .tb-sep{width:1px;height:18px;background:var(--border);flex-shrink:0}
-.tb-section{color:var(--muted);font-size:.82rem;white-space:nowrap}
-.unsaved{width:7px;height:7px;border-radius:50%;background:var(--gold);display:none;flex-shrink:0}
-.unsaved.on{display:block}
-.tb-right{margin-left:auto;display:flex;align-items:center;gap:.35rem}
+.tb-status{font-size:.78rem;color:var(--muted);white-space:nowrap}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--gold);display:none;flex-shrink:0}
+.dot.on{display:inline-block}
+.tb-right{margin-left:auto;display:flex;align-items:center;gap:.32rem}
 
 /* ── Buttons ── */
-.btn{display:inline-flex;align-items:center;gap:.32rem;padding:.4rem .8rem;border-radius:6px;font-size:.82rem;font-weight:600;transition:all .15s;white-space:nowrap;border:1.5px solid transparent}
+.btn{display:inline-flex;align-items:center;gap:.3rem;padding:.38rem .72rem;border-radius:6px;font-size:.8rem;font-weight:600;white-space:nowrap;border:1.5px solid transparent;transition:all .15s}
 .btn-primary{background:var(--accent);color:#fff;border-color:var(--accent)}.btn-primary:hover{background:var(--accent2)}
-.btn-success{background:var(--green);color:#fff;border-color:var(--green)}.btn-success:hover{background:#047857}
+.btn-success{background:var(--green);color:#fff}.btn-success:hover{background:#047857}
 .btn-ghost{background:transparent;color:var(--muted);border-color:var(--border)}.btn-ghost:hover{background:var(--bg);color:var(--text)}
-.btn-danger{background:var(--red);color:#fff;border-color:var(--red)}.btn-danger:hover{background:#b91c1c}
-.btn-sm{display:inline-flex;align-items:center;gap:.3rem;padding:.28rem .6rem;border-radius:5px;border:1px solid #2e323b;background:#252830;color:#c9d1d9;font-size:.76rem;font-weight:600}
-.btn-sm:hover{background:#2e323b}
-.btn-icon{display:inline-flex;align-items:center;justify-content:center;padding:.32rem;border-radius:5px;border:1.5px solid var(--border);color:var(--muted);transition:all .15s}
+.btn-warn{color:var(--gold);border-color:rgba(217,119,6,.35)}.btn-warn:hover{background:rgba(217,119,6,.07)}
+.btn-icon{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:6px;border:1.5px solid var(--border);color:var(--muted);transition:all .15s}
 .btn-icon:hover{background:var(--bg);color:var(--text)}
-.btn-icon.active{border-color:var(--accent);color:var(--accent);background:rgba(79,70,229,.07)}
-.btn:disabled{opacity:.38;cursor:not-allowed;pointer-events:none}
-.btn-full{width:100%;justify-content:center}
-.btn-add{display:flex;align-items:center;gap:.45rem;width:100%;padding:.55rem .85rem;border:1.5px dashed var(--border);border-radius:8px;color:var(--muted);font-size:.82rem;font-weight:600;background:transparent;transition:all .15s;justify-content:center;margin-top:.5rem}
-.btn-add:hover{border-color:var(--accent);color:var(--accent);background:rgba(79,70,229,.04)}
+.btn-icon:disabled{opacity:.35;cursor:not-allowed;pointer-events:none}
+.btn:disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
 
 /* ── Layout ── */
-.layout{display:flex;flex:1;overflow:hidden}
+.body{display:flex;flex:1;overflow:hidden}
 
 /* ── Sidebar ── */
-.sidebar{width:var(--sw);background:var(--sb);display:flex;flex-direction:column;flex-shrink:0}
-.stabs{display:grid;grid-template-columns:repeat(5,1fr);background:#0a0c10;flex-shrink:0}
-.stab{background:none;border:none;color:#6b7280;padding:.52rem .1rem;display:flex;flex-direction:column;align-items:center;gap:.17rem;font-size:.55rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;transition:all .15s;border-bottom:2px solid transparent}
-.stab:hover{color:#e5e7eb;background:rgba(255,255,255,.04)}
-.stab.on{color:#fff;border-bottom-color:var(--accent)}
+.sidebar{width:208px;background:var(--sb);display:flex;flex-direction:column;flex-shrink:0}
+.stabs{display:grid;grid-template-columns:repeat(3,1fr);background:#07090f;flex-shrink:0;border-bottom:1px solid #181b24}
+.stab{padding:.54rem .15rem;display:flex;flex-direction:column;align-items:center;gap:.18rem;font-size:.53rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:#4b5563;border-bottom:2px solid transparent;transition:all .15s}
+.stab:hover{color:#9ca3af;background:rgba(255,255,255,.03)}
+.stab.on{color:#a5b4fc;border-bottom-color:var(--accent)}
 .stab svg{width:15px;height:15px}
-.sidebar-pane{display:none;flex-direction:column;flex:1;overflow:hidden}.sidebar-pane.on{display:flex}
-.ph{display:flex;align-items:center;justify-content:space-between;padding:.65rem .85rem;border-bottom:1px solid #22252d;flex-shrink:0}
-.ph h3{color:#f9fafb;font-size:.85rem;font-weight:600}
-.pscroll{flex:1;overflow-y:auto;padding:.65rem}.pscroll::-webkit-scrollbar{width:3px}.pscroll::-webkit-scrollbar-thumb{background:#2e323b;border-radius:2px}
-.hint{color:#5b6370;font-size:.76rem;line-height:1.55;margin-bottom:.6rem}
-.sb-label{font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#4b5563;padding:.45rem .6rem .2rem;margin-top:.2rem}
-.sb-item{display:flex;align-items:center;gap:.5rem;padding:.44rem .6rem;border-radius:6px;cursor:pointer;color:#b0b8c4;font-size:.82rem;transition:background .15s;margin-bottom:1px}
+.sb-pane{display:none;flex-direction:column;flex:1;overflow:hidden}.sb-pane.on{display:flex}
+.sb-scroll{flex:1;overflow-y:auto;padding:.55rem .45rem}
+.sb-scroll::-webkit-scrollbar{width:3px}.sb-scroll::-webkit-scrollbar-thumb{background:#2e323b;border-radius:2px}
+.sb-head{padding:.45rem .65rem .2rem;color:#374151;font-size:.63rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em}
+.sb-item{display:flex;align-items:center;gap:.42rem;padding:.42rem .65rem;border-radius:7px;color:#8a95a3;font-size:.8rem;cursor:pointer;transition:all .15s;margin-bottom:1px;user-select:none}
 .sb-item:hover{background:rgba(255,255,255,.05);color:#e5e7eb}
-.sb-item.on{background:rgba(79,70,229,.2);color:#a5b4fc;font-weight:600}
-.sb-item svg{width:14px;height:14px;flex-shrink:0}
+.sb-item.on{background:rgba(99,102,241,.18);color:#a5b4fc;font-weight:600}
+.sb-item svg{width:13px;height:13px;flex-shrink:0}
+.sb-div{height:1px;background:#181b24;margin:.45rem .4rem}
 
-/* Media tab */
-.img-grid-sb{display:grid;grid-template-columns:1fr 1fr;gap:.4rem}
-.img-card-sb{border-radius:6px;overflow:hidden;background:#1c1f26;position:relative;aspect-ratio:1}
-.img-card-sb img{width:100%;height:100%;object-fit:cover;display:block}
-.img-overlay-sb{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.3rem;opacity:0;transition:opacity .15s;padding:.3rem}
-.img-card-sb:hover .img-overlay-sb{opacity:1}
-.img-name-sb{font-size:.6rem;color:#9ca3af;text-align:center;padding:.15rem .3rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.upload-zone{border:1.5px dashed #2e323b;border-radius:8px;text-align:center;padding:.9rem .75rem;color:#5b6370;cursor:pointer;transition:all .2s;margin-bottom:.65rem;display:block}
-.upload-zone:hover,.upload-zone.drag{border-color:var(--accent);color:#a5b4fc;background:rgba(79,70,229,.06)}
-.upload-zone input{display:none}
+/* Media */
+.upload-drop{border:1.5px dashed #2e323b;border-radius:8px;padding:.75rem .6rem;text-align:center;color:#4b5563;cursor:pointer;transition:all .2s;margin-bottom:.5rem;display:block}
+.upload-drop:hover,.upload-drop.drag{border-color:var(--accent);color:#a5b4fc;background:rgba(99,102,241,.05)}
+.upload-drop input{display:none}
+.media-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.3rem}
+.media-cell{border-radius:5px;overflow:hidden;aspect-ratio:1;position:relative;background:#1a1d26}
+.media-cell img{width:100%;height:100%;object-fit:cover;display:block}
+.media-overlay{position:absolute;inset:0;background:rgba(0,0,0,.6);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .15s}
+.media-cell:hover .media-overlay{opacity:1}
+.del-img{font-size:.65rem;background:var(--red);color:#fff;border-radius:4px;padding:.15rem .4rem;font-weight:700;border:none;cursor:pointer}
 
-/* ── Forms panel ── */
-.forms-panel{overflow-y:auto;background:var(--bg);transition:width .2s;flex:1}
-.forms-panel.with-preview{flex:none;width:420px;border-right:1px solid var(--border)}
-.forms-panel::-webkit-scrollbar{width:5px}.forms-panel::-webkit-scrollbar-thumb{background:#d1d5db;border-radius:3px}
-.forms-inner{padding:1.25rem}
+/* Settings */
+.sf{padding:.65rem .7rem}
+.sf-label{display:block;font-size:.67rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:#4b5563;margin-bottom:.26rem}
+.sf-input{width:100%;background:#1a1d26;border:1px solid #2e323b;border-radius:6px;color:#e5e7eb;padding:.45rem .65rem;font-size:.82rem;outline:none;margin-bottom:.52rem}
+.sf-input:focus{border-color:var(--accent)}
+.deploy-status{padding:.45rem .7rem;border-radius:6px;font-size:.76rem;display:none;margin-top:.45rem;line-height:1.5}
 
-/* ── Preview panel ── */
-.preview-panel{flex:1;display:none;flex-direction:column;background:#1a1d24;min-width:0}
-.preview-panel.on{display:flex}
-.preview-toolbar{height:40px;background:#0d0f14;border-bottom:1px solid #22252d;display:flex;align-items:center;padding:0 .75rem;gap:.4rem;flex-shrink:0}
-.preview-toolbar span{color:#9ca3af;font-size:.78rem;font-weight:600;margin-right:.35rem}
-.dev-btn{display:inline-flex;align-items:center;justify-content:center;padding:.28rem .55rem;border-radius:5px;border:1px solid #2e323b;color:#9ca3af;font-size:.72rem;font-weight:600;transition:all .15s}
-.dev-btn:hover{background:#1c1f26;color:#e5e7eb}
-.dev-btn.on{background:rgba(79,70,229,.2);border-color:rgba(79,70,229,.5);color:#a5b4fc}
-.preview-toolbar .ml{margin-left:auto}
-.frame-wrap{flex:1;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:.75rem;transition:padding .25s}
-.frame-wrap.tablet{padding:.75rem 10%}
-.frame-wrap.mobile{padding:.75rem 25%}
-#pframe{width:100%;height:100%;border:none;border-radius:8px;box-shadow:0 0 0 1px rgba(255,255,255,.05),0 16px 48px rgba(0,0,0,.4);background:#fff}
+/* ── Main ── */
+.main{flex:1;display:flex;flex-direction:column;overflow:hidden;min-width:0}
+.hint-bar{height:30px;background:linear-gradient(90deg,#1e1b4b,#312e81);display:flex;align-items:center;padding:0 .9rem;gap:.45rem;flex-shrink:0}
+.hint-bar span{font-size:.74rem;color:#a5b4fc}
+.hint-pulse{width:6px;height:6px;border-radius:50%;background:#818cf8;animation:pulse 2s infinite;flex-shrink:0}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.45;transform:scale(.75)}}
+.dev-bar{height:34px;background:#0d0f14;border-bottom:1px solid #181b24;display:flex;align-items:center;padding:0 .7rem;gap:.3rem;flex-shrink:0}
+.dev-btn{padding:.22rem .52rem;border-radius:5px;border:1px solid #2e323b;color:#6b7280;font-size:.72rem;font-weight:600;transition:all .15s}
+.dev-btn:hover{background:#1a1d26;color:#e5e7eb}
+.dev-btn.on{background:rgba(99,102,241,.18);border-color:rgba(99,102,241,.45);color:#a5b4fc}
+.dev-bar-right{margin-left:auto;display:flex;align-items:center;gap:.35rem}
+.frame-area{flex:1;overflow:hidden;background:#111;display:flex;align-items:stretch;justify-content:center}
+.frame-wrap{flex:1;overflow:hidden;transition:padding .3s}
+.frame-wrap.tablet{padding:0 11%}
+.frame-wrap.mobile{padding:0 27%}
+#site-frame{width:100%;height:100%;border:none;display:block}
 
-/* ── Cards (main forms) ── */
-.page-header{margin-bottom:1.1rem}
-.page-header h2{font-size:1.2rem;font-weight:800;color:var(--text);letter-spacing:-.3px}
-.page-header p{font-size:.8rem;color:var(--muted);margin-top:.18rem}
-.card{background:#fff;border-radius:10px;border:1px solid var(--border);margin-bottom:.85rem;overflow:hidden;box-shadow:var(--sh)}
-.card-head{padding:.75rem 1rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.card-head h3{font-size:.84rem;font-weight:700;color:var(--text);display:flex;align-items:center;gap:.4rem}
-.card-head h3 svg{color:var(--accent)}
-.card-body{padding:1rem}
-.card-item{background:#fff;border:1.5px solid var(--border);border-radius:8px;margin-bottom:.65rem;overflow:hidden}
-.card-item:last-child{margin-bottom:0}
-.card-item-head{padding:.6rem .85rem;background:#f8f9fc;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.card-item-head span{font-size:.74rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.05em}
-.card-item-body{padding:.85rem}
-
-/* ── Fields ── */
-.field{margin-bottom:.8rem}
-.field:last-child{margin-bottom:0}
-.field label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:.28rem}
-.field input,.field textarea,.field select{width:100%;padding:.5rem .72rem;border:1.5px solid var(--border);border-radius:7px;font-size:.85rem;outline:none;transition:border-color .2s;color:var(--text);background:#fff}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
-.field textarea{min-height:78px;resize:vertical;line-height:1.6}
-.field-hint{font-size:.73rem;color:var(--muted);margin-top:.22rem}
-.g2{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}
-.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:.7rem}
-
-/* Image picker field */
-.img-pick-row{display:flex;align-items:center;gap:.7rem}
-.img-pick-thumb{width:58px;height:58px;border-radius:8px;object-fit:cover;border:1.5px solid var(--border);display:none}
-.img-pick-thumb.has{display:block}
-.img-pick-empty{width:58px;height:58px;border-radius:8px;border:1.5px dashed var(--border);background:#f9fafb;display:flex;align-items:center;justify-content:center;flex-shrink:0;color:#d1d5db}
-.img-pick-info{font-size:.74rem;color:var(--muted);margin-top:.28rem}
-
-/* ── Modal ── */
-.overlay{position:fixed;inset:0;background:rgba(0,0,0,.42);z-index:100;display:none}.overlay.on{display:block}
-.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:12px;box-shadow:var(--shlg);z-index:101;display:none;width:540px;max-width:95vw;max-height:85vh;flex-direction:column}
+/* ── Modals ── */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:300;display:none}.overlay.on{display:block}
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;border-radius:14px;box-shadow:var(--shlg);z-index:301;width:540px;max-width:96vw;max-height:88vh;display:none;flex-direction:column}
 .modal.on{display:flex}
-.mhead{padding:1rem 1.1rem .75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.mhead{padding:.9rem 1.1rem .75rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
 .mhead h3{font-size:.95rem;font-weight:700}
 .mbody{padding:1rem;overflow-y:auto;flex:1}
-.picker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.45rem}
-.picker-item{border-radius:6px;overflow:hidden;aspect-ratio:1;cursor:pointer;border:2px solid transparent;transition:border-color .15s;position:relative}
-.picker-item:hover{border-color:var(--accent)}
-.picker-item img{width:100%;height:100%;object-fit:cover}
-.picker-name{font-size:.6rem;color:var(--muted);text-align:center;padding:.12rem .25rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.picker-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.4rem}
+.picker-cell{border-radius:7px;overflow:hidden;aspect-ratio:1;cursor:pointer;border:2.5px solid transparent;transition:border-color .15s;background:#f3f4f6}
+.picker-cell:hover{border-color:var(--accent)}
+.picker-cell img{width:100%;height:100%;object-fit:cover;display:block}
+.picker-name{font-size:.58rem;color:var(--muted);padding:.1rem .25rem;text-align:center;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+/* Contact modal */
+.cf-row{margin-bottom:.65rem}
+.cf-label{display:block;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);margin-bottom:.25rem}
+.cf-input{width:100%;padding:.5rem .75rem;border:1.5px solid var(--border);border-radius:7px;font-size:.88rem;outline:none;transition:border-color .2s}
+.cf-input:focus{border-color:var(--accent)}
 
 /* ── Toast ── */
-#toast{position:fixed;bottom:1.25rem;right:1.25rem;background:#1f2937;color:#f9fafb;padding:.55rem 1rem;border-radius:7px;font-size:.82rem;box-shadow:var(--shlg);z-index:300;opacity:0;transform:translateY(6px);transition:all .22s;pointer-events:none}
-#toast.on{opacity:1;transform:translateY(0)}
-#toast.ok{background:#064e3b}#toast.err{background:#7f1d1d}
-
-/* ── Tab panes ── */
-.mpane{display:none}.mpane.on{display:block}
+#toast{position:fixed;bottom:1.1rem;right:1.1rem;background:#1f2937;color:#f9fafb;padding:.5rem 1rem;border-radius:8px;font-size:.82rem;box-shadow:var(--shlg);z-index:600;opacity:0;transform:translateY(6px);transition:all .22s;pointer-events:none;max-width:300px}
+#toast.on{opacity:1;transform:none}
+#toast.ok{background:#064e3b}
+#toast.err{background:#7f1d1d}
 </style>
 </head>
 <body>
 
 <!-- LOGIN -->
-<div id="login-screen">
-  <div class="lc">
-    <div class="lc-logo">Ayaa <small>School Admin</small></div>
+<div id="login">
+  <div class="lbox">
+    <div class="lbox-logo">Ayaa <small>School Admin</small></div>
     <h2>Sign in to continue</h2>
     <form id="login-form">
       <input id="pw" type="password" placeholder="Password" autofocus autocomplete="current-password"/>
-      <button type="submit" class="lc-btn">Sign In</button>
+      <button type="submit" class="lbox-btn">Sign In</button>
     </form>
-    <p class="lc-err" id="lc-err"></p>
+    <p class="lbox-err" id="lc-err"></p>
   </div>
 </div>
 
@@ -186,475 +153,164 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
   <header class="topbar">
     <span class="tb-logo">Ayaa School</span>
     <span class="tb-sep"></span>
-    <span class="tb-section" id="tb-section">General</span>
-    <span class="unsaved" id="unsaved-dot" title="Unsaved changes"></span>
+    <span class="dot" id="dot"></span>
+    <span class="tb-status" id="tb-status">Loading…</span>
     <div class="tb-right">
-      <!-- Undo / Redo -->
       <button class="btn-icon" id="btn-undo" title="Undo (Ctrl+Z)" disabled>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.8"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.8"/></svg>
       </button>
       <button class="btn-icon" id="btn-redo" title="Redo (Ctrl+Y)" disabled>
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-3.8"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-.49-3.8"/></svg>
       </button>
       <span class="tb-sep"></span>
-      <!-- Preview toggle -->
-      <button class="btn-icon" id="btn-preview" title="Toggle live preview">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-        Preview
-      </button>
-      <span class="tb-sep"></span>
-      <button class="btn btn-ghost" id="btn-restore" style="color:#d97706;border-color:#d97706;display:none">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.8"/></svg>
+      <button class="btn btn-ghost btn-warn" id="btn-restore" style="display:none">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.8"/></svg>
         Restore
       </button>
       <button class="btn btn-primary" id="btn-save">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
         Save
       </button>
       <button class="btn btn-success" id="btn-deploy">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
         Go Live
       </button>
       <button class="btn btn-ghost" id="btn-logout">Logout</button>
     </div>
   </header>
 
-  <div class="layout">
-    <!-- ── SIDEBAR ── -->
+  <div class="body">
+    <!-- SIDEBAR -->
     <aside class="sidebar">
       <div class="stabs">
-        <button class="stab on" data-stab="content">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
-          Content
+        <button class="stab on" data-stab="sections">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+          Sections
         </button>
         <button class="stab" data-stab="media">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
           Media
         </button>
-        <button class="stab" data-stab="deploy">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
-          Deploy
-        </button>
         <button class="stab" data-stab="settings">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
           Settings
-        </button>
-        <button class="stab" data-stab="help">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-          Help
         </button>
       </div>
 
-      <!-- Content nav -->
-      <div class="sidebar-pane on" id="sp-content">
-        <div class="ph"><h3>Sections</h3></div>
-        <div class="pscroll">
-          <div class="sb-label">Info</div>
-          <div class="sb-item on" data-tab="general">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-            General
-          </div>
-          <div class="sb-label">Homepage</div>
-          <div class="sb-item" data-tab="hero">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
-            Hero
-          </div>
-          <div class="sb-item" data-tab="story">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
-            Story
-          </div>
-          <div class="sb-item" data-tab="founder">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            Founder
-          </div>
-          <div class="sb-item" data-tab="gallery">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-            Gallery
-          </div>
-          <div class="sb-item" data-tab="impact">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            Impact
-          </div>
-          <div class="sb-item" data-tab="projects">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-            Projects
-          </div>
-          <div class="sb-item" data-tab="watch">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
-            Watch
+      <!-- Sections -->
+      <div class="sb-pane on" id="sp-sections">
+        <div class="sb-scroll">
+          <div class="sb-head">Jump to section</div>
+          <div class="sb-item" data-scroll="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Hero Banner</div>
+          <div class="sb-item" data-scroll="story"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Story & Founder</div>
+          <div class="sb-item" data-scroll="gallery"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Gallery</div>
+          <div class="sb-item" data-scroll="watch"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Watch Video</div>
+          <div class="sb-item" data-scroll="impact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Impact</div>
+          <div class="sb-item" data-scroll="projects"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Projects</div>
+          <div class="sb-item" data-scroll="contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact</div>
+          <div class="sb-div"></div>
+          <div class="sb-head">Edit links & info</div>
+          <div class="sb-item" id="btn-open-contact">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+            Edit URLs &amp; Email
           </div>
         </div>
       </div>
 
       <!-- Media -->
-      <div class="sidebar-pane" id="sp-media">
-        <div class="ph"><h3>Media</h3></div>
-        <div class="pscroll">
-          <label class="upload-zone" id="upload-zone">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
-            <div style="font-size:.8rem;margin-top:.25rem">Click or drag to upload</div>
-            <div style="font-size:.7rem;color:#4b5563;margin-top:.15rem">JPG · PNG · WEBP · SVG</div>
+      <div class="sb-pane" id="sp-media">
+        <div class="sb-scroll">
+          <label class="upload-drop" id="upload-zone">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><polyline points="16 16 12 12 8 16"/><line x1="12" y1="12" x2="12" y2="21"/><path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/></svg>
+            <div style="font-size:.77rem;font-weight:600;color:#6b7280;margin-top:.2rem">Upload photos</div>
+            <div style="font-size:.68rem;color:#4b5563;margin-top:.1rem">JPG · PNG · WEBP</div>
             <input type="file" id="upload-input" accept="image/*" multiple/>
           </label>
-          <div class="img-grid-sb" id="img-grid"></div>
-        </div>
-      </div>
-
-      <!-- Deploy -->
-      <div class="sidebar-pane" id="sp-deploy">
-        <div class="ph"><h3>Deploy</h3></div>
-        <div class="pscroll">
-          <p class="hint">Save your changes first, then click Deploy to push to the live website.</p>
-          <button class="btn btn-success btn-full" id="btn-deploy-side" style="margin-bottom:.65rem">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
-            Deploy Now
-          </button>
-          <div id="deploy-status" style="font-size:.8rem;padding:.5rem .65rem;border-radius:6px;display:none;line-height:1.5"></div>
+          <div class="media-grid" id="media-grid"></div>
         </div>
       </div>
 
       <!-- Settings -->
-      <div class="sidebar-pane" id="sp-settings">
-        <div class="ph"><h3>Settings</h3></div>
-        <div class="pscroll">
-          <p class="hint" style="margin-bottom:.75rem">Change the admin password below.</p>
-          <div style="display:flex;flex-direction:column;gap:.5rem">
-            <div>
-              <label style="display:block;color:#6b7280;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.28rem">New Password</label>
-              <input id="new-pw" type="password" placeholder="New password" style="width:100%;background:#1c1f26;border:1px solid #2e323b;border-radius:6px;color:#f3f4f6;padding:.48rem .65rem;font-size:.81rem;outline:none"/>
-            </div>
-            <div>
-              <label style="display:block;color:#6b7280;font-size:.72rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.28rem">Confirm</label>
-              <input id="confirm-pw" type="password" placeholder="Repeat password" style="width:100%;background:#1c1f26;border:1px solid #2e323b;border-radius:6px;color:#f3f4f6;padding:.48rem .65rem;font-size:.81rem;outline:none"/>
-            </div>
-            <button class="btn btn-primary btn-full" id="btn-save-pw" style="margin-top:.15rem">Save Password</button>
+      <div class="sb-pane" id="sp-settings">
+        <div class="sb-scroll">
+          <div class="sb-head">Deploy</div>
+          <div class="sf">
+            <button class="btn btn-success" style="width:100%;justify-content:center;margin-bottom:.45rem" id="btn-deploy-side">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
+              Deploy Now
+            </button>
+            <div class="deploy-status" id="deploy-status"></div>
           </div>
-        </div>
-      </div>
-
-      <!-- Help / Manual -->
-      <div class="sidebar-pane" id="sp-help">
-        <div class="ph"><h3>Manual</h3></div>
-        <div class="pscroll">
-          <div style="display:flex;flex-direction:column;gap:.5rem">
-
-            <!-- Step 1 -->
-            <div style="background:#1c1f26;border-radius:8px;padding:.8rem">
-              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
-                <div style="width:20px;height:20px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.65rem;font-weight:800;color:#fff">1</div>
-                <span style="color:#e5e7eb;font-size:.78rem;font-weight:700">Edit content</span>
-              </div>
-              <div style="color:#9ca3af;font-size:.75rem;line-height:1.7">Click any section in the sidebar — <strong style="color:#e5e7eb">Hero, Story, Founder</strong>, etc. — and edit the text fields on the right. Changes are tracked automatically.</div>
-            </div>
-
-            <!-- Step 2 -->
-            <div style="background:#1c1f26;border-radius:8px;padding:.8rem">
-              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
-                <div style="width:20px;height:20px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.65rem;font-weight:800;color:#fff">2</div>
-                <span style="color:#e5e7eb;font-size:.78rem;font-weight:700">Save your work</span>
-              </div>
-              <div style="color:#9ca3af;font-size:.75rem;line-height:1.7">When you are done editing, click <strong style="color:#e5e7eb">Save</strong> in the top bar. You will see a yellow dot while there are unsaved changes — it disappears after saving.</div>
-            </div>
-
-            <!-- Step 3 -->
-            <div style="background:#1c1f26;border-radius:8px;padding:.8rem">
-              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
-                <div style="width:20px;height:20px;border-radius:50%;background:var(--accent);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.65rem;font-weight:800;color:#fff">3</div>
-                <span style="color:#e5e7eb;font-size:.78rem;font-weight:700">Publish to the website</span>
-              </div>
-              <div style="color:#9ca3af;font-size:.75rem;line-height:1.7">Click <strong style="color:#e5e7eb">Go Live</strong> to push your saved changes to the public website. This takes about 30–60 seconds to go live.</div>
-            </div>
-
-            <div style="height:1px;background:#22252d;margin:.1rem 0"></div>
-
-            <!-- Preview -->
-            <div style="background:#1c1f26;border-radius:8px;padding:.8rem">
-              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
-                <span style="color:#a5b4fc;font-size:.78rem;font-weight:700">Live Preview</span>
-              </div>
-              <div style="color:#9ca3af;font-size:.75rem;line-height:1.7">Click <strong style="color:#e5e7eb">Preview</strong> in the top bar to open a side-by-side view of the site. It auto-refreshes as you type so you can see changes in real time.</div>
-            </div>
-
-            <!-- Undo -->
-            <div style="background:#1c1f26;border-radius:8px;padding:.8rem">
-              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.8"/></svg>
-                <span style="color:#a5b4fc;font-size:.78rem;font-weight:700">Undo &amp; Redo</span>
-              </div>
-              <div style="color:#9ca3af;font-size:.75rem;line-height:1.7">Click the undo and redo arrows in the top bar to step backwards or forwards through your edits. You can also press <strong style="color:#e5e7eb">Ctrl + Z</strong> to undo and <strong style="color:#e5e7eb">Ctrl + Y</strong> to redo.</div>
-            </div>
-
-            <!-- Images -->
-            <div style="background:#1c1f26;border-radius:8px;padding:.8rem">
-              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-                <span style="color:#a5b4fc;font-size:.78rem;font-weight:700">Adding images</span>
-              </div>
-              <div style="color:#9ca3af;font-size:.75rem;line-height:1.7">Go to the <strong style="color:#e5e7eb">Media</strong> tab on the left and drag &amp; drop photos or click to upload. Then on any section, click <strong style="color:#e5e7eb">Choose image</strong> to pick from your uploaded photos.</div>
-            </div>
-
-            <!-- Add / Remove -->
-            <div style="background:#1c1f26;border-radius:8px;padding:.8rem">
-              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span style="color:#a5b4fc;font-size:.78rem;font-weight:700">Adding &amp; removing items</span>
-              </div>
-              <div style="color:#9ca3af;font-size:.75rem;line-height:1.7">In <strong style="color:#e5e7eb">Gallery, Impact</strong>, and <strong style="color:#e5e7eb">Projects</strong> you can add new items with the <strong style="color:#e5e7eb">Add</strong> button at the bottom, or remove any item with its <strong style="color:#e5e7eb">Remove</strong> button.</div>
-            </div>
-
-            <!-- Restore -->
-            <div style="background:#1c1f26;border-radius:8px;padding:.8rem">
-              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#d97706" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.8"/></svg>
-                <span style="color:#d97706;font-size:.78rem;font-weight:700">Restore last save</span>
-              </div>
-              <div style="color:#9ca3af;font-size:.75rem;line-height:1.7">After saving, a <strong style="color:#e5e7eb">Restore</strong> button appears in the top bar. Click it to undo your last save and go back to the version before it.</div>
-            </div>
-
-            <!-- Password -->
-            <div style="background:#1c1f26;border-radius:8px;padding:.8rem">
-              <div style="display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a5b4fc" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                <span style="color:#a5b4fc;font-size:.78rem;font-weight:700">Changing your password</span>
-              </div>
-              <div style="color:#9ca3af;font-size:.75rem;line-height:1.7">Click the <strong style="color:#e5e7eb">Settings</strong> tab on the left and enter a new password. Make sure to write it down somewhere safe.</div>
-            </div>
-
+          <div class="sb-div"></div>
+          <div class="sb-head">Change Password</div>
+          <div class="sf">
+            <label class="sf-label">New password</label>
+            <input class="sf-input" id="new-pw" type="password" placeholder="New password"/>
+            <label class="sf-label">Confirm</label>
+            <input class="sf-input" id="confirm-pw" type="password" placeholder="Repeat password"/>
+            <button class="btn btn-primary" style="width:100%;justify-content:center" id="btn-save-pw">Save Password</button>
           </div>
         </div>
       </div>
     </aside>
 
-    <!-- ── FORMS PANEL ── -->
-    <div class="forms-panel" id="forms-panel">
-      <div class="forms-inner">
-
-        <!-- GENERAL -->
-        <div class="mpane on" id="pane-general">
-          <div class="page-header"><h2>General</h2><p>Contact info & links shown across the site</p></div>
-          <div class="card">
-            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.77 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>Contact</h3></div>
-            <div class="card-body">
-              <div class="g2">
-                <div class="field"><label>Email</label><input type="email" id="g-email"/></div>
-                <div class="field"><label>Phone</label><input type="tel" id="g-phone"/></div>
-              </div>
-              <div class="g2">
-                <div class="field"><label>School Facebook</label><input type="url" id="g-fbSchool"/></div>
-                <div class="field"><label>Simon's Facebook</label><input type="url" id="g-fbSimon"/></div>
-              </div>
-              <div class="field"><label>GoFundMe URL</label><input type="url" id="g-gofundme"/></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- HERO -->
-        <div class="mpane" id="pane-hero">
-          <div class="page-header"><h2>Hero</h2><p>The banner at the top of the homepage</p></div>
-          <div class="card">
-            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>Hero Text</h3></div>
-            <div class="card-body">
-              <div class="field"><label>Eyebrow</label><input type="text" id="h-eyebrow"/><p class="field-hint">e.g. "Louisville, Kentucky · South Sudan"</p></div>
-              <div class="field"><label>Headline</label><input type="text" id="h-headline"/></div>
-              <div class="field"><label>Description</label><textarea id="h-description"></textarea></div>
-              <div class="g2">
-                <div class="field"><label>Card Tag</label><input type="text" id="h-cardSpan"/><p class="field-hint">e.g. "Established 2022 · 200+ Students"</p></div>
-                <div class="field"><label>Card Heading</label><input type="text" id="h-cardHeading"/></div>
-              </div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Hero Image</h3></div>
-            <div class="card-body">
-              <div class="img-pick-row">
-                <img id="h-heroImage-thumb" class="img-pick-thumb" src="" alt=""/>
-                <div id="h-heroImage-empty" class="img-pick-empty"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-                <div>
-                  <input type="hidden" id="h-heroImage"/>
-                  <button class="btn btn-ghost" onclick="openPicker('h-heroImage','h-heroImage-thumb','h-heroImage-empty')">Choose image</button>
-                  <p class="img-pick-info" id="h-heroImage-name"></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- STORY -->
-        <div class="mpane" id="pane-story">
-          <div class="page-header"><h2>Story</h2><p>Simon's story section</p></div>
-          <div class="card">
-            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Story Content</h3></div>
-            <div class="card-body">
-              <div class="field"><label>Pull Quote</label><textarea id="s-quote" style="min-height:60px"></textarea><p class="field-hint">The large quote shown in the story section</p></div>
-              <div class="field"><label>Paragraph 1</label><textarea id="s-p1"></textarea></div>
-              <div class="field"><label>Paragraph 2</label><textarea id="s-p2"></textarea></div>
-              <div class="field"><label>Paragraph 3</label><textarea id="s-p3"></textarea></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- FOUNDER -->
-        <div class="mpane" id="pane-founder">
-          <div class="page-header"><h2>Founder</h2><p>Simon's profile card</p></div>
-          <div class="card">
-            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Details</h3></div>
-            <div class="card-body">
-              <div class="g2">
-                <div class="field"><label>Full Name</label><input type="text" id="f-name"/></div>
-                <div class="field"><label>Title / Role</label><input type="text" id="f-role"/></div>
-              </div>
-              <div class="field"><label>Bio</label><textarea id="f-bio" style="min-height:95px"></textarea></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</h3></div>
-            <div class="card-body">
-              <div class="g2">
-                <div class="field">
-                  <label>Profile Photo</label>
-                  <div class="img-pick-row">
-                    <img id="f-photo-thumb" class="img-pick-thumb" src="" alt=""/>
-                    <div id="f-photo-empty" class="img-pick-empty"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
-                    <div>
-                      <input type="hidden" id="f-photo"/>
-                      <button class="btn btn-ghost" onclick="openPicker('f-photo','f-photo-thumb','f-photo-empty')">Choose</button>
-                      <p class="img-pick-info" id="f-photo-name"></p>
-                    </div>
-                  </div>
-                </div>
-                <div class="field">
-                  <label>Army Photo</label>
-                  <div class="img-pick-row">
-                    <img id="f-armyPhoto-thumb" class="img-pick-thumb" src="" alt=""/>
-                    <div id="f-armyPhoto-empty" class="img-pick-empty"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-                    <div>
-                      <input type="hidden" id="f-armyPhoto"/>
-                      <button class="btn btn-ghost" onclick="openPicker('f-armyPhoto','f-armyPhoto-thumb','f-armyPhoto-empty')">Choose</button>
-                      <p class="img-pick-info" id="f-armyPhoto-name"></p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- GALLERY -->
-        <div class="mpane" id="pane-gallery">
-          <div class="page-header"><h2>Gallery</h2><p>School photo gallery on the homepage</p></div>
-          <div class="card">
-            <div class="card-head">
-              <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>Photos</h3>
-            </div>
-            <div class="card-body" style="padding-bottom:.5rem">
-              <div id="gallery-admin"></div>
-              <button class="btn-add" onclick="addGalleryItem()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Add Photo
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- IMPACT -->
-        <div class="mpane" id="pane-impact">
-          <div class="page-header"><h2>Impact</h2><p>Timeline milestone cards</p></div>
-          <div class="card">
-            <div class="card-head">
-              <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>Milestones</h3>
-            </div>
-            <div class="card-body" style="padding-bottom:.5rem">
-              <div id="impact-admin"></div>
-              <button class="btn-add" onclick="addImpactItem()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Add Milestone
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- PROJECTS -->
-        <div class="mpane" id="pane-projects">
-          <div class="page-header"><h2>Projects</h2><p>Fundraising goals and future projects</p></div>
-          <div class="card">
-            <div class="card-head">
-              <h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Projects</h3>
-            </div>
-            <div class="card-body" style="padding-bottom:.5rem">
-              <div id="projects-admin"></div>
-              <button class="btn-add" onclick="addProjectItem()">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                Add Project
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- WATCH -->
-        <div class="mpane" id="pane-watch">
-          <div class="page-header"><h2>Watch</h2><p>Featured video section — Simon's story</p></div>
-          <div class="card">
-            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Video</h3></div>
-            <div class="card-body">
-              <div class="field"><label>Facebook Video Embed URL</label><input type="url" id="w-videoUrl" placeholder="https://www.facebook.com/plugins/video.php?href=..."/><p class="field-hint">The full Facebook video embed URL (from the "Embed" option on the video)</p></div>
-              <div class="field"><label>Tag / Byline</label><input type="text" id="w-tag" placeholder="e.g. WaterStep · 2023"/></div>
-              <div class="field"><label>Title</label><input type="text" id="w-title"/></div>
-              <div class="field"><label>Description</label><textarea id="w-description"></textarea></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Article Link</h3></div>
-            <div class="card-body">
-              <div class="g2">
-                <div class="field"><label>Article URL</label><input type="url" id="w-articleUrl" placeholder="https://..."/></div>
-                <div class="field"><label>Button Text</label><input type="text" id="w-articleText" placeholder="e.g. Read the full story"/></div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /forms-inner -->
-    </div><!-- /forms-panel -->
-
-    <!-- ── PREVIEW PANEL ── -->
-    <div class="preview-panel" id="preview-panel">
-      <div class="preview-toolbar">
-        <span>Preview</span>
-        <button class="dev-btn on" id="dev-desktop" onclick="setDevice('desktop')">Desktop</button>
-        <button class="dev-btn" id="dev-tablet" onclick="setDevice('tablet')">Tablet</button>
-        <button class="dev-btn" id="dev-mobile" onclick="setDevice('mobile')">Mobile</button>
-        <div class="ml" style="display:flex;align-items:center;gap:.4rem">
-          <button class="dev-btn" onclick="refreshPreview()" style="display:inline-flex;align-items:center;gap:.3rem">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-            Refresh
+    <!-- MAIN -->
+    <div class="main">
+      <div class="hint-bar">
+        <span class="hint-pulse"></span>
+        <span>Click any <strong style="color:#e0e7ff">text</strong> to edit it directly · Click any <strong style="color:#e0e7ff">photo</strong> to swap it · Press <strong style="color:#e0e7ff">Save</strong> when done</span>
+      </div>
+      <div class="dev-bar">
+        <span style="color:#374151;font-size:.72rem;font-weight:600;margin-right:.2rem">View:</span>
+        <button class="dev-btn on" onclick="setDevice('desktop')">Desktop</button>
+        <button class="dev-btn" onclick="setDevice('tablet')">Tablet</button>
+        <button class="dev-btn" onclick="setDevice('mobile')">Mobile</button>
+        <div class="dev-bar-right">
+          <button class="dev-btn" id="btn-reload" style="display:inline-flex;align-items:center;gap:.28rem">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+            Reload
           </button>
-          <a href="/?preview" target="_blank" class="dev-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:.3rem">
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Open
+          <a href="/?preview" target="_blank" class="dev-btn" style="text-decoration:none;display:inline-flex;align-items:center;gap:.28rem">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Open site
           </a>
         </div>
       </div>
-      <div class="frame-wrap" id="frame-wrap">
-        <iframe id="pframe" src="/?preview" title="Site preview"></iframe>
+      <div class="frame-area">
+        <div class="frame-wrap" id="frame-wrap">
+          <iframe id="site-frame" src="/?preview" title="Live site"></iframe>
+        </div>
       </div>
     </div>
-
-  </div><!-- /layout -->
-</div><!-- /app -->
+  </div>
+</div>
 
 <!-- Image picker modal -->
 <div class="overlay" id="picker-overlay" onclick="closePicker()"></div>
 <div class="modal" id="picker-modal">
   <div class="mhead">
-    <h3>Choose an Image</h3>
-    <button class="btn btn-ghost" style="padding:.28rem .6rem;font-size:.78rem;display:inline-flex;align-items:center;gap:.3rem" onclick="closePicker()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-      Close
-    </button>
+    <h3>Choose a Photo</h3>
+    <button class="btn btn-ghost" style="padding:.25rem .6rem;font-size:.78rem" onclick="closePicker()">✕ Close</button>
   </div>
-  <div class="mbody">
-    <div class="picker-grid" id="picker-grid"></div>
+  <div class="mbody"><div class="picker-grid" id="picker-grid"></div></div>
+</div>
+
+<!-- Contact / URL modal -->
+<div class="overlay" id="contact-overlay" onclick="closeContact()"></div>
+<div class="modal" id="contact-modal">
+  <div class="mhead">
+    <h3>Edit Links &amp; Contact Info</h3>
+    <button class="btn btn-ghost" style="padding:.25rem .6rem;font-size:.78rem" onclick="closeContact()">✕ Close</button>
+  </div>
+  <div class="mbody" style="display:flex;flex-direction:column;gap:.6rem">
+    <div class="cf-row"><label class="cf-label">Email</label><input class="cf-input" id="c-email" type="email" placeholder="email@example.com"/></div>
+    <div class="cf-row"><label class="cf-label">Phone</label><input class="cf-input" id="c-phone" type="tel" placeholder="502-000-0000"/></div>
+    <div class="cf-row"><label class="cf-label">GoFundMe URL</label><input class="cf-input" id="c-gofundme" type="url" placeholder="https://gofundme.com/..."/></div>
+    <div class="cf-row"><label class="cf-label">School Facebook URL</label><input class="cf-input" id="c-fbSchool" type="url" placeholder="https://facebook.com/..."/></div>
+    <div class="cf-row"><label class="cf-label">Simon's Facebook URL</label><input class="cf-input" id="c-fbSimon" type="url" placeholder="https://facebook.com/..."/></div>
+    <div class="cf-row"><label class="cf-label">Watch Video — Facebook Embed URL</label><input class="cf-input" id="c-videoUrl" type="url" placeholder="https://www.facebook.com/plugins/video.php?..."/></div>
+    <div class="cf-row"><label class="cf-label">Watch Article URL</label><input class="cf-input" id="c-articleUrl" type="url" placeholder="https://..."/></div>
+    <button class="btn btn-primary" style="width:100%;justify-content:center" id="btn-save-contact">Save Changes</button>
   </div>
 </div>
 
@@ -664,627 +320,453 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 'use strict';
 
 let content = null;
-let pickerTarget = null, pickerThumb = null, pickerEmpty = null;
-let toastTimer, previewTimer;
-let previewVisible = false;
-
-// ── Undo / Redo ──────────────────────────────────────────────
+let pickerPath = null;
+let toastTimer;
 const undoStack = [];
 let undoIndex = -1;
 
-function pushUndo(){
-  if(!content) return;
-  const snap = JSON.stringify(collectContent());
-  // Don't push if same as current
-  if(undoIndex >= 0 && undoStack[undoIndex] === snap) return;
-  undoStack.splice(undoIndex + 1);
-  undoStack.push(snap);
-  if(undoStack.length > 25){ undoStack.shift(); } else { undoIndex++; }
-  updateUndoBtns();
-}
-
-function updateUndoBtns(){
-  document.getElementById('btn-undo').disabled = undoIndex <= 0;
-  document.getElementById('btn-redo').disabled = undoIndex >= undoStack.length - 1;
-}
-
-function applyUndo(idx){
-  const snap = undoStack[idx];
-  if(!snap) return;
-  content = JSON.parse(snap);
-  populateForms();
-  markUnsaved();
-  schedulPreview();
-  updateUndoBtns();
-}
-
-document.getElementById('btn-undo').onclick = () => {
-  if(undoIndex <= 0) return;
-  undoIndex--;
-  applyUndo(undoIndex);
-};
-document.getElementById('btn-redo').onclick = () => {
-  if(undoIndex >= undoStack.length - 1) return;
-  undoIndex++;
-  applyUndo(undoIndex);
-};
-document.addEventListener('keydown', e => {
-  if((e.ctrlKey || e.metaKey) && e.key === 'z' && !e.shiftKey){
-    e.preventDefault();
-    document.getElementById('btn-undo').click();
-  }
-  if((e.ctrlKey || e.metaKey) && (e.key === 'y' || (e.key === 'z' && e.shiftKey))){
-    e.preventDefault();
-    document.getElementById('btn-redo').click();
-  }
-  if((e.ctrlKey || e.metaKey) && e.key === 's'){
-    e.preventDefault();
-    document.getElementById('btn-save').click();
-  }
-});
-
-// ── Toast ────────────────────────────────────────────────────
-function toast(msg, type=''){
+// ── Helpers ───────────────────────────────────────────────────────
+function toast(msg, type) {
   const el = document.getElementById('toast');
-  el.textContent = msg; el.className = 'on ' + type;
-  clearTimeout(toastTimer); toastTimer = setTimeout(()=>el.className='', 3200);
+  el.textContent = msg;
+  el.className = 'on' + (type ? ' ' + type : '');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => (el.className = ''), 3400);
 }
-function markUnsaved(){ document.getElementById('unsaved-dot').classList.add('on'); }
-function markSaved(){ document.getElementById('unsaved-dot').classList.remove('on'); }
+function setStatus(msg) { document.getElementById('tb-status').textContent = msg; }
+function markUnsaved() { document.getElementById('dot').classList.add('on'); setStatus('Unsaved changes'); }
+function markSaved()   { document.getElementById('dot').classList.remove('on'); setStatus('All saved'); }
 
-// ── Login ────────────────────────────────────────────────────
-document.getElementById('login-form').onsubmit = async e => {
-  e.preventDefault();
-  const r = await fetch('/api/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({password:document.getElementById('pw').value})});
-  if(r.ok){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('app').classList.add('on');
-    initAdmin();
-  } else {
-    document.getElementById('lc-err').textContent='Wrong password. Try again.';
-  }
-};
-document.getElementById('btn-logout').onclick = async () => {
-  await fetch('/api/logout',{method:'POST'});
-  location.reload();
-};
-
-// ── Sidebar tabs ─────────────────────────────────────────────
-document.querySelectorAll('.stab').forEach(tab => {
-  tab.onclick = () => {
-    document.querySelectorAll('.stab').forEach(t=>t.classList.remove('on'));
-    document.querySelectorAll('.sidebar-pane').forEach(p=>p.classList.remove('on'));
-    tab.classList.add('on');
-    document.getElementById('sp-'+tab.dataset.stab).classList.add('on');
-    if(tab.dataset.stab === 'media') loadImages();
-  };
-});
-
-// ── Content section nav ──────────────────────────────────────
-document.querySelectorAll('.sb-item').forEach(item => {
-  item.onclick = () => {
-    document.querySelectorAll('.sb-item').forEach(i=>i.classList.remove('on'));
-    document.querySelectorAll('.mpane').forEach(p=>p.classList.remove('on'));
-    item.classList.add('on');
-    document.getElementById('pane-'+item.dataset.tab).classList.add('on');
-    document.getElementById('tb-section').textContent = item.textContent.trim();
-  };
-});
-
-// ── Preview ──────────────────────────────────────────────────
-const previewBtn = document.getElementById('btn-preview');
-previewBtn.onclick = () => {
-  previewVisible = !previewVisible;
-  document.getElementById('preview-panel').classList.toggle('on', previewVisible);
-  document.getElementById('forms-panel').classList.toggle('with-preview', previewVisible);
-  previewBtn.classList.toggle('active', previewVisible);
-  if(previewVisible) schedulPreview();
-};
-
-function schedulPreview(){
-  if(!previewVisible) return;
-  clearTimeout(previewTimer);
-  previewTimer = setTimeout(doPreview, 700);
+function getPath(obj, path) { return path.reduce((o, k) => (o != null ? o[k] : undefined), obj); }
+function setPath(obj, path, val) {
+  const keys = [...path]; const last = keys.pop();
+  let cur = obj; for (const k of keys) cur = cur[k];
+  cur[last] = val;
 }
-
-async function doPreview(){
-  if(!previewVisible || !content) return;
-  const data = collectContent();
-  await fetch('/api/content/preview',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).catch(()=>{});
-  refreshPreview();
-}
-
-function refreshPreview(){
-  const frame = document.getElementById('pframe');
-  frame.src = '/?preview&t=' + Date.now();
-}
-
-function setDevice(d){
-  document.getElementById('frame-wrap').className = 'frame-wrap' + (d==='tablet'?' tablet':d==='mobile'?' mobile':'');
-  ['desktop','tablet','mobile'].forEach(id => document.getElementById('dev-'+id).classList.toggle('on', id===d));
-}
-
-// ── Init ─────────────────────────────────────────────────────
-async function initAdmin(){
-  let r;
-  try { r = await fetch('/api/content'); } catch(e){ toast('Network error loading content','err'); return; }
-  if(r.status === 401){
-    document.getElementById('login-screen').style.display='flex';
-    document.getElementById('app').classList.remove('on');
-    return;
-  }
-  if(!r.ok){ toast('Failed to load content','err'); return; }
-  content = await r.json();
-  populateForms();
-  loadImages();
-  // Push initial state
-  undoStack.push(JSON.stringify(content));
-  undoIndex = 0;
-  updateUndoBtns();
-  // Check backup
-  fetch('/api/content/has-backup').then(r=>r.json()).then(d=>{
-    document.getElementById('btn-restore').style.display = d.hasBak ? 'inline-flex' : 'none';
-  }).catch(()=>{});
-}
-
-// ── Populate ─────────────────────────────────────────────────
-function populateForms(){
-  const c = content;
-  document.getElementById('g-email').value    = c.contact.email||'';
-  document.getElementById('g-phone').value    = c.contact.phone||'';
-  document.getElementById('g-fbSchool').value = c.contact.facebookSchool||'';
-  document.getElementById('g-fbSimon').value  = c.contact.facebookSimon||'';
-  document.getElementById('g-gofundme').value = c.gofundmeUrl||'';
-
-  document.getElementById('h-eyebrow').value     = c.hero.eyebrow||'';
-  document.getElementById('h-headline').value    = c.hero.headline||'';
-  document.getElementById('h-description').value = c.hero.description||'';
-  document.getElementById('h-cardSpan').value    = c.hero.cardSpan||'';
-  document.getElementById('h-cardHeading').value = c.hero.cardHeading||'';
-  setImg('h-heroImage','h-heroImage-thumb','h-heroImage-empty','h-heroImage-name', c.hero.heroImage);
-
-  document.getElementById('s-quote').value = c.story.quote||'';
-  document.getElementById('s-p1').value    = c.story.paragraph1||'';
-  document.getElementById('s-p2').value    = c.story.paragraph2||'';
-  document.getElementById('s-p3').value    = c.story.paragraph3||'';
-
-  document.getElementById('f-name').value = c.founder.name||'';
-  document.getElementById('f-role').value = c.founder.role||'';
-  document.getElementById('f-bio').value  = c.founder.bio||'';
-  setImg('f-photo','f-photo-thumb','f-photo-empty','f-photo-name', c.founder.photo);
-  setImg('f-armyPhoto','f-armyPhoto-thumb','f-armyPhoto-empty','f-armyPhoto-name', c.founder.armyPhoto);
-
-  const w = c.watch || {};
-  document.getElementById('w-videoUrl').value    = w.videoUrl||'';
-  document.getElementById('w-tag').value         = w.tag||'';
-  document.getElementById('w-title').value       = w.title||'';
-  document.getElementById('w-description').value = w.description||'';
-  document.getElementById('w-articleUrl').value  = w.articleUrl||'';
-  document.getElementById('w-articleText').value = w.articleText||'';
-
-  buildGallery(c.gallery);
-  buildImpact(c.impact);
-  buildProjects(c.projects);
-
-  bindInputs();
-  bindUrlNormalize();
-}
-
-function setImg(inputId, thumbId, emptyId, nameId, filename){
-  const el = document.getElementById(inputId);
-  if(el) el.value = filename||'';
-  const thumb = document.getElementById(thumbId);
-  const empty = document.getElementById(emptyId);
-  if(thumb){
-    if(filename){ thumb.src='/'+filename; thumb.classList.add('has'); }
-    else{ thumb.src=''; thumb.classList.remove('has'); }
-  }
-  if(empty) empty.style.display = filename ? 'none' : 'flex';
-  if(nameId){ const n=document.getElementById(nameId); if(n) n.textContent=filename||''; }
-}
-
-function bindInputs(){
-  document.querySelectorAll('input,textarea,select').forEach(el => {
-    el.removeEventListener('input', onInput);
-    el.addEventListener('input', onInput);
-  });
-}
-let inputDebounce;
-function onInput(){
-  markUnsaved();
-  clearTimeout(inputDebounce);
-  inputDebounce = setTimeout(()=>{ pushUndo(); schedulPreview(); }, 800);
-}
-
-// ── Gallery ──────────────────────────────────────────────────
-function collectGallery(){
-  return (content.gallery||[]).map((_,i)=>({
-    src:     val(`gal-src-${i}`),
-    caption: val(`gal-cap-${i}`),
-    alt:     val(`gal-alt-${i}`),
-    tall:    content.gallery[i]?.tall||false,
-    wide:    content.gallery[i]?.wide||false
-  }));
-}
-function buildGallery(gallery){
-  const c = document.getElementById('gallery-admin');
-  c.innerHTML='';
-  gallery.forEach((img,i)=>{
-    const d=document.createElement('div');
-    d.className='card-item';
-    d.innerHTML=`
-      <div class="card-item-head">
-        <span>Photo ${i+1}</span>
-        <button class="btn btn-ghost" style="padding:.2rem .5rem;font-size:.76rem;color:var(--red);border-color:var(--red)" onclick="removeGalleryItem(${i})">Remove</button>
-      </div>
-      <div class="card-item-body">
-        <div class="field" style="margin-bottom:.65rem">
-          <label>Image</label>
-          <div class="img-pick-row">
-            <img id="gal-thumb-${i}" class="img-pick-thumb${img.src?' has':''}" src="${img.src?'/'+img.src:''}" alt=""/>
-            <div id="gal-empty-${i}" class="img-pick-empty" style="${img.src?'display:none':''}"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg></div>
-            <div>
-              <input type="hidden" id="gal-src-${i}" value="${e(img.src)}"/>
-              <button class="btn btn-ghost" onclick="openPicker('gal-src-${i}','gal-thumb-${i}','gal-empty-${i}')">Choose image</button>
-              <p class="img-pick-info" id="gal-name-${i}">${e(img.src)}</p>
-            </div>
-          </div>
-        </div>
-        <div class="g2">
-          <div class="field"><label>Caption</label><input type="text" id="gal-cap-${i}" value="${e(img.caption)}"/></div>
-          <div class="field"><label>Alt Text</label><input type="text" id="gal-alt-${i}" value="${e(img.alt)}"/></div>
-        </div>
-      </div>`;
-    c.appendChild(d);
-  });
-  bindInputs();
-}
-window.addGalleryItem = ()=>{
-  content.gallery = collectGallery();
-  content.gallery.push({src:'',alt:'',caption:'',tall:false,wide:false});
-  buildGallery(content.gallery);
-  markUnsaved(); pushUndo();
-};
-window.removeGalleryItem = i=>{
-  content.gallery = collectGallery();
-  content.gallery.splice(i,1);
-  buildGallery(content.gallery);
-  markUnsaved(); pushUndo(); schedulPreview();
-};
-
-// ── Impact ───────────────────────────────────────────────────
-function collectImpact(){
-  return (content.impact||[]).map((_,i)=>({
-    number: val(`imp-num-${i}`),
-    format: val(`imp-fmt-${i}`),
-    title:  val(`imp-title-${i}`),
-    desc:   val(`imp-desc-${i}`)
-  }));
-}
-function buildImpact(impact){
-  const c=document.getElementById('impact-admin');
-  c.innerHTML='';
-  impact.forEach((item,i)=>{
-    const d=document.createElement('div');
-    d.className='card-item';
-    d.innerHTML=`
-      <div class="card-item-head">
-        <span>Milestone ${i+1}</span>
-        <button class="btn btn-ghost" style="padding:.2rem .5rem;font-size:.76rem;color:var(--red);border-color:var(--red)" onclick="removeImpactItem(${i})">Remove</button>
-      </div>
-      <div class="card-item-body">
-        <div class="g3">
-          <div class="field"><label>Number</label><input type="text" id="imp-num-${i}" value="${e(item.number)}"/></div>
-          <div class="field"><label>Format</label>
-            <select id="imp-fmt-${i}">
-              <option value="year" ${item.format==='year'?'selected':''}>Year (2022)</option>
-              <option value="plus" ${item.format==='plus'?'selected':''}>Number+ (200+)</option>
-              <option value="plain" ${item.format==='plain'?'selected':''}>Plain</option>
-            </select>
-          </div>
-          <div class="field"><label>Title</label><input type="text" id="imp-title-${i}" value="${e(item.title)}"/></div>
-        </div>
-        <div class="field"><label>Description</label><textarea id="imp-desc-${i}">${e(item.desc)}</textarea></div>
-      </div>`;
-    c.appendChild(d);
-  });
-  bindInputs();
-}
-window.addImpactItem = ()=>{
-  content.impact = collectImpact();
-  content.impact.push({number:'',format:'plain',title:'',desc:''});
-  buildImpact(content.impact);
-  markUnsaved(); pushUndo();
-};
-window.removeImpactItem = i=>{
-  content.impact = collectImpact();
-  content.impact.splice(i,1);
-  buildImpact(content.impact);
-  markUnsaved(); pushUndo(); schedulPreview();
-};
-
-// ── Projects ─────────────────────────────────────────────────
-function collectProjects(){
-  return (content.projects||[]).map((proj,i)=>({
-    title:    val(`proj-title-${i}`),
-    desc:     val(`proj-desc-${i}`),
-    link:     val(`proj-link-${i}`),
-    linkText: val(`proj-linktext-${i}`),
-    highlight: proj.highlight||false
-  }));
-}
-function buildProjects(projects){
-  const c=document.getElementById('projects-admin');
-  c.innerHTML='';
-  projects.forEach((proj,i)=>{
-    const d=document.createElement('div');
-    d.className='card-item';
-    d.innerHTML=`
-      <div class="card-item-head">
-        <span style="display:inline-flex;align-items:center;gap:.4rem">Project ${i+1}${proj.highlight?'<span style="color:#d97706;display:inline-flex;align-items:center;gap:.2rem"><svg width="11" height="11" viewBox="0 0 24 24" fill="#d97706" stroke="#d97706" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Active</span>':''}</span>
-        <button class="btn btn-ghost" style="padding:.2rem .5rem;font-size:.76rem;color:var(--red);border-color:var(--red)" onclick="removeProjectItem(${i})">Remove</button>
-      </div>
-      <div class="card-item-body">
-        <div class="field"><label>Title</label><input type="text" id="proj-title-${i}" value="${e(proj.title)}"/></div>
-        <div class="field"><label>Description</label><textarea id="proj-desc-${i}">${e(proj.desc)}</textarea></div>
-        <div class="g2">
-          <div class="field"><label>Donate Link</label><input type="url" id="proj-link-${i}" value="${e(proj.link)}" placeholder="https://..."/></div>
-          <div class="field"><label>Button Text</label><input type="text" id="proj-linktext-${i}" value="${e(proj.linkText)}"/></div>
-        </div>
-      </div>`;
-    c.appendChild(d);
-    bindProjectUrlNormalize(i);
-  });
-  bindInputs();
-}
-window.addProjectItem = ()=>{
-  content.projects = collectProjects();
-  content.projects.push({title:'',desc:'',link:'',linkText:'',highlight:false});
-  buildProjects(content.projects);
-  markUnsaved(); pushUndo();
-};
-window.removeProjectItem = i=>{
-  content.projects = collectProjects();
-  content.projects.splice(i,1);
-  buildProjects(content.projects);
-  markUnsaved(); pushUndo(); schedulPreview();
-};
-
-// ── Helpers ──────────────────────────────────────────────────
-function val(id){ const el=document.getElementById(id); return el?el.value:''; }
-function e(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-function normalizeHref(url){
-  if(!url) return url;
-  if(/^(https?:\/\/|mailto:|tel:|#|\/|\.\/)/.test(url)) return url;
+function normalizeUrl(url) {
+  if (!url) return url;
+  if (/^(https?:\/\/|mailto:|tel:|#|\/)/.test(url)) return url;
   return 'https://' + url;
 }
 
-// Apply URL normalization on blur to all URL inputs
-function bindUrlNormalize(){
-  ['g-fbSchool','g-fbSimon','g-gofundme','w-videoUrl','w-articleUrl'].forEach(id=>{
-    const el = document.getElementById(id);
-    if(el) el.addEventListener('blur', ()=>{ const n=normalizeHref(el.value.trim()); if(n!==el.value){ el.value=n; markUnsaved(); } });
-  });
+// ── Undo/Redo ─────────────────────────────────────────────────────
+function pushUndo() {
+  if (!content) return;
+  const snap = JSON.stringify(content);
+  if (undoIndex >= 0 && undoStack[undoIndex] === snap) return;
+  undoStack.splice(undoIndex + 1);
+  undoStack.push(snap);
+  if (undoStack.length > 40) undoStack.shift(); else undoIndex++;
+  updateUndoBtns();
 }
-
-// For dynamically created project link fields
-function bindProjectUrlNormalize(i){
-  const el = document.getElementById('proj-link-'+i);
-  if(el) el.addEventListener('blur', ()=>{ const n=normalizeHref(el.value.trim()); if(n!==el.value){ el.value=n; markUnsaved(); } });
+function updateUndoBtns() {
+  document.getElementById('btn-undo').disabled = undoIndex <= 0;
+  document.getElementById('btn-redo').disabled = undoIndex >= undoStack.length - 1;
 }
-
-// ── Collect all ──────────────────────────────────────────────
-function collectContent(){
-  return {
-    contact:{
-      email:          val('g-email'),
-      phone:          val('g-phone'),
-      facebookSchool: val('g-fbSchool'),
-      facebookSimon:  val('g-fbSimon')
-    },
-    gofundmeUrl: val('g-gofundme'),
-    hero:{
-      eyebrow:     val('h-eyebrow'),
-      headline:    val('h-headline'),
-      description: val('h-description'),
-      cardSpan:    val('h-cardSpan'),
-      cardHeading: val('h-cardHeading'),
-      heroImage:   val('h-heroImage')
-    },
-    story:{
-      quote:      val('s-quote'),
-      paragraph1: val('s-p1'),
-      paragraph2: val('s-p2'),
-      paragraph3: val('s-p3')
-    },
-    founder:{
-      name:      val('f-name'),
-      role:      val('f-role'),
-      bio:       val('f-bio'),
-      photo:     val('f-photo'),
-      armyPhoto: val('f-armyPhoto')
-    },
-    watch:{
-      videoUrl:    val('w-videoUrl'),
-      tag:         val('w-tag'),
-      title:       val('w-title'),
-      description: val('w-description'),
-      articleUrl:  val('w-articleUrl'),
-      articleText: val('w-articleText')
-    },
-    gallery:  collectGallery(),
-    impact:   collectImpact(),
-    projects: collectProjects()
-  };
-}
-
-// ── Save ─────────────────────────────────────────────────────
-document.getElementById('btn-save').onclick = async () => {
-  const btn = document.getElementById('btn-save');
-  btn.disabled = true;
-  const data = collectContent();
-  let r;
-  try {
-    r = await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
-  } catch(e) {
-    toast('Network error — check your connection','err');
-    btn.disabled = false;
-    return;
-  }
-  btn.disabled = false;
-  if(r.status === 401){
-    toast('Session expired — please reload the page and log in again','err');
-    return;
-  }
-  if(r.ok){
-    content = data; markSaved();
-    toast('Saved successfully','ok');
-    document.getElementById('btn-restore').style.display='inline-flex';
-    if(previewVisible) refreshPreview();
-  } else {
-    const err = await r.json().catch(()=>({}));
-    toast('Save failed: '+(err.error||r.status),'err');
-  }
+document.getElementById('btn-undo').onclick = async () => {
+  if (undoIndex <= 0) return;
+  undoIndex--; content = JSON.parse(undoStack[undoIndex]);
+  markUnsaved(); updateUndoBtns(); await reloadFrame();
 };
-
-// ── Deploy ────────────────────────────────────────────────────
-async function doDeploy(){
-  toast('Deploying…');
-  const ds = document.getElementById('deploy-status');
-  if(ds){ ds.style.display='block'; ds.textContent='Deploying…'; ds.style.background='rgba(79,70,229,.1)'; ds.style.color='#a5b4fc'; }
-  let r;
-  try {
-    r = await fetch('/api/deploy',{method:'POST'});
-  } catch(e) {
-    toast('Network error — check your connection','err');
-    if(ds){ ds.innerHTML='Network error — check your connection'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; }
-    return;
-  }
-  if(r.status === 401){
-    toast('Session expired — please reload the page and log in again','err');
-    if(ds){ ds.innerHTML='Session expired — reload and log in again'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; }
-    return;
-  }
-  if(r.ok){
-    toast('Site is live!','ok');
-    if(ds){ ds.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:middle;margin-right:5px"><polyline points="20 6 9 17 4 12"/></svg>Deployed successfully'; ds.style.background='rgba(5,150,105,.1)'; ds.style.color='#059669'; ds.style.display='flex'; ds.style.alignItems='center'; }
-  } else {
-    const err = await r.json().catch(()=>({}));
-    toast('Deploy failed: '+(err.error||r.status),'err');
-    if(ds){ ds.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:middle;margin-right:5px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Deploy failed — check logs'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; ds.style.display='flex'; ds.style.alignItems='center'; }
-  }
-}
-document.getElementById('btn-deploy').onclick = doDeploy;
-document.getElementById('btn-deploy-side').onclick = doDeploy;
-
-// ── Restore ───────────────────────────────────────────────────
-document.getElementById('btn-restore').onclick = async () => {
-  if(!confirm('Restore previous version? This will undo your last save.')) return;
-  const r = await fetch('/api/content/restore',{method:'POST'});
-  if(r.ok){
-    const data = await r.json();
-    content = data.content; populateForms(); markSaved();
-    toast('Restored to previous version','ok');
-    document.getElementById('btn-restore').style.display='none';
-    if(previewVisible) refreshPreview();
-  } else {
-    const err = await r.json().catch(()=>({}));
-    toast(err.error||'No backup found','err');
-  }
+document.getElementById('btn-redo').onclick = async () => {
+  if (undoIndex >= undoStack.length - 1) return;
+  undoIndex++; content = JSON.parse(undoStack[undoIndex]);
+  markUnsaved(); updateUndoBtns(); await reloadFrame();
 };
-
-// ── Images ────────────────────────────────────────────────────
-async function loadImages(){
-  const r = await fetch('/api/images');
-  if(!r.ok) return;
-  const images = await r.json();
-  const grid = document.getElementById('img-grid');
-  grid.innerHTML='';
-  images.forEach(name=>{
-    const cell=document.createElement('div');
-    cell.className='img-card-sb';
-    cell.innerHTML=`<img src="/${name}" alt="${name}"/><div class="img-overlay-sb"><div class="img-name-sb">${name}</div><button class="btn-sm" style="background:#dc2626;border-color:#dc2626;color:#fff" onclick="delImg('${name}')">Delete</button></div>`;
-    grid.appendChild(cell);
-  });
-}
-window.delImg = async name=>{
-  if(!confirm('Delete "'+name+'"?')) return;
-  await fetch('/api/images/'+encodeURIComponent(name),{method:'DELETE'});
-  toast('Deleted','ok'); loadImages();
-};
-const uploadZone  = document.getElementById('upload-zone');
-const uploadInput = document.getElementById('upload-input');
-uploadZone.addEventListener('dragover', e=>{e.preventDefault();uploadZone.classList.add('drag');});
-uploadZone.addEventListener('dragleave', ()=>uploadZone.classList.remove('drag'));
-uploadZone.addEventListener('drop', async e=>{
-  e.preventDefault();uploadZone.classList.remove('drag');
-  for(const f of e.dataTransfer.files) await uploadFile(f);
-  loadImages();
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey||e.metaKey) && e.key==='z' && !e.shiftKey) { e.preventDefault(); document.getElementById('btn-undo').click(); }
+  if ((e.ctrlKey||e.metaKey) && (e.key==='y'||(e.key==='z'&&e.shiftKey))) { e.preventDefault(); document.getElementById('btn-redo').click(); }
+  if ((e.ctrlKey||e.metaKey) && e.key==='s') { e.preventDefault(); document.getElementById('btn-save').click(); }
 });
-uploadInput.onchange = async ()=>{
-  for(const f of uploadInput.files) await uploadFile(f);
-  uploadInput.value=''; loadImages();
+
+// ── Login ─────────────────────────────────────────────────────────
+document.getElementById('login-form').onsubmit = async e => {
+  e.preventDefault();
+  const r = await fetch('/api/login', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({ password: document.getElementById('pw').value }) });
+  if (r.ok) {
+    document.getElementById('login').style.display = 'none';
+    document.getElementById('app').classList.add('on');
+    initAdmin();
+  } else {
+    document.getElementById('lc-err').textContent = 'Wrong password. Try again.';
+  }
 };
-async function uploadFile(file){
-  const fd=new FormData(); fd.append('image',file);
-  const r=await fetch('/api/images',{method:'POST',body:fd});
-  if(r.ok) toast('Uploaded: '+file.name,'ok');
-  else toast('Upload failed','err');
+document.getElementById('btn-logout').onclick = async () => { await fetch('/api/logout',{method:'POST'}); location.reload(); };
+
+// ── Sidebar tabs ──────────────────────────────────────────────────
+document.querySelectorAll('.stab').forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll('.stab').forEach(t => t.classList.remove('on'));
+    document.querySelectorAll('.sb-pane').forEach(p => p.classList.remove('on'));
+    tab.classList.add('on');
+    document.getElementById('sp-' + tab.dataset.stab).classList.add('on');
+    if (tab.dataset.stab === 'media') loadMedia();
+  };
+});
+
+// Section scroll
+document.querySelectorAll('[data-scroll]').forEach(item => {
+  item.onclick = () => {
+    document.querySelectorAll('[data-scroll]').forEach(i => i.classList.remove('on'));
+    item.classList.add('on');
+    try {
+      const doc = document.getElementById('site-frame').contentDocument;
+      const el = doc.getElementById(item.dataset.scroll);
+      if (el) el.scrollIntoView({ behavior:'smooth', block:'start' });
+    } catch(e) {}
+  };
+});
+document.getElementById('btn-open-contact').onclick = openContact;
+
+// ── Device ────────────────────────────────────────────────────────
+function setDevice(d) {
+  document.getElementById('frame-wrap').className = 'frame-wrap' + (d==='tablet'?' tablet':d==='mobile'?' mobile':'');
+  document.querySelectorAll('.dev-btn').forEach(b => {
+    if (['Desktop','Tablet','Mobile'].includes(b.textContent)) b.classList.toggle('on', b.textContent.toLowerCase()===d);
+  });
+}
+document.getElementById('btn-reload').onclick = reloadFrame;
+
+// ── Frame ─────────────────────────────────────────────────────────
+async function reloadFrame() {
+  if (content) {
+    await fetch('/api/content/preview', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(content) }).catch(()=>{});
+  }
+  document.getElementById('site-frame').src = '/?preview&t=' + Date.now();
 }
 
-// ── Image picker ──────────────────────────────────────────────
-window.openPicker = async (inputId,thumbId,emptyId)=>{
-  pickerTarget=inputId; pickerThumb=thumbId; pickerEmpty=emptyId;
-  const images=await fetch('/api/images').then(r=>r.json());
-  const grid=document.getElementById('picker-grid');
-  grid.innerHTML='';
-  images.forEach(name=>{
-    const cell=document.createElement('div');
-    cell.className='picker-item';
-    cell.innerHTML=`<img src="/${name}" alt="${name}"/><div class="picker-name">${name}</div>`;
-    cell.onclick=()=>{
-      document.getElementById(pickerTarget).value=name;
-      const thumb=document.getElementById(pickerThumb);
-      if(thumb){thumb.src='/'+name; thumb.classList.add('has');}
-      const empty=document.getElementById(pickerEmpty);
-      if(empty) empty.style.display='none';
-      // Update name label
-      const nameEl=document.getElementById(pickerTarget+'-name');
-      if(nameEl) nameEl.textContent=name;
-      // Gallery name label
-      const galName=document.getElementById(pickerTarget.replace('gal-src-','gal-name-'));
-      if(galName) galName.textContent=name;
-      markUnsaved(); schedulPreview(); closePicker();
-    };
+document.getElementById('site-frame').addEventListener('load', function() {
+  try {
+    const doc = this.contentDocument;
+    if (!doc || !doc.body || !content) return;
+    injectEditMode(doc);
+  } catch(e) { console.warn('Frame inject:', e); }
+});
+
+// ── Edit mode injection ───────────────────────────────────────────
+const TEXT_FIELDS = [
+  { sel: '#home .eyebrow',               path: ['hero','eyebrow'],       ml: false },
+  { sel: '#home h1',                     path: ['hero','headline'],       ml: false },
+  { sel: '.hero-copy > p',               path: ['hero','description'],    ml: true  },
+  { sel: '.hero-card-content > span',    path: ['hero','cardSpan'],       ml: false },
+  { sel: '.hero-card-content > h3',      path: ['hero','cardHeading'],    ml: false },
+  { sel: '.story-big',                   path: ['story','quote'],         ml: true,
+    unwrap: v => v.replace(/^[\u201c"]+|[\u201d"]+$/g,'').trim() },
+  { sel: '.story-copy p:nth-of-type(1)', path: ['story','paragraph1'],   ml: true  },
+  { sel: '.story-copy p:nth-of-type(2)', path: ['story','paragraph2'],   ml: true  },
+  { sel: '.story-copy p:nth-of-type(3)', path: ['story','paragraph3'],   ml: true  },
+  { sel: '.founder-name',                path: ['founder','name'],        ml: false },
+  { sel: '.founder-role',                path: ['founder','role'],        ml: false },
+  { sel: '.founder-bio',                 path: ['founder','bio'],         ml: true  },
+  { sel: '.watch-tag',                   path: ['watch','tag'],           ml: false },
+  { sel: '.watch-title',                 path: ['watch','title'],         ml: true  },
+  { sel: '.watch-desc',                  path: ['watch','description'],   ml: true  },
+];
+
+function injectEditMode(doc) {
+  // Inject CSS
+  let st = doc.getElementById('__ae__');
+  if (st) st.remove();
+  st = doc.createElement('style');
+  st.id = '__ae__';
+  st.textContent = `
+    [data-ae]{outline:none!important;cursor:text!important;border-radius:4px;transition:box-shadow .15s,background .15s;display:inline;}
+    [data-ae]:hover{background:rgba(99,102,241,.09)!important;box-shadow:0 0 0 2px rgba(99,102,241,.28)!important;}
+    [data-ae]:focus{background:rgba(99,102,241,.13)!important;box-shadow:0 0 0 2.5px rgba(99,102,241,.6)!important;}
+    .__img-wrap{position:relative;display:inline-block;cursor:pointer!important;}
+    .__img-wrap img{display:block;}
+    .__img-lbl{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:rgba(0,0,0,.78);color:#fff;padding:.4rem .85rem;border-radius:7px;font:600 13px/-apple-system,sans-serif;font-family:-apple-system,sans-serif;white-space:nowrap;pointer-events:none;opacity:0;transition:opacity .2s;z-index:10;}
+    .__img-wrap:hover .__img-lbl{opacity:1;}
+  `;
+  doc.head.appendChild(st);
+
+  // Text fields
+  TEXT_FIELDS.forEach(field => {
+    const el = doc.querySelector(field.sel);
+    if (el) makeText(el, field, doc);
+  });
+
+  // Impact (array)
+  doc.querySelectorAll('.impact-card').forEach((card, i) => {
+    const h3 = card.querySelector('h3');
+    const p  = card.querySelector('p');
+    if (h3) makeText(h3, { path:['impact',i,'title'], ml:false }, doc);
+    if (p)  makeText(p,  { path:['impact',i,'desc'],  ml:true  }, doc);
+  });
+
+  // Projects (array)
+  doc.querySelectorAll('#projects .feature').forEach((card, i) => {
+    const h3 = card.querySelector('h3');
+    const p  = card.querySelector('p');
+    if (h3) makeText(h3, { path:['projects',i,'title'], ml:false }, doc);
+    if (p)  makeText(p,  { path:['projects',i,'desc'],  ml:true  }, doc);
+  });
+
+  // Gallery captions
+  doc.querySelectorAll('.gallery-item figcaption').forEach((cap, i) => {
+    makeText(cap, { path:['gallery',i,'caption'], ml:true }, doc);
+  });
+
+  // Images
+  [
+    { sel:'.hero-card-img',                    path:['hero','heroImage']      },
+    { sel:'.founder-photo:not(.founder-army)', path:['founder','photo']       },
+    { sel:'.founder-army',                     path:['founder','armyPhoto']   },
+    { sel:'.contact-avatar',                   path:['founder','photo']       },
+  ].forEach(f => {
+    const el = doc.querySelector(f.sel);
+    if (el) makeImg(el, f.path, doc);
+  });
+  doc.querySelectorAll('.gallery-item img').forEach((img, i) => makeImg(img, ['gallery',i,'src'], doc));
+}
+
+let editDebounce;
+function makeText(el, field, doc) {
+  el.contentEditable = 'true';
+  el.dataset.ae = '1';
+  el.spellcheck = true;
+
+  if (!field.ml) {
+    el.addEventListener('keydown', e => { if (e.key === 'Enter') e.preventDefault(); });
+  }
+  el.addEventListener('paste', e => {
+    e.preventDefault();
+    const text = (e.clipboardData || window.clipboardData).getData('text/plain');
+    doc.execCommand('insertText', false, text);
+  });
+  el.addEventListener('input', () => {
+    let t = el.innerText;
+    if (field.unwrap) t = field.unwrap(t);
+    setPath(content, field.path, t);
+    markUnsaved();
+    clearTimeout(editDebounce);
+    editDebounce = setTimeout(pushUndo, 900);
+  });
+  el.addEventListener('blur', () => {
+    let t = el.innerText.trim();
+    if (field.unwrap) t = field.unwrap(t);
+    setPath(content, field.path, t);
+    pushUndo();
+  });
+}
+
+function makeImg(el, path, doc) {
+  const wrap = doc.createElement('div');
+  wrap.className = '__img-wrap';
+  const lbl = doc.createElement('div');
+  lbl.className = '__img-lbl';
+  lbl.textContent = '📷  Change photo';
+  el.parentNode.insertBefore(wrap, el);
+  wrap.appendChild(el);
+  wrap.appendChild(lbl);
+  wrap.addEventListener('click', e => { e.preventDefault(); e.stopPropagation(); openPicker(path); });
+}
+
+// ── Image picker ──────────────────────────────────────────────────
+async function openPicker(path) {
+  pickerPath = path;
+  let images;
+  try { images = await fetch('/api/images').then(r => r.json()); }
+  catch(e) { toast('Could not load images', 'err'); return; }
+  const grid = document.getElementById('picker-grid');
+  grid.innerHTML = '';
+  images.forEach(name => {
+    const cell = document.createElement('div');
+    cell.className = 'picker-cell';
+    cell.innerHTML = `<img src="/${name}" alt="${name}"/><div class="picker-name">${name}</div>`;
+    cell.onclick = () => applyImg(name);
     grid.appendChild(cell);
   });
   document.getElementById('picker-overlay').classList.add('on');
   document.getElementById('picker-modal').classList.add('on');
-};
-window.closePicker = ()=>{
+}
+window.closePicker = () => {
   document.getElementById('picker-overlay').classList.remove('on');
   document.getElementById('picker-modal').classList.remove('on');
+  pickerPath = null;
+};
+async function applyImg(name) {
+  if (!pickerPath) return;
+  setPath(content, pickerPath, name);
+  markUnsaved(); pushUndo();
+  closePicker();
+  await reloadFrame();
+  toast('Photo updated — click Save to keep it', 'ok');
+}
+
+// ── Contact modal ─────────────────────────────────────────────────
+function openContact() {
+  if (!content) return;
+  const c = content.contact || {};
+  const w = content.watch   || {};
+  document.getElementById('c-email').value      = c.email          || '';
+  document.getElementById('c-phone').value      = c.phone          || '';
+  document.getElementById('c-gofundme').value   = content.gofundmeUrl || '';
+  document.getElementById('c-fbSchool').value   = c.facebookSchool || '';
+  document.getElementById('c-fbSimon').value    = c.facebookSimon  || '';
+  document.getElementById('c-videoUrl').value   = w.videoUrl       || '';
+  document.getElementById('c-articleUrl').value = w.articleUrl     || '';
+  document.getElementById('contact-overlay').classList.add('on');
+  document.getElementById('contact-modal').classList.add('on');
+}
+function closeContact() {
+  document.getElementById('contact-overlay').classList.remove('on');
+  document.getElementById('contact-modal').classList.remove('on');
+}
+window.closeContact = closeContact;
+document.getElementById('btn-save-contact').onclick = async () => {
+  if (!content) return;
+  if (!content.contact) content.contact = {};
+  if (!content.watch)   content.watch   = {};
+  content.contact.email          = document.getElementById('c-email').value.trim();
+  content.contact.phone          = document.getElementById('c-phone').value.trim();
+  content.gofundmeUrl            = normalizeUrl(document.getElementById('c-gofundme').value.trim());
+  content.contact.facebookSchool = normalizeUrl(document.getElementById('c-fbSchool').value.trim());
+  content.contact.facebookSimon  = normalizeUrl(document.getElementById('c-fbSimon').value.trim());
+  content.watch.videoUrl         = document.getElementById('c-videoUrl').value.trim();
+  content.watch.articleUrl       = normalizeUrl(document.getElementById('c-articleUrl').value.trim());
+  markUnsaved(); pushUndo();
+  closeContact();
+  await reloadFrame();
+  toast('Links updated — click Save to keep them', 'ok');
 };
 
-// ── Password ──────────────────────────────────────────────────
-document.getElementById('btn-save-pw').onclick = async ()=>{
-  const np=document.getElementById('new-pw').value;
-  const cp=document.getElementById('confirm-pw').value;
-  if(!np) return toast('Enter a new password','err');
-  if(np!==cp) return toast('Passwords do not match','err');
-  const r=await fetch('/api/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({newPassword:np})});
-  if(r.ok){toast('Password updated','ok');document.getElementById('new-pw').value='';document.getElementById('confirm-pw').value='';}
-  else toast('Failed','err');
-};
-
-// ── Auth check on load ────────────────────────────────────────
-fetch('/api/auth').then(r=>r.json()).then(d=>{
-  if(d.ok){
-    document.getElementById('login-screen').style.display='none';
-    document.getElementById('app').classList.add('on');
-    initAdmin();
+// ── Init ──────────────────────────────────────────────────────────
+async function initAdmin() {
+  setStatus('Loading…');
+  let r;
+  try { r = await fetch('/api/content'); } catch(e) { toast('Network error loading content', 'err'); return; }
+  if (r.status === 401) { document.getElementById('login').style.display='flex'; document.getElementById('app').classList.remove('on'); return; }
+  if (!r.ok) { toast('Failed to load content', 'err'); return; }
+  content = await r.json();
+  // Post to preview so iframe uses latest
+  await fetch('/api/content/preview', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(content) }).catch(()=>{});
+  setStatus('Ready — click any text to edit');
+  undoStack.push(JSON.stringify(content));
+  undoIndex = 0;
+  updateUndoBtns();
+  // Check backup
+  fetch('/api/content/has-backup').then(r=>r.json()).then(d => {
+    document.getElementById('btn-restore').style.display = d.hasBak ? 'inline-flex' : 'none';
+  }).catch(()=>{});
+  // Inject into already-loaded iframe
+  try {
+    const doc = document.getElementById('site-frame').contentDocument;
+    if (doc && doc.body && doc.readyState === 'complete') injectEditMode(doc);
+    else document.getElementById('site-frame').src = '/?preview&t=' + Date.now();
+  } catch(e) {
+    document.getElementById('site-frame').src = '/?preview&t=' + Date.now();
   }
+  loadMedia();
+}
+
+// ── Save ──────────────────────────────────────────────────────────
+document.getElementById('btn-save').onclick = async () => {
+  const btn = document.getElementById('btn-save');
+  btn.disabled = true;
+  setStatus('Saving…');
+  let r;
+  try { r = await fetch('/api/content', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(content) }); }
+  catch(e) { toast('Network error — check your connection', 'err'); setStatus('Save failed'); btn.disabled=false; return; }
+  btn.disabled = false;
+  if (r.status === 401) { toast('Session expired — reload and log in again', 'err'); setStatus('Session expired'); return; }
+  if (r.ok) {
+    markSaved();
+    toast('Saved!', 'ok');
+    document.getElementById('btn-restore').style.display = 'inline-flex';
+    await fetch('/api/content/preview', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(content) }).catch(()=>{});
+  } else {
+    const err = await r.json().catch(()=>({}));
+    toast('Save failed: ' + (err.error || r.status), 'err');
+    setStatus('Save failed');
+  }
+};
+
+// ── Deploy ────────────────────────────────────────────────────────
+async function doDeploy() {
+  const ds = document.getElementById('deploy-status');
+  ds.style.display = 'block'; ds.style.background = 'rgba(99,102,241,.1)'; ds.style.color = '#a5b4fc'; ds.textContent = 'Deploying…';
+  toast('Deploying…');
+  let r;
+  try { r = await fetch('/api/deploy', { method:'POST' }); }
+  catch(e) { toast('Network error','err'); ds.textContent='Network error'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; return; }
+  if (r.status === 401) { toast('Session expired — reload and log in again','err'); ds.textContent='Session expired'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; return; }
+  if (r.ok) { toast('Site is live!','ok'); ds.textContent='✓ Deployed successfully'; ds.style.background='rgba(5,150,105,.1)'; ds.style.color='#059669'; }
+  else { const e=await r.json().catch(()=>({})); toast('Deploy failed: '+(e.error||r.status),'err'); ds.textContent='Deploy failed — check logs'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; }
+}
+document.getElementById('btn-deploy').onclick = doDeploy;
+document.getElementById('btn-deploy-side').onclick = doDeploy;
+
+// ── Restore ───────────────────────────────────────────────────────
+document.getElementById('btn-restore').onclick = async () => {
+  if (!confirm('Restore to the previous saved version? Current changes will be lost.')) return;
+  let r;
+  try { r = await fetch('/api/content/restore', { method:'POST' }); } catch(e) { toast('Network error','err'); return; }
+  if (r.ok) {
+    const d = await r.json();
+    content = d.content;
+    markSaved(); toast('Restored to previous version','ok');
+    document.getElementById('btn-restore').style.display = 'none';
+    undoStack.length=0; undoIndex=-1;
+    undoStack.push(JSON.stringify(content)); undoIndex=0;
+    updateUndoBtns();
+    await reloadFrame();
+  } else { toast('No backup found','err'); }
+};
+
+// ── Media ─────────────────────────────────────────────────────────
+async function loadMedia() {
+  try {
+    const r = await fetch('/api/images');
+    if (!r.ok) return;
+    const imgs = await r.json();
+    const grid = document.getElementById('media-grid');
+    grid.innerHTML = '';
+    imgs.forEach(name => {
+      const cell = document.createElement('div');
+      cell.className = 'media-cell';
+      cell.innerHTML = `<img src="/${name}" alt="${name}" loading="lazy"/><div class="media-overlay"><button class="del-img" onclick="delImg('${name}')">✕</button></div>`;
+      grid.appendChild(cell);
+    });
+  } catch(e) {}
+}
+window.delImg = async name => {
+  if (!confirm('Delete "' + name + '"?')) return;
+  try { await fetch('/api/images/' + encodeURIComponent(name), { method:'DELETE' }); toast('Deleted','ok'); loadMedia(); }
+  catch(e) { toast('Delete failed','err'); }
+};
+const uploadZone  = document.getElementById('upload-zone');
+const uploadInput = document.getElementById('upload-input');
+uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag'); });
+uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag'));
+uploadZone.addEventListener('drop', async e => {
+  e.preventDefault(); uploadZone.classList.remove('drag');
+  for (const f of e.dataTransfer.files) await uploadFile(f);
+  loadMedia();
+});
+uploadInput.onchange = async () => { for (const f of uploadInput.files) await uploadFile(f); uploadInput.value=''; loadMedia(); };
+async function uploadFile(file) {
+  const fd = new FormData(); fd.append('image', file);
+  try { const r = await fetch('/api/images',{method:'POST',body:fd}); if(r.ok) toast('Uploaded: '+file.name,'ok'); else toast('Upload failed','err'); }
+  catch(e) { toast('Upload failed','err'); }
+}
+
+// ── Password ──────────────────────────────────────────────────────
+document.getElementById('btn-save-pw').onclick = async () => {
+  const np = document.getElementById('new-pw').value;
+  const cp = document.getElementById('confirm-pw').value;
+  if (!np) return toast('Enter a new password','err');
+  if (np !== cp) return toast('Passwords do not match','err');
+  try {
+    const r = await fetch('/api/settings',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({newPassword:np})});
+    if (r.ok) { toast('Password updated','ok'); document.getElementById('new-pw').value=''; document.getElementById('confirm-pw').value=''; }
+    else toast('Failed to update password','err');
+  } catch(e) { toast('Network error','err'); }
+};
+
+// ── Auth check on load ────────────────────────────────────────────
+fetch('/api/auth').then(r=>r.json()).then(d => {
+  if (d.ok) { document.getElementById('login').style.display='none'; document.getElementById('app').classList.add('on'); initAdmin(); }
 });
 </script>
 </body>
