@@ -279,6 +279,10 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
             Projects
           </div>
+          <div class="sb-item" data-tab="watch">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+            Watch
+          </div>
         </div>
       </div>
 
@@ -587,6 +591,29 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
           </div>
         </div>
 
+        <!-- WATCH -->
+        <div class="mpane" id="pane-watch">
+          <div class="page-header"><h2>Watch</h2><p>Featured video section — Simon's story</p></div>
+          <div class="card">
+            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>Video</h3></div>
+            <div class="card-body">
+              <div class="field"><label>Facebook Video Embed URL</label><input type="url" id="w-videoUrl" placeholder="https://www.facebook.com/plugins/video.php?href=..."/><p class="field-hint">The full Facebook video embed URL (from the "Embed" option on the video)</p></div>
+              <div class="field"><label>Tag / Byline</label><input type="text" id="w-tag" placeholder="e.g. WaterStep · 2023"/></div>
+              <div class="field"><label>Title</label><input type="text" id="w-title"/></div>
+              <div class="field"><label>Description</label><textarea id="w-description"></textarea></div>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-head"><h3><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Article Link</h3></div>
+            <div class="card-body">
+              <div class="g2">
+                <div class="field"><label>Article URL</label><input type="url" id="w-articleUrl" placeholder="https://..."/></div>
+                <div class="field"><label>Button Text</label><input type="text" id="w-articleText" placeholder="e.g. Read the full story"/></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div><!-- /forms-inner -->
     </div><!-- /forms-panel -->
 
@@ -779,7 +806,13 @@ function setDevice(d){
 
 // ── Init ─────────────────────────────────────────────────────
 async function initAdmin(){
-  const r = await fetch('/api/content');
+  let r;
+  try { r = await fetch('/api/content'); } catch(e){ toast('Network error loading content','err'); return; }
+  if(r.status === 401){
+    document.getElementById('login-screen').style.display='flex';
+    document.getElementById('app').classList.remove('on');
+    return;
+  }
   if(!r.ok){ toast('Failed to load content','err'); return; }
   content = await r.json();
   populateForms();
@@ -821,11 +854,20 @@ function populateForms(){
   setImg('f-photo','f-photo-thumb','f-photo-empty','f-photo-name', c.founder.photo);
   setImg('f-armyPhoto','f-armyPhoto-thumb','f-armyPhoto-empty','f-armyPhoto-name', c.founder.armyPhoto);
 
+  const w = c.watch || {};
+  document.getElementById('w-videoUrl').value    = w.videoUrl||'';
+  document.getElementById('w-tag').value         = w.tag||'';
+  document.getElementById('w-title').value       = w.title||'';
+  document.getElementById('w-description').value = w.description||'';
+  document.getElementById('w-articleUrl').value  = w.articleUrl||'';
+  document.getElementById('w-articleText').value = w.articleText||'';
+
   buildGallery(c.gallery);
   buildImpact(c.impact);
   buildProjects(c.projects);
 
   bindInputs();
+  bindUrlNormalize();
 }
 
 function setImg(inputId, thumbId, emptyId, nameId, filename){
@@ -991,6 +1033,7 @@ function buildProjects(projects){
         </div>
       </div>`;
     c.appendChild(d);
+    bindProjectUrlNormalize(i);
   });
   bindInputs();
 }
@@ -1010,6 +1053,26 @@ window.removeProjectItem = i=>{
 // ── Helpers ──────────────────────────────────────────────────
 function val(id){ const el=document.getElementById(id); return el?el.value:''; }
 function e(s){ return String(s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+function normalizeHref(url){
+  if(!url) return url;
+  if(/^(https?:\/\/|mailto:|tel:|#|\/|\.\/)/.test(url)) return url;
+  return 'https://' + url;
+}
+
+// Apply URL normalization on blur to all URL inputs
+function bindUrlNormalize(){
+  ['g-fbSchool','g-fbSimon','g-gofundme','w-videoUrl','w-articleUrl'].forEach(id=>{
+    const el = document.getElementById(id);
+    if(el) el.addEventListener('blur', ()=>{ const n=normalizeHref(el.value.trim()); if(n!==el.value){ el.value=n; markUnsaved(); } });
+  });
+}
+
+// For dynamically created project link fields
+function bindProjectUrlNormalize(i){
+  const el = document.getElementById('proj-link-'+i);
+  if(el) el.addEventListener('blur', ()=>{ const n=normalizeHref(el.value.trim()); if(n!==el.value){ el.value=n; markUnsaved(); } });
+}
 
 // ── Collect all ──────────────────────────────────────────────
 function collectContent(){
@@ -1042,6 +1105,14 @@ function collectContent(){
       photo:     val('f-photo'),
       armyPhoto: val('f-armyPhoto')
     },
+    watch:{
+      videoUrl:    val('w-videoUrl'),
+      tag:         val('w-tag'),
+      title:       val('w-title'),
+      description: val('w-description'),
+      articleUrl:  val('w-articleUrl'),
+      articleText: val('w-articleText')
+    },
     gallery:  collectGallery(),
     impact:   collectImpact(),
     projects: collectProjects()
@@ -1050,14 +1121,31 @@ function collectContent(){
 
 // ── Save ─────────────────────────────────────────────────────
 document.getElementById('btn-save').onclick = async () => {
+  const btn = document.getElementById('btn-save');
+  btn.disabled = true;
   const data = collectContent();
-  const r = await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  let r;
+  try {
+    r = await fetch('/api/content',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)});
+  } catch(e) {
+    toast('Network error — check your connection','err');
+    btn.disabled = false;
+    return;
+  }
+  btn.disabled = false;
+  if(r.status === 401){
+    toast('Session expired — please reload the page and log in again','err');
+    return;
+  }
   if(r.ok){
     content = data; markSaved();
-    toast('Saved — site updating in the background…','ok');
+    toast('Saved successfully','ok');
     document.getElementById('btn-restore').style.display='inline-flex';
     if(previewVisible) refreshPreview();
-  } else { toast('Save failed','err'); }
+  } else {
+    const err = await r.json().catch(()=>({}));
+    toast('Save failed: '+(err.error||r.status),'err');
+  }
 };
 
 // ── Deploy ────────────────────────────────────────────────────
@@ -1065,12 +1153,25 @@ async function doDeploy(){
   toast('Deploying…');
   const ds = document.getElementById('deploy-status');
   if(ds){ ds.style.display='block'; ds.textContent='Deploying…'; ds.style.background='rgba(79,70,229,.1)'; ds.style.color='#a5b4fc'; }
-  const r = await fetch('/api/deploy',{method:'POST'});
+  let r;
+  try {
+    r = await fetch('/api/deploy',{method:'POST'});
+  } catch(e) {
+    toast('Network error — check your connection','err');
+    if(ds){ ds.innerHTML='Network error — check your connection'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; }
+    return;
+  }
+  if(r.status === 401){
+    toast('Session expired — please reload the page and log in again','err');
+    if(ds){ ds.innerHTML='Session expired — reload and log in again'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; }
+    return;
+  }
   if(r.ok){
     toast('Site is live!','ok');
     if(ds){ ds.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:middle;margin-right:5px"><polyline points="20 6 9 17 4 12"/></svg>Deployed successfully'; ds.style.background='rgba(5,150,105,.1)'; ds.style.color='#059669'; ds.style.display='flex'; ds.style.alignItems='center'; }
   } else {
-    toast('Deploy failed','err');
+    const err = await r.json().catch(()=>({}));
+    toast('Deploy failed: '+(err.error||r.status),'err');
     if(ds){ ds.innerHTML='<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" style="vertical-align:middle;margin-right:5px"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>Deploy failed — check logs'; ds.style.background='rgba(220,38,38,.1)'; ds.style.color='#dc2626'; ds.style.display='flex'; ds.style.alignItems='center'; }
   }
 }

@@ -103,10 +103,15 @@ app.get('/api/content', auth, async (req, res) => {
 });
 
 app.post('/api/content', auth, async (req, res) => {
-  try { await fs.copyFile(CONTENT_FILE, CONTENT_FILE + '.bak'); } catch{}
-  await fs.writeFile(CONTENT_FILE, JSON.stringify(req.body, null, 2), 'utf8');
-  res.json({ ok: true });
-  netlifyDeploy().catch(err => console.error('Deploy error:', err.message));
+  try {
+    try { await fs.copyFile(CONTENT_FILE, CONTENT_FILE + '.bak'); } catch{}
+    await fs.writeFile(CONTENT_FILE, JSON.stringify(req.body, null, 2), 'utf8');
+    res.json({ ok: true });
+    netlifyDeploy().catch(err => console.error('Deploy error:', err.message));
+  } catch(err) {
+    console.error('Save error:', err);
+    res.status(500).json({ error: err.message });
+  }
 });
 
 // Check if content backup exists

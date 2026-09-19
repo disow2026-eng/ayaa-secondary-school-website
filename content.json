@@ -39,6 +39,14 @@
     { "number": "2023", "format": "year", "title": "Safe water arrives", "desc": "WaterStep partners with Ayaa to install a clean-water system, ending the school's reliance on unsafe river water and expensive tanker deliveries." },
     { "number": "200", "format": "plus", "title": "Students enrolled today", "desc": "Over 200 young people from Magwi County now attend Ayaa — studying, growing, and building toward their futures." }
   ],
+  "watch": {
+    "videoUrl": "https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FWaterStep%2Fvideos%2F572520868981967%2F&show_text=false&mute=0",
+    "tag": "WaterStep · 2023",
+    "title": "\"South Sudanese Man Endured War to Bring Hope Home\"",
+    "description": "This film follows Simon Ottaviano's journey — from the Lost Boys of Sudan to Louisville, Kentucky, to the construction of Ayaa Senior Secondary School in South Sudan. It also documents the safe-water project WaterStep brought to the school in 2023.",
+    "articleUrl": "https://waterstep.org/the-privilege-of-safe-water/",
+    "articleText": "Read the full story"
+  },
   "projects": [
     { "title": "Girls' Dormitory", "desc": "Most girls at Ayaa travel long distances on dangerous roads every day. A dormitory would give ~100 girls a safe, clean place to sleep and focus fully on their studies.", "link": "https://www.gofundme.com/f/building-of-girls-dormitory-at-ayaa-secondary-scho", "linkText": "Donate on GoFundMe", "highlight": true },
     { "title": "Library", "desc": "A dedicated library would give students greater access to books, study resources, and independent learning — critical for academic growth beyond the classroom.", "link": "", "linkText": "", "highlight": false },

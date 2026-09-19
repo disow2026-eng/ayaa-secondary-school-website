@@ -147,16 +147,16 @@ function render(d){
           </div>
           <div class="watch-layout reveal">
             <div class="video-wrap">
-              <iframe src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FWaterStep%2Fvideos%2F572520868981967%2F&show_text=false&mute=0"
+              <iframe src="${(d.watch&&d.watch.videoUrl)||'https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2FWaterStep%2Fvideos%2F572520868981967%2F&show_text=false&mute=0'}"
                 scrolling="no" frameborder="0" allowfullscreen="true"
                 allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
                 title="Simon Ottaviano and Ayaa Secondary School — WaterStep"></iframe>
             </div>
             <div class="watch-info">
-              <div class="watch-tag">WaterStep · 2023</div>
-              <h3 class="watch-title">"South Sudanese Man Endured War to Bring Hope Home"</h3>
-              <p class="watch-desc">This film follows Simon Ottaviano's journey — from the Lost Boys of Sudan to Louisville, Kentucky, to the construction of Ayaa Senior Secondary School in South Sudan. It also documents the safe-water project WaterStep brought to the school in 2023.</p>
-              <a class="btn btn-primary" href="https://waterstep.org/the-privilege-of-safe-water/" target="_blank" rel="noopener">Read the full story ${icon('arrow')}</a>
+              <div class="watch-tag">${(d.watch&&d.watch.tag)||'WaterStep · 2023'}</div>
+              <h3 class="watch-title">${(d.watch&&d.watch.title)||'"South Sudanese Man Endured War to Bring Hope Home"'}</h3>
+              <p class="watch-desc">${(d.watch&&d.watch.description)||''}</p>
+              <a class="btn btn-primary" href="${(d.watch&&d.watch.articleUrl)||'#'}" target="_blank" rel="noopener">${(d.watch&&d.watch.articleText)||'Read the full story'} ${icon('arrow')}</a>
             </div>
           </div>
         </div>
