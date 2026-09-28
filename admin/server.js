@@ -139,7 +139,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
   storage,
-  fileFilter: (req, file, cb) => /\/(image)\//i.test(file.mimetype) ? cb(null, true) : cb(new Error('Images only')),
+  fileFilter: (req, file, cb) => /^image\//i.test(file.mimetype) ? cb(null, true) : cb(new Error('Images only')),
   limits: { fileSize: 50 * 1024 * 1024 }
 });
 
@@ -162,6 +162,31 @@ app.delete('/api/images/:name', auth, async (req, res) => {
 app.post('/api/deploy', auth, async (req, res) => {
   try { await netlifyDeploy(); res.json({ ok: true }); }
   catch(err){ res.status(500).json({ error: err.message }); }
+});
+
+// ── Source code editor ────────────────────────────────────────
+const ALLOWED_SOURCE = ['index.html', 'script.js', 'style.css'];
+
+app.get('/api/source/:file', auth, async (req, res) => {
+  const name = req.params.file;
+  if (!ALLOWED_SOURCE.includes(name)) return res.status(403).json({ error: 'Not allowed' });
+  try {
+    const code = await fs.readFile(path.join(SITE_DIR, name), 'utf8');
+    res.json({ code });
+  } catch(err) { res.status(500).json({ error: err.message }); }
+});
+
+app.post('/api/source/:file', auth, async (req, res) => {
+  const name = req.params.file;
+  if (!ALLOWED_SOURCE.includes(name)) return res.status(403).json({ error: 'Not allowed' });
+  const { code } = req.body;
+  if (typeof code !== 'string') return res.status(400).json({ error: 'No code provided' });
+  try {
+    const filePath = path.join(SITE_DIR, name);
+    await fs.copyFile(filePath, filePath + '.bak').catch(() => {});
+    await fs.writeFile(filePath, code, 'utf8');
+    res.json({ ok: true });
+  } catch(err) { res.status(500).json({ error: err.message }); }
 });
 
 // ── Settings ──────────────────────────────────────────────────

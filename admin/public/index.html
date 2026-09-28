@@ -123,6 +123,30 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
 .cf-input{width:100%;padding:.5rem .72rem;border:1.5px solid var(--border);border-radius:7px;font-size:.88rem;outline:none;transition:border-color .2s}
 .cf-input:focus{border-color:var(--accent)}
 
+/* ── Source editor (full-area mode) ── */
+#source-mode{display:none;flex-direction:column;flex:1;overflow:hidden;background:#0d0f14}
+#source-mode.on{display:flex}
+.src-topbar{display:flex;align-items:center;gap:.4rem;padding:0 .75rem;height:40px;background:#07090f;border-bottom:1px solid #1e2130;flex-shrink:0}
+.src-tab{display:flex;align-items:center;gap:.35rem;padding:.3rem .85rem;border-radius:6px 6px 0 0;font-size:.78rem;font-weight:700;color:#6b7280;cursor:pointer;border:1px solid transparent;border-bottom:none;transition:all .12s;position:relative;top:1px;background:none}
+.src-tab:hover{color:#9ca3af;background:#0f1117}
+.src-tab.on{background:#0d0f14;color:#a5b4fc;border-color:#1e2130}
+.src-tab-dot{width:7px;height:7px;border-radius:50%}
+.src-tab-dot.html{background:#f97316}
+.src-tab-dot.js{background:#eab308}
+.src-tab-dot.css{background:#3b82f6}
+.src-topbar-right{margin-left:auto;display:flex;align-items:center;gap:.5rem}
+.src-back{display:flex;align-items:center;gap:.3rem;padding:.3rem .7rem;border-radius:6px;border:1px solid #2e323b;color:#6b7280;font-size:.75rem;font-weight:600;cursor:pointer;background:none;transition:all .12s}
+.src-back:hover{background:#1a1d26;color:#e5e7eb}
+.src-save{display:flex;align-items:center;gap:.3rem;padding:.3rem .8rem;border-radius:6px;background:var(--accent);color:#fff;font-size:.75rem;font-weight:700;cursor:pointer;border:none;transition:background .12s}
+.src-save:hover{background:var(--accent2)}
+.src-save:disabled{opacity:.4;cursor:not-allowed}
+.src-statusbar{height:22px;background:#07090f;border-top:1px solid #1e2130;display:flex;align-items:center;padding:0 .85rem;gap:1rem;flex-shrink:0}
+.src-statusbar span{font-size:.65rem;color:#4b5563}
+.src-statusbar .s-file{color:#6b7280;font-weight:600}
+#src-editor{flex:1;width:100%;background:#0d0f14;color:#abb2bf;border:none;outline:none;resize:none;font-family:'SF Mono','Fira Code','Cascadia Code',monospace;font-size:13px;line-height:1.7;padding:1rem 1.2rem;tab-size:2;scrollbar-width:thin;scrollbar-color:#2e323b #0d0f14}
+#src-editor::-webkit-scrollbar{width:6px}
+#src-editor::-webkit-scrollbar-thumb{background:#2e323b;border-radius:3px}
+
 /* ── Toast ── */
 #toast{position:fixed;bottom:1.1rem;right:1.1rem;background:#1f2937;color:#f9fafb;padding:.5rem 1rem;border-radius:8px;font-size:.82rem;box-shadow:var(--shlg);z-index:600;opacity:0;transform:translateY(6px);transition:all .22s;pointer-events:none;max-width:300px}
 #toast.on{opacity:1;transform:none}
@@ -177,9 +201,38 @@ svg{display:inline-block;vertical-align:middle;flex-shrink:0}
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="M12 15l-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/></svg>
         Go Live
       </button>
+      <button class="btn btn-ghost" id="btn-source" title="Source code editor">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+        Source
+      </button>
       <button class="btn btn-ghost" id="btn-logout">Logout</button>
     </div>
   </header>
+
+  <!-- FULL SOURCE EDITOR -->
+  <div id="source-mode">
+    <div class="src-topbar">
+      <button class="src-tab on" data-src="index.html"><span class="src-tab-dot html"></span>index.html</button>
+      <button class="src-tab" data-src="script.js"><span class="src-tab-dot js"></span>script.js</button>
+      <button class="src-tab" data-src="style.css"><span class="src-tab-dot css"></span>style.css</button>
+      <div class="src-topbar-right">
+        <button class="src-save" id="src-save-btn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+          Save
+        </button>
+        <button class="src-back" id="src-back-btn">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Back to Visual
+        </button>
+      </div>
+    </div>
+    <textarea id="src-editor" spellcheck="false" placeholder="Loading..."></textarea>
+    <div class="src-statusbar">
+      <span class="s-file" id="src-info">index.html</span>
+      <span id="src-lines">Lines: —</span>
+      <span id="src-chars">Chars: —</span>
+    </div>
+  </div>
 
   <div class="body">
     <aside class="sidebar">
@@ -957,6 +1010,98 @@ document.getElementById('btn-save-pw').onclick=async()=>{
     else toast('Failed','err');
   }catch(e){ toast('Network error','err'); }
 };
+
+// ── Source editor (full-area mode) ────────────────────────
+let srcFile = 'index.html';
+
+function updateSrcStats() {
+  const val = document.getElementById('src-editor').value;
+  document.getElementById('src-lines').textContent = 'Lines: ' + val.split('\n').length;
+  document.getElementById('src-chars').textContent = 'Chars: ' + val.length.toLocaleString();
+}
+
+async function loadSource(file) {
+  srcFile = file;
+  document.getElementById('src-info').textContent = file;
+  const ta = document.getElementById('src-editor');
+  ta.value = 'Loading…';
+  document.getElementById('src-save-btn').disabled = true;
+  try {
+    const r = await fetch('/api/source/' + file);
+    if (!r.ok) throw new Error('Failed');
+    const d = await r.json();
+    ta.value = d.code;
+    ta.scrollTop = 0;
+    document.getElementById('src-save-btn').disabled = false;
+    updateSrcStats();
+  } catch(e) {
+    ta.value = '// Error loading file';
+    toast('Could not load ' + file, 'err');
+  }
+}
+
+function openSourceMode() {
+  document.getElementById('source-mode').classList.add('on');
+  document.querySelector('.body').style.display = 'none';
+  document.getElementById('btn-source').classList.add('btn-edit-on');
+  loadSource(srcFile);
+}
+
+function closeSourceMode() {
+  document.getElementById('source-mode').classList.remove('on');
+  document.querySelector('.body').style.display = '';
+  document.getElementById('btn-source').classList.remove('btn-edit-on');
+}
+
+document.getElementById('btn-source').onclick = openSourceMode;
+document.getElementById('src-back-btn').onclick = closeSourceMode;
+
+document.querySelectorAll('.src-tab').forEach(tab => {
+  tab.onclick = () => {
+    document.querySelectorAll('.src-tab').forEach(t => t.classList.remove('on'));
+    tab.classList.add('on');
+    loadSource(tab.dataset.src);
+  };
+});
+
+document.getElementById('src-save-btn').onclick = async () => {
+  const btn = document.getElementById('src-save-btn');
+  const code = document.getElementById('src-editor').value;
+  btn.disabled = true;
+  const orig = btn.innerHTML;
+  btn.innerHTML = 'Saving…';
+  try {
+    const r = await fetch('/api/source/' + srcFile, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ code })
+    });
+    if (r.ok) {
+      toast('Saved ' + srcFile + ' ✓', 'ok');
+      reloadFrame();
+    } else {
+      const e = await r.json().catch(() => ({}));
+      toast('Save failed: ' + (e.error || r.status), 'err');
+    }
+  } catch(e) { toast('Network error', 'err'); }
+  btn.disabled = false; btn.innerHTML = orig;
+};
+
+document.getElementById('src-editor').addEventListener('input', updateSrcStats);
+
+document.getElementById('src-editor').addEventListener('keydown', e => {
+  if (e.key === 'Tab') {
+    e.preventDefault();
+    const ta = e.target, s = ta.selectionStart, end = ta.selectionEnd;
+    ta.value = ta.value.substring(0, s) + '  ' + ta.value.substring(end);
+    ta.selectionStart = ta.selectionEnd = s + 2;
+  }
+  if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+    e.preventDefault();
+    document.getElementById('src-save-btn').click();
+  }
+  if (e.key === 'Escape') closeSourceMode();
+});
 
 // ── Auth check ────────────────────────────────────────────
 fetch('/api/auth').then(r=>r.json()).then(d=>{
