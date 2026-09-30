@@ -23,6 +23,48 @@ async function saveConfig(){
   await fs.writeFile(CFG_FILE, JSON.stringify(config, null, 2));
 }
 
+// ── GitHub auto-commit (persists content across Railway restarts) ──
+const GH_TOKEN = process.env.GITHUB_TOKEN;
+const GH_REPO  = 'disow2026-eng/ayaa-secondary-school-website';
+
+async function githubCommit(relPath, content) {
+  if (!GH_TOKEN) { console.warn('GITHUB_TOKEN not set — skipping GitHub commit'); return; }
+  const encoded = Buffer.from(content).toString('base64');
+  const sha = await new Promise(resolve => {
+    const req = https.request({
+      hostname: 'api.github.com',
+      path: `/repos/${GH_REPO}/contents/${relPath}`,
+      headers: { Authorization: `Bearer ${GH_TOKEN}`, 'User-Agent': 'ayaa-admin', Accept: 'application/vnd.github.v3+json' }
+    }, res => {
+      let b = '';
+      res.on('data', d => b += d);
+      res.on('end', () => { try { resolve(JSON.parse(b).sha); } catch { resolve(undefined); } });
+    });
+    req.on('error', () => resolve(undefined));
+    req.end();
+  });
+  const body = JSON.stringify({ message: `[skip ci] admin: update ${relPath}`, content: encoded, ...(sha ? { sha } : {}) });
+  await new Promise(resolve => {
+    const req = https.request({
+      hostname: 'api.github.com',
+      path: `/repos/${GH_REPO}/contents/${relPath}`,
+      method: 'PUT',
+      headers: { Authorization: `Bearer ${GH_TOKEN}`, 'User-Agent': 'ayaa-admin', Accept: 'application/vnd.github.v3+json', 'Content-Type': 'application/json', 'Content-Length': Buffer.byteLength(body) }
+    }, res => {
+      let b = '';
+      res.on('data', d => b += d);
+      res.on('end', () => {
+        if (res.statusCode >= 300) console.error('GitHub commit failed:', res.statusCode, b);
+        else console.log('GitHub: saved', relPath);
+        resolve();
+      });
+    });
+    req.on('error', err => { console.error('GitHub error:', err.message); resolve(); });
+    req.write(body);
+    req.end();
+  });
+}
+
 // ── Netlify deploy ────────────────────────────────────────────
 async function netlifyDeploy(){
   const token  = process.env.NETLIFY_TOKEN;
@@ -105,8 +147,10 @@ app.get('/api/content', auth, async (req, res) => {
 app.post('/api/content', auth, async (req, res) => {
   try {
     try { await fs.copyFile(CONTENT_FILE, CONTENT_FILE + '.bak'); } catch{}
-    await fs.writeFile(CONTENT_FILE, JSON.stringify(req.body, null, 2), 'utf8');
+    const json = JSON.stringify(req.body, null, 2);
+    await fs.writeFile(CONTENT_FILE, json, 'utf8');
     res.json({ ok: true });
+    githubCommit('content.json', json).catch(err => console.error('GitHub error:', err.message));
     netlifyDeploy().catch(err => console.error('Deploy error:', err.message));
   } catch(err) {
     console.error('Save error:', err);
@@ -127,8 +171,10 @@ app.post('/api/content/restore', auth, async (req, res) => {
   try { await fs.access(bak); } catch { return res.status(404).json({ error: 'No backup found' }); }
   await fs.copyFile(CONTENT_FILE, CONTENT_FILE + '.restored-bak');
   await fs.copyFile(bak, CONTENT_FILE);
-  const content = JSON.parse(await fs.readFile(CONTENT_FILE, 'utf8'));
+  const raw = await fs.readFile(CONTENT_FILE, 'utf8');
+  const content = JSON.parse(raw);
   res.json({ ok: true, content });
+  githubCommit('content.json', raw).catch(err => console.error('GitHub error:', err.message));
   netlifyDeploy().catch(err => console.error('Deploy error:', err.message));
 });
 
